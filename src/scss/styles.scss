@@ -443,6 +443,7 @@ BOTTOM PART OF CONTROLLER
         margin-right: 0;
     }
     &__color {
+        background-color: rgb(73, 246, 239);
         border-radius: inherit;
         @include fill-parent();
     }

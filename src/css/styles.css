@@ -333,6 +333,7 @@ BOTTOM PART OF CONTROLLER
   .pad:last-child {
     margin-right: 0; }
   .pad__color {
+    background-color: #49f6ef;
     border-radius: inherit;
     position: absolute;
     top: 0;

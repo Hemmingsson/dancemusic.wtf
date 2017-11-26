@@ -6,13 +6,13 @@ var padColors = {
   green: '21, 255, 44'
 }
 
-const sound = {
-  tap: new Audio('../sounds/tap.mp3'),
-  correct: new Audio('../sounds/correct.mp3'),
-  wrong: new Audio('../sounds/wrong.mp3')
+var sound = {
+  tap: new Audio('./sounds/tap.mp3'),
+  correct: new Audio('./sounds/correct.mp3'),
+  wrong: new Audio('./sounds/wrong.mp3')
 }
 
-let gameData = {
+var gameData = {
   'totalScore': 0,
   'totalCorrect': 0,
   'totalRounds': 0,
@@ -20,7 +20,7 @@ let gameData = {
   'gameIsActive': false
 }
 
-const defaultGame = function () {
+var defaultGame = function () {
   return {
     'answers': [],
     'track': {
@@ -36,6 +36,7 @@ INIT
 ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', function (event) {
+  initFPS()
   initRippleEffect()
   initDisplayButtons()
   initPads()
@@ -69,14 +70,14 @@ START GAME
 ========================================================================== */
 
 // NEW GAME
-const startNewGame = function () {
+var startNewGame = function () {
   resetStats()
   gameData.currentGame = defaultGame()
   startNewRound()
 }
 
 // NEW ROUND
-const startNewRound = function () {
+var startNewRound = function () {
   resetBoard() // Reset whole board before we start new round
   setDisplayText('Loading track...', false)
 
@@ -95,7 +96,7 @@ const startNewRound = function () {
 }
 
 // RESET GAME BOARD
-const resetBoard = function () {
+var resetBoard = function () {
   showDarkDisplayText(false)
   animatePads(false)
   resetSamplesBackground()
@@ -112,10 +113,10 @@ const resetBoard = function () {
 USER PICKS ANSWER
 ========================================================================== */
 
-const answerChoosen = function (answerIndex, elm) {
+var answerChoosen = function (answerIndex, elm) {
   gameData.gameIsActive = false
-  const choosenGenre = gameData.currentGame.answers[answerIndex]
-  const answerIsCorrect = choosenGenre.correct
+  var choosenGenre = gameData.currentGame.answers[answerIndex]
+  var answerIsCorrect = choosenGenre.correct
 
   // Indicate which users choise
   answerChoosenAnimation(answerIndex)
@@ -141,9 +142,9 @@ const answerChoosen = function (answerIndex, elm) {
   }, 3700)
 }
 
-const answerChoosenAnimation = function (answerIndex) {
+var answerChoosenAnimation = function (answerIndex) {
   animatePads(false) // Stop current animation
-  const choosenPad = document.getElementsByClassName('pad__color')[answerIndex]
+  var choosenPad = document.getElementsByClassName('pad__color')[answerIndex]
 
   var blinkPad = function () {
     TweenLite.to(choosenPad, 0.15, {
@@ -161,7 +162,7 @@ const answerChoosenAnimation = function (answerIndex) {
   blinkPad()
 }
 
-const correctAnswer = function () {
+var correctAnswer = function () {
   sound.correct.play()
   // Update Score
   gameData.totalScore += 100 * (3 - gameData.currentGame.track.currentSample)
@@ -169,7 +170,7 @@ const correctAnswer = function () {
   console.log('CORRECT!')
 }
 
-const wrongAnswer = function answerIndex () {
+var wrongAnswer = function answerIndex () {
   sound.wrong.play()
   console.log('WRONG!')
 }
@@ -178,21 +179,21 @@ const wrongAnswer = function answerIndex () {
    Draw Round
    ========================================================================== */
 
-const drawNewRound = function () {
+var drawNewRound = function () {
   return new Promise(function (resolve, reject) {
-    const draw = function () {
+    var draw = function () {
       // Trow dice
       var correctIndex = Math.floor(Math.random() * 3)
       // Draw 4 random tracks
-      const answers = _.sample(genreData.tracks, 4)
+      var answers = _.sample(genreData.tracks, 4)
       // Check if draw has unique genres
       var genres = []
       for (var data of answers) { genres.push(data.genre) }
-      const isUnique = _.uniq(genres).length === answers.length
+      var isUnique = _.uniq(genres).length === answers.length
       // If unique draw update gameData and resolve, else draw again
       if (isUnique) {
-        for (let [index, data] of answers.entries()) {
-          const isCorrectAnswer = index === correctIndex
+        for (var [index, data] of answers.entries()) {
+          var isCorrectAnswer = index === correctIndex
           gameData.currentGame.answers.push({
             genre: data.genre,
             correct: isCorrectAnswer
@@ -249,7 +250,7 @@ var onPlayerStateChange = function (e) {
   } else if (e.data === 1) {
     animateEqualizer(true)
 
-    const updater = function () {
+    var updater = function () {
       if (videoPlayer.getPlayerState() === 1) {
         sampleHandeling()
         setTimeout(updater, 100)
@@ -273,16 +274,16 @@ var onPlayerError = function (e) {
   startNewRound()
 }
 
-const prepairVideo = function () {
+var prepairVideo = function () {
   return new Promise(function (resolve, reject) {
     videoPlayer.loadVideoById(gameData.currentGame.track.info.ytId, 40, 'small')
 
     // Wait untill duration is avalible
-    const calculateTimeStamps = function () {
+    var calculateTimeStamps = function () {
       if (videoPlayer.getDuration() > 1) {
         videoPlayer.pauseVideo()
         // Get Video Duration
-        const duration = videoPlayer.getDuration()
+        var duration = videoPlayer.getDuration()
         // Create sampe Points
         gameData.currentGame.track.sampleTimeStamps = createSamplePoints(duration, 3)
         // Set time to First Sample point
@@ -313,8 +314,8 @@ var createSamplePoints = function (duration, sampleSize) {
 
 var playNextSample = function () {
   updateCurrentSample()
-  const sampleTimeStamps = gameData.currentGame.track.sampleTimeStamps
-  const currentSample = gameData.currentGame.track.currentSample
+  var sampleTimeStamps = gameData.currentGame.track.sampleTimeStamps
+  var currentSample = gameData.currentGame.track.currentSample
   videoPlayer.seekTo(sampleTimeStamps[currentSample])
   videoPlayer.playVideo()
   videoPlayer.unMute()
@@ -341,7 +342,7 @@ var sampleHandeling = function () {
   }
 }
 
-const lastSample = function () {
+var lastSample = function () {
   animatePads(false)
   gameData.gameIsActive = false
   videoPlayer.pauseVideo()
@@ -358,7 +359,7 @@ DISPLAY
 
 // NORMAL DISPLAY TEXT
 // -------------------------------------------------------
-const setDisplayText = function (string, animated, callback) {
+var setDisplayText = function (string, animated, callback) {
   if (!animated) {
     document.getElementsByClassName('interface__info')[0].innerHTML = string
     return
@@ -376,8 +377,8 @@ const setDisplayText = function (string, animated, callback) {
   })
 }
 
-const blinkDisplayText = function (play) {
-  const textElm = document.getElementsByClassName('interface__info')[0]
+var blinkDisplayText = function (play) {
+  var textElm = document.getElementsByClassName('interface__info')[0]
 
   if (!play) {
     TweenLite.killTweensOf(textElm)
@@ -406,24 +407,24 @@ const blinkDisplayText = function (play) {
 
 // DARK DISPLAY TEXT
 // -------------------------------------------------------
-const showDarkDisplayText = function (show) {
-  const darkScreen = document.getElementsByClassName('interface--dark')[0]
+var showDarkDisplayText = function (show) {
+  var darkScreen = document.getElementsByClassName('interface--dark')[0]
   darkScreen.style.opacity = show ? 1 : 0
 }
 
-const setDarkDisplayText = function (string) {
-  const textElm = document.getElementsByClassName('interface--dark')[0].getElementsByTagName('p')[0]
+var setDarkDisplayText = function (string) {
+  var textElm = document.getElementsByClassName('interface--dark')[0].getElementsByTagName('p')[0]
   textElm.innerHTML = string
 }
 
 // SAMPLE INDICATOR
 // -------------------------------------------------------
-const updateCurrentSample = function () {
-  const currentSample = gameData.currentGame.track.currentSample
-  const elms = document.getElementsByClassName('interface__samples')[0].children
+var updateCurrentSample = function () {
+  var currentSample = gameData.currentGame.track.currentSample
+  var elms = document.getElementsByClassName('interface__samples')[0].children
 
   Array.from(elms).forEach(function (elm, index) {
-    const textElm = elm.children[0]
+    var textElm = elm.children[0]
 
     elm.style.backgroundColor = '#d5dac9'
     textElm.style.color = '#262b2a'
@@ -436,11 +437,11 @@ const updateCurrentSample = function () {
   })
 }
 
-const resetSamplesBackground = function () {
-  const sampleBackgrounds = document.getElementsByClassName('interface__samples')[0].children
+var resetSamplesBackground = function () {
+  var sampleBackgrounds = document.getElementsByClassName('interface__samples')[0].children
 
-  const reset = function (elm) {
-    const textElm = elm.children[0]
+  var reset = function (elm) {
+    var textElm = elm.children[0]
     elm.style.backgroundColor = '#d5dac9'
     textElm.style.color = '#262b2a'
     textElm.style.opacity = 1
@@ -453,13 +454,13 @@ const resetSamplesBackground = function () {
 
 // STATS
 // -------------------------------------------------------
-const renderStats = function () {
+var renderStats = function () {
   document.getElementsByClassName('total-score')[0].innerHTML = gameData.totalScore
   document.getElementsByClassName('total-correct')[0].innerHTML = gameData.totalCorrect
   document.getElementsByClassName('total-rounds')[0].innerHTML = gameData.totalRounds
 }
 
-const resetStats = function () {
+var resetStats = function () {
   gameData.totalScore = 0
   gameData.totalCorrect = 0
   gameData.totalRounds = 0
@@ -474,7 +475,7 @@ var animateEqualizer = function (play) {
 }
 
 var startEqualizer = function () {
-  const bars = document.getElementsByClassName('bar')
+  var bars = document.getElementsByClassName('bar')
   var animateBar = function (bar) {
     var animation = function (grow) {
       var duration = (Math.random() * 0.4) + 0.2
@@ -500,7 +501,7 @@ var startEqualizer = function () {
 }
 
 var stopEqualizer = function () {
-  const elms = document.getElementsByClassName('bar')
+  var elms = document.getElementsByClassName('bar')
   TweenLite.killTweensOf(elms)
   TweenLite.to(elms, 0.3, {
     scaleY: 0.16,
@@ -515,7 +516,7 @@ PADS
 // PAD CLICK SOUND
 // -------------------------------------------------------
 var initPads = function () {
-  const pads = document.getElementsByClassName('pad')
+  var pads = document.getElementsByClassName('pad')
   Array.from(pads).forEach(function (pad, index) {
     pad.addEventListener('mousedown', function (event) {
       sound.tap.play()
@@ -625,20 +626,20 @@ var renderPadGenres = function () {
 RIPPLE EFFECT
 ========================================================================== */
 var initRippleEffect = function () {
-  const elms = document.getElementsByClassName('ripple-effect')
+  var elms = document.getElementsByClassName('ripple-effect')
   for (var i = 0; i < elms.length; i++) {
     createRippleEffect(elms.item(i))
   }
 }
 
-const createRippleEffect = function (elm) {
+var createRippleEffect = function (elm) {
   elm.addEventListener('mousedown', function (event) {
     event.preventDefault()
 
     var rect = this.getBoundingClientRect()
 
-    const xPos = event.pageX - rect.left
-    const yPos = event.pageY - rect.top
+    var xPos = event.pageX - rect.left
+    var yPos = event.pageY - rect.top
 
     var elWavesRipple = document.createElement('div')
 
@@ -656,5 +657,24 @@ const createRippleEffect = function (elm) {
       onComplete: function (elements) { elWavesRipple.remove() }
     })
   })
+}
+
+/* ==========================================================================
+FPS INDICATOR
+========================================================================== */
+var initFPS = function () {
+  var stats = new Stats()
+  stats.setMode(0)
+  document.body.appendChild(stats.domElement)
+  stats.domElement.style.position = 'absolute'
+  stats.domElement.style.top = '0'
+  stats.domElement.style.left = '0'
+
+  var update = function () {
+    stats.begin()
+    stats.end()
+    requestAnimationFrame(update)
+  }
+  requestAnimationFrame(update)
 }
 

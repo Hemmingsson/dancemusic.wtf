@@ -36,7 +36,6 @@ INIT
 ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', function (event) {
-  initFPS()
   initRippleEffect()
   initDisplayButtons()
   initPads()

@@ -1,13 +1,14 @@
-var gulp = require('gulp')
-var sass = require('gulp-sass')
-var browserSync = require('browser-sync')
-var useref = require('gulp-useref')
-var uglify = require('gulp-uglify')
-var gulpIf = require('gulp-if')
-var cssnano = require('gulp-cssnano')
-var cache = require('gulp-cache')
-var del = require('del')
-var runSequence = require('run-sequence')
+const gulp = require('gulp')
+const sass = require('gulp-sass')
+const browserSync = require('browser-sync')
+const useref = require('gulp-useref')
+const uglify = require('gulp-uglify')
+const gulpIf = require('gulp-if')
+const cssnano = require('gulp-cssnano')
+const cache = require('gulp-cache')
+const del = require('del')
+const babel = require('gulp-babel')
+const runSequence = require('run-sequence')
 
 // Development Tasks
 // -----------------
@@ -43,8 +44,13 @@ gulp.task('watch', function () {
 // Optimizing CSS and JavaScript
 gulp.task('useref', function () {
   return gulp.src('src/*.html')
+
     .pipe(useref())
     .pipe(gulpIf('*.css', cssnano()))
+    .pipe(gulpIf('*.js', babel()))
+    .pipe(gulpIf('*.js', uglify().on('error', function (e) {
+      console.log(e)
+    })))
     .pipe(gulp.dest('dist'))
 })
 

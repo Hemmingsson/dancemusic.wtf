@@ -36,7 +36,6 @@ INIT
 ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', function (event) {
-  initFPS()
   initRippleEffect()
   initDisplayButtons()
   initPads()
@@ -657,24 +656,5 @@ const createRippleEffect = function (elm) {
       onComplete: function (elements) { elWavesRipple.remove() }
     })
   })
-}
-
-/* ==========================================================================
-FPS INDICATOR
-========================================================================== */
-var initFPS = function () {
-  var stats = new Stats()
-  stats.setMode(0)
-  document.body.appendChild(stats.domElement)
-  stats.domElement.style.position = 'absolute'
-  stats.domElement.style.top = '0'
-  stats.domElement.style.left = '0'
-
-  var update = function () {
-    stats.begin()
-    stats.end()
-    requestAnimationFrame(update)
-  }
-  requestAnimationFrame(update)
 }
 

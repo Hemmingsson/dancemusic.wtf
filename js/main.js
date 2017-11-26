@@ -348,6 +348,7 @@ var lastSample = function () {
   videoPlayer.pauseVideo()
   setDarkDisplayText('You where to slow')
   showDarkDisplayText(true)
+  gameData.totalRounds += 1 // update rounds stats
   setTimeout(function () {
     startNewRound()
   }, 3000)
@@ -658,23 +659,3 @@ var createRippleEffect = function (elm) {
     })
   })
 }
-
-/* ==========================================================================
-FPS INDICATOR
-========================================================================== */
-var initFPS = function () {
-  var stats = new Stats()
-  stats.setMode(0)
-  document.body.appendChild(stats.domElement)
-  stats.domElement.style.position = 'absolute'
-  stats.domElement.style.top = '0'
-  stats.domElement.style.left = '0'
-
-  var update = function () {
-    stats.begin()
-    stats.end()
-    requestAnimationFrame(update)
-  }
-  requestAnimationFrame(update)
-}
-

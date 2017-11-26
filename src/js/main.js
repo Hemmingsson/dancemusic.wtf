@@ -4,6 +4,7 @@ var padColors = {
   pink: '247, 73, 247',
   red: '246, 73, 73',
   green: '21, 255, 44',
+  lightGreen: '152, 246, 73',
   orange: '246, 156, 73'
 }
 
@@ -65,7 +66,7 @@ var startNewGame = function () {
 var startNewRound = function (addRound) {
   gameData.currentGame = defaultGame()
   resetBoard()
-  blinkAllPadsOnce('green')
+  blinkAllPadsOnce('pink')
   setDisplayText('Loading track...', false)
   renderStats()
   gameData.totalRounds += addRound ? 1 : 0
@@ -147,6 +148,8 @@ var answerChoosen = function (answerIndex, elm) {
   // Wait abit to show the correct anwser
   setTimeout(function () {
     if (answerIsCorrect) {
+      killPadsAnimation()
+      showCorrectPad()
       sound.correct.play()
       setDarkDisplayText(true, choosenGenre.genre + '<br> is correct!!!')
       // Update Score
@@ -155,12 +158,13 @@ var answerChoosen = function (answerIndex, elm) {
     } else {
       sound.wrong.play()
       setDarkDisplayText(true, choosenGenre.genre + '<br> is incorrect :(')
+      showCorrectPad()
     }
   }, 1700)
   // Wait even more to start new round
   setTimeout(function () {
     startNewRound(true)
-  }, 3700)
+  }, 4700)
 }
 
 var noAnswerChoosen = function () {
@@ -337,10 +341,6 @@ var startEqualizer = function () {
     }
     animation(true)
   }
-
-  for (var i = 0; i < bars.length; i++) {
-    animateBar(bars.item(i))
-  }
 }
 
 var stopEqualizer = function () {
@@ -486,6 +486,46 @@ var renderPadGenres = function () {
   })
 }
 
+// SHOW CORRECT PAD
+// -------------------------------------------------------
+var showCorrectPad = function () {
+  killPadsAnimation()
+  var pads = document.getElementsByClassName('pad__color')
+  var answers = gameData.currentGame.answers
+  console.log(answers)
+  var correctPad
+  var wrongPads = []
+
+  for (var i = 0; i < answers.length; i++) {
+    if (answers[i].correct) {
+      correctPad = pads[i]
+    } else {
+      wrongPads.push(pads[i])
+    }
+  }
+
+  TweenLite.to(wrongPads, 0.2, {
+    backgroundColor: 'rgb(' + padColors.red + ')'
+  })
+
+  var blinkPads = function () {
+    TweenLite.to(correctPad, 0.3, {
+      backgroundColor: 'rgb(' + padColors.green + ')',
+      onComplete: function () {
+        TweenLite.to(correctPad, 0.2, {
+          backgroundColor: 'rgb(' + padColors.lightGreen + ')',
+          onComplete: function () {
+            blinkPads()
+          }
+        })
+      }
+    })
+  }
+  blinkPads()
+}
+
+// KILL ALL PAD ANIMATIONS
+// -------------------------------------------------------
 var killPadsAnimation = function (pads) {
   var pads = document.getElementsByClassName('pad__color')
   TweenLite.killTweensOf(pads)

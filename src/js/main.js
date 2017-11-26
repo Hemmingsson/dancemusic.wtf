@@ -41,13 +41,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
   initRippleEffect()
   initDisplayButtons()
   initPads()
-  waitForVideoPlayer(initGame)
+  waitForVideoPlayer(function () {
+    setDisplayText('Click Start to begin game', true)
+  })
 })
-
-var initGame = function () {
-  blinkAllPadsOnce('pink')
-  setDisplayText('Click Start to begin game', true)
-}
 
 /* ==========================================================================
 START GAME
@@ -57,7 +54,6 @@ START GAME
 // -------------------------------------------------------
 var startNewGame = function () {
   resetStats()
-
   startNewRound(true)
 }
 
@@ -66,7 +62,6 @@ var startNewGame = function () {
 var startNewRound = function (addRound) {
   gameData.currentGame = defaultGame()
   resetBoard()
-  blinkAllPadsOnce('pink')
   setDisplayText('Loading track...', false)
   renderStats()
   gameData.totalRounds += addRound ? 1 : 0
@@ -340,6 +335,10 @@ var startEqualizer = function () {
       })
     }
     animation(true)
+  }
+
+  for (var i = 0; i < bars.length; i++) {
+    animateBar(bars.item(i))
   }
 }
 
@@ -651,8 +650,8 @@ var waitForVideoPlayer = function (callback) {
 // -------------------------------------------------------
 var prepairVideo = function () {
   return new Promise(function (resolve, reject) {
-    videoPlayer.loadVideoById(gameData.currentGame.track.info.ytId, 40, 'small')
-
+    videoPlayer.loadVideoById(gameData.currentGame.track.info.ytId, 40)
+    videoPlayer.setPlaybackQuality('small')
     // Wait untill duration is avalible
     var calculateTimeStamps = function () {
       if (videoPlayer.getDuration() > 1) {
@@ -702,7 +701,7 @@ var sampleHandeling = function () {
   var startPoint = gameData.currentGame.track.sampleTimeStamps[currentSample]
 
   if (videoPlayerIsReady) {
-    if (currentTime > startPoint + 10) {
+    if (currentTime > startPoint + 15) {
       gameData.currentGame.track.currentSample++
       // Play next sample if avalible
       if (currentSample !== 2) {

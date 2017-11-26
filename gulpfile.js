@@ -55,13 +55,13 @@ gulp.task('fonts', function () {
 })
 
 // Copying fonts
-gulp.task('sounds', function () {
+gulp.task('images', function () {
   return gulp.src('src/img/**/*')
     .pipe(gulp.dest('dist/img'))
 })
 
 // Copying fonts
-gulp.task('images', function () {
+gulp.task('sounds', function () {
   return gulp.src('src/sounds/**/*')
     .pipe(gulp.dest('dist/sounds'))
 })
@@ -90,7 +90,7 @@ gulp.task('build', function (callback) {
   runSequence(
     'clean:dist',
     'sass',
-    ['useref', 'fonts', 'sounds'],
+    ['useref', 'fonts', 'sounds', 'images'],
     callback
   )
 })

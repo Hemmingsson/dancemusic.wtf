@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!--build:css css/styles.min.css-->
+    <link rel="stylesheet" href="css/styles.css">
+    <!--endbuild-->
+</head>
+
+<body>
+    <div id="videoPlayer"></div>
+    <main class="controller">
+        <div class="controller__decoration">
+            <img class="logo" src="./img/logo.svg">
+            <div class="cords">
+                <div class="cords__aux cords__aux--right"></div>
+                <div class="cords__aux cords__aux--left"></div>
+                <div class="cords__io"></div>
+            </div>
+        </div>
+        <div class="controller__inside">
+            <section class="controlls">
+                <img class="speaker" src="./img/speaker.svg">
+                <div class="display">
+                    <div class="display__buttons">
+                        <div class="buttons-title">game controlls</div>
+                        <div class="button ripple-effect">Start</div>
+                        <div class="button ripple-effect">MUTE</div>
+                        <div class="button ripple-effect">About</div>
+                    </div>
+                    <div class="display__inner">
+                        <div class="interface">
+                            <div class="interface--dark">
+                                <p></p>
+                            </div>
+                            <div class="interface__score">
+                                <div class="interface__score--total">score: <span class="total-score">0</span></div>
+                                <div class="interface__score--correct">Correct: <span class="total-correct">0</span></div>
+                                <div class="interface__score--rounds">Rounds: <span class="total-rounds">0</span></div>
+                            </div>
+                            <div class="interface__info">
+                                <p>Initializing controller...</p>
+                            </div>
+                            <div class="interface__samples">
+                                <div><span>Sample 01</span></div>
+                                <div><span>Sample 02</span></div>
+                                <div><span>Sample 03</span></div>
+                            </div>
+                        </div>
+                        <div class="equalizer animate-bars">
+                            <div class='equalizer--inner'>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <img class="speaker" src="./img/speaker.svg">
+            </section>
+            <section class="pads">
+                <div class="pad">
+                    <div class="pad__color"></div>
+                    <div class="pad__button">
+                        <div class="pad__sticker ripple-effect">
+                            <img src="./img/pad-sticker.svg">
+                        </div>
+                        <div class="pad__title"></div>
+                    </div>
+                </div>
+                <div class="pad">
+                    <div class="pad__color"></div>
+                    <div class="pad__button">
+                        <div class="pad__sticker ripple-effect">
+                            <img src="./img/pad-sticker.svg">
+                        </div>
+                        <div class="pad__title"></div>
+                    </div>
+                </div>
+                <div class="pad">
+                    <div class="pad__color"></div>
+                    <div class="pad__button">
+                        <div class="pad__sticker ripple-effect">
+                            <img src="./img/pad-sticker.svg">
+                        </div>
+                        <div class="pad__title"></div>
+                    </div>
+                </div>
+                <div class="pad">
+                    <div class="pad__color"></div>
+                    <div class="pad__button">
+                        <div class="pad__sticker ripple-effect">
+                            <img src="./img/pad-sticker.svg">
+                        </div>
+                        <div class="pad__title"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!--build:js js/main.min.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.6/typed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.11.5/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>

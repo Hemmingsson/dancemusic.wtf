@@ -34,13 +34,13 @@ GENERAL
   padding: 0; }
 
 body {
+  font-family: 'Roboto Condensed', sans-serif;
   width: 100vw;
   height: 100vh;
   background-color: #cfdce4;
   display: flex;
   justify-content: center;
-  align-items: center;
-  font-family: 'Roboto Condensed', sans-serif; }
+  align-items: center; }
 
 /* ==========================================================================
 CONTROLLER
@@ -49,14 +49,14 @@ CONTROLLER
   position: relative;
   width: 87vw;
   height: 94vh;
+  user-select: none;
   border-radius: 1.2vw;
   background-color: #fffffa;
   background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0.01) 10%, rgba(0, 0, 0, 0.04) 10%, rgba(0, 0, 0, 0.04) 13%, transparent 13%, transparent 87%, rgba(0, 0, 0, 0.04) 87%, rgba(0, 0, 0, 0.04) 90%, rgba(0, 0, 0, 0.01) 90%, rgba(0, 0, 0, 0.01) 100%);
   box-shadow: 0 0.9vw 3.8vw 0.6vw rgba(68, 94, 119, 0.2);
   display: flex;
   justify-content: center;
-  align-items: center;
-  user-select: none; }
+  align-items: center; }
 
 /*
 Controller Decoration
@@ -138,12 +138,12 @@ TOP PART OF CONTROLLER
   position: relative;
   display: flex;
   width: auto;
+  height: 95%;
+  margin: 0 2vw;
   color: #262b2a;
   border-radius: .2vw;
   background: #252623;
-  height: 95%;
-  flex-grow: 1;
-  margin: 0 2vw; }
+  flex-grow: 1; }
   .display:after {
     position: absolute;
     z-index: 10;
@@ -157,26 +157,26 @@ TOP PART OF CONTROLLER
   .display__inner {
     font-family: visitor;
     display: flex;
+    width: 80%;
     margin: 1.2vw;
     padding: 1vw;
-    background: #d5dac9;
-    width: 80%; }
+    background: #d5dac9; }
 
 .display__buttons {
+  z-index: 9;
   display: flex;
   flex-direction: column;
   padding: 1.2vw;
   padding-right: 0;
-  z-index: 9;
   justify-content: space-between;
   align-items: flex-end;
   flex-grow: 1; }
 
 .button {
   font-family: RobotoMono-Bold;
-  font-size: 0.9vw;
   font-weight: 100;
   position: relative;
+  overflow: hidden;
   width: 100%;
   height: 0;
   margin-bottom: 1vh;
@@ -186,9 +186,9 @@ TOP PART OF CONTROLLER
   text-transform: uppercase;
   color: #b4b7b7;
   border-radius: .2vw;
-  box-shadow: inset 0 0 0 0.2vw #b4b7b7, 0 0 0 0.12vw black;
   background-color: rgba(255, 255, 255, 0.04);
-  overflow: hidden;
+  box-shadow: inset 0 0 0 0.2vw #b4b7b7, 0 0 0 0.12vw black;
+  font-size: 0.9vw;
   flex-grow: 1;
   display: flex;
   justify-content: center;
@@ -200,16 +200,16 @@ TOP PART OF CONTROLLER
     margin-bottom: 0; }
 
 .buttons-title {
-  height: 1.9vh;
-  width: 100%;
-  color: #d3d5d5;
-  text-align: center;
   font-weight: 0;
-  font-size: 0.6vw;
-  text-transform: uppercase;
-  border-bottom: 1px solid #d3d5d5;
+  width: 100%;
+  height: 1.9vh;
   margin-bottom: 1.4vh;
-  opacity: 0.5; }
+  text-align: center;
+  text-transform: uppercase;
+  opacity: .5;
+  color: #d3d5d5;
+  border-bottom: 1px solid #d3d5d5;
+  font-size: 0.6vw; }
   @media (max-width: 1666.66667px) {
     .buttons-title {
       font-size: 10px; } }
@@ -230,21 +230,21 @@ TOP PART OF CONTROLLER
   width: 75%;
   justify-content: space-between; }
   .interface--dark {
+    z-index: 1;
+    transform: scale(1.02);
+    text-align: center;
+    opacity: 0;
+    color: #d5dac9;
     background: #262b2a;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    transform: scale(1.02);
-    color: #d5dac9;
-    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5vw;
-    text-align: center;
-    opacity: 0; }
+    font-size: 1.5vw; }
     @media (max-width: 1333.33333px) {
       .interface--dark {
         font-size: 20px; } }
@@ -260,7 +260,7 @@ TOP PART OF CONTROLLER
     .interface__score {
       font-size: 10px; } }
   .interface__score div:not(:first-child) {
-    opacity: 0.7; }
+    opacity: .7; }
   .interface__score--lives {
     text-align: right; }
 
@@ -327,14 +327,14 @@ BOTTOM PART OF CONTROLLER
   padding: .23vw;
   cursor: pointer;
   border-radius: .85vw;
-  box-shadow: 0 0 0 0.7vw rgba(0, 0, 0, 0.025);
   background-color: #cfdce4;
+  box-shadow: 0 0 0 0.7vw rgba(0, 0, 0, 0.025);
   flex-grow: 1; }
   .pad:last-child {
     margin-right: 0; }
   .pad__color {
-    background-color: #49f6ef;
     border-radius: inherit;
+    background-color: #49f6ef;
     position: absolute;
     top: 0;
     right: 0;
@@ -367,38 +367,42 @@ BOTTOM PART OF CONTROLLER
     width: 100%;
     height: 100%;
     padding: .67vw;
-    opacity: 0.86;
     transform: scaleY(0.975);
-    transform-origin: top; }
+    transform-origin: top;
+    opacity: .86; }
     .pad__sticker img {
       display: block;
       width: 100%;
       height: 100%; }
   .pad__title {
-    text-align: center;
+    font-weight: bold;
     position: absolute;
     bottom: 7%;
     width: 100%;
+    text-align: center;
     text-transform: uppercase;
-    font-size: 1vw;
     opacity: .6;
     color: black;
-    font-weight: bold; }
+    font-size: 1vw; }
     @media (max-width: 1400px) {
       .pad__title {
         font-size: 14px; } }
-  .pad:active .pad__button:before, .pad:active .pad__sticker {
+  .pad:active .pad__button:before,
+  .pad:active .pad__sticker {
     transform: scaleY(0.98); }
   .pad:active .pad__title {
     transform: translateY(0.08vw); }
 
 #videoPlayer {
   position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
   overflow: hidden;
-  pointer-events: none;
-  opacity: 0;
   width: 1px;
   height: 1px;
   margin: -1px;
   padding: 0;
+  pointer-events: none;
+  opacity: 0;
   border: 0; }

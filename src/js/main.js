@@ -1,17 +1,29 @@
+var sound = {
+  tap: new Audio('./sounds/tap.mp3'),
+  correct: new Audio('./sounds/correct.mp3'),
+  wrong: new Audio('./sounds/wrong.mp3')
+}
 
-var padColors = {
+var sampleLenght = 10
+
+var message = {
+  start: 'Click Start to begin game',
+  loading: 'Loading track...',
+  what: 'What genere is playing?',
+  buffering: 'Buffering Music...',
+  userChoosed: 'You Picked ',
+  correct: 'is correct!!!',
+  incorrect: 'is incorrect :(',
+  toSlow: 'You were to slow...'
+}
+
+var padColor = {
   blue: '73, 246, 239',
   pink: '247, 73, 247',
   red: '246, 73, 73',
   green: '21, 255, 44',
   lightGreen: '152, 246, 73',
   orange: '246, 156, 73'
-}
-
-var sound = {
-  tap: new Audio('./sounds/tap.mp3'),
-  correct: new Audio('./sounds/correct.mp3'),
-  wrong: new Audio('./sounds/wrong.mp3')
 }
 
 var gameData = {
@@ -42,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
   initDisplayButtons()
   initPads()
   waitForVideoPlayer(function () {
-    setDisplayText('Click Start to begin game', true)
+    setDisplayText(message.start, true)
   })
 })
 
@@ -62,17 +74,19 @@ var startNewGame = function () {
 var startNewRound = function (addRound) {
   gameData.currentGame = defaultGame()
   resetBoard()
-  setDisplayText('Loading track...', false)
+  setDisplayText(message.loading, false)
   renderStats()
+
   gameData.totalRounds += addRound ? 1 : 0
   drawNewRound()
     .then(prepairVideo)
     .then(renderPadGenres)
     .then(function () {
       blinkDisplayText(false)
-      setDisplayText('What genere is playing?', true, function () {
+      setDisplayText(message.what, true, function () {
         // callback to wait untill typed animateion is done
         gameData.gameIsActive = true
+        scoreMultiplyCounter()
         playNextSample() // start sample playback
         blinkPadsRandomly('pink') // start pads animation
       })
@@ -84,6 +98,8 @@ var resetBoard = function () {
   setDarkDisplayText(false)
   killPadsAnimation()
   resetSamplesBackground()
+  muteVideo(true)
+  scoreMultiplyer = 0
   // remove genre form pads
   var titles = document.getElementsByClassName('pad__title')
   for (var i = 0; i < titles.length; i++) {
@@ -138,7 +154,7 @@ var answerChoosen = function (answerIndex, elm) {
 
   // Indicate which users choise
   blinkSpecificPad(answerIndex, 0.15)
-  setDisplayText('You Picked ' + choosenGenre.genre, false)
+  setDisplayText(message.userChoosed + choosenGenre.genre, false)
 
   // Wait abit to show the correct anwser
   setTimeout(function () {
@@ -146,13 +162,13 @@ var answerChoosen = function (answerIndex, elm) {
       killPadsAnimation()
       showCorrectPad()
       sound.correct.play()
-      setDarkDisplayText(true, choosenGenre.genre + '<br> is correct!!!')
+      setDarkDisplayText(true, choosenGenre.genre + '<br>' + message.correct)
       // Update Score
-      gameData.totalScore += 100 * (3 - gameData.currentGame.track.currentSample)
+      gameData.totalScore += getScore()
       gameData.totalCorrect += 1
     } else {
       sound.wrong.play()
-      setDarkDisplayText(true, choosenGenre.genre + '<br> is incorrect :(')
+      setDarkDisplayText(true, choosenGenre.genre + '<br>' + message.incorrect)
       showCorrectPad()
     }
   }, 1700)
@@ -168,11 +184,39 @@ var noAnswerChoosen = function () {
   videoPlayer.pauseVideo()
   gameData.gameIsActive = false
 
-  setDarkDisplayText(true, 'You were to slow...')
+  setDarkDisplayText(true, message.toSlow)
 
   setTimeout(function () {
     startNewRound()
   }, 3000)
+}
+
+/* ==========================================================================
+DISPLAY
+========================================================================== */
+
+var resetStats = function () {
+  gameData.totalScore = 0
+  gameData.totalCorrect = 0
+  gameData.totalRounds = 0
+  renderStats()
+}
+
+var getScore = function () {
+  return 11 * scoreMultiplyer
+}
+
+var scoreMultiplyCounter = function () {
+  scoreMultiplyer = sampleLenght * 3
+  var counter = function () {
+    if (videoIsPlaying && !videoIsMuted && scoreMultiplyer > 1 && gameData.gameIsActive) {
+      scoreMultiplyer -= 1
+      console.log(scoreMultiplyer)
+    }
+
+    setTimeout(counter, 1000)
+  }
+  counter()
 }
 
 /* ==========================================================================
@@ -302,21 +346,19 @@ var renderStats = function () {
   document.getElementsByClassName('total-rounds')[0].innerHTML = gameData.totalRounds
 }
 
-var resetStats = function () {
-  gameData.totalScore = 0
-  gameData.totalCorrect = 0
-  gameData.totalRounds = 0
-  renderStats()
-}
-
 // EQUALIZER
 // -------------------------------------------------------
 
+var isEqualizerAnimating = false
+
 var animateEqualizer = function (play) {
+  if (play === isEqualizerAnimating) return
+  isEqualizerAnimating = play
   play ? startEqualizer() : stopEqualizer()
 }
 
 var startEqualizer = function () {
+  console.log('Playing EQ')
   var bars = document.getElementsByClassName('bar')
   var animateBar = function (bar) {
     var animation = function (grow) {
@@ -343,6 +385,7 @@ var startEqualizer = function () {
 }
 
 var stopEqualizer = function () {
+  console.log('STOP EQ')
   var elms = document.getElementsByClassName('bar')
   TweenLite.killTweensOf(elms)
   TweenLite.to(elms, 0.1, {
@@ -384,10 +427,10 @@ var blinkPadsRandomly = function (color) {
     function makePink (pad) {
       currentPad = pad
       TweenLite.to(pad, 0.3, {
-        backgroundColor: 'rgb(' + padColors[color] + ')',
+        backgroundColor: 'rgb(' + padColor[color] + ')',
         onComplete: function () {
           TweenLite.to(pad, 0.1, {
-            backgroundColor: 'rgb(' + padColors.blue + ')',
+            backgroundColor: 'rgb(' + padColor.blue + ')',
             onComplete: animate()
           })
         }
@@ -402,10 +445,10 @@ var blinkPadsRandomly = function (color) {
 var blinkAllPadsOnce = function (color) {
   var pads = document.getElementsByClassName('pad__color')
   TweenLite.to(pads, 0.3, {
-    backgroundColor: 'rgb(' + padColors[color] + ')',
+    backgroundColor: 'rgb(' + padColor[color] + ')',
     onComplete: function () {
       TweenLite.to(pads, 0.1, {
-        backgroundColor: 'rgb(' + padColors.blue + ')',
+        backgroundColor: 'rgb(' + padColor.blue + ')',
         delay: 0.1
       })
     }
@@ -418,10 +461,10 @@ var blinkAllPads = function (toColor, fromColor) {
   var pads = document.getElementsByClassName('pad__color')
   var blinkPads = function () {
     TweenLite.to(pads, 0.3, {
-      backgroundColor: 'rgb(' + padColors[toColor] + ')',
+      backgroundColor: 'rgb(' + padColor[toColor] + ')',
       onComplete: function () {
         TweenLite.to(pads, 0.1, {
-          backgroundColor: 'rgb(' + padColors[fromColor] + ')',
+          backgroundColor: 'rgb(' + padColor[fromColor] + ')',
           delay: 0.1,
           onComplete: function () {
             blinkPads()
@@ -440,10 +483,10 @@ var blinkSpecificPad = function (padIndex, speed) {
   var choosenPad = document.getElementsByClassName('pad__color')[padIndex]
   var blinkPad = function () {
     TweenLite.to(choosenPad, speed, {
-      backgroundColor: 'rgb(' + padColors['pink'] + ')',
+      backgroundColor: 'rgb(' + padColor['pink'] + ')',
       onComplete: function () {
         TweenLite.to(choosenPad, speed, {
-          backgroundColor: 'rgb(' + padColors['blue'] + ')',
+          backgroundColor: 'rgb(' + padColor['blue'] + ')',
           onComplete: function () {
             blinkPad()
           }
@@ -460,15 +503,15 @@ var renderPadGenres = function () {
   return new Promise(function (resolve, reject) {
     var pads = document.getElementsByClassName('pad')
     var setGenre = function (currentPad) {
-      var padColor = pads[currentPad].getElementsByClassName('pad__color')[0]
+      var pad = pads[currentPad].getElementsByClassName('pad__color')[0]
       var padText = pads[currentPad].getElementsByClassName('pad__title')[0]
 
-      TweenLite.to(padColor, 0.3, {
-        backgroundColor: 'rgb(' + padColors.green + ')',
+      TweenLite.to(pad, 0.3, {
+        backgroundColor: 'rgb(' + padColor.green + ')',
         onComplete: function () {
           padText.innerHTML = gameData.currentGame.answers[currentPad].genre
-          TweenLite.to(padColor, 0.1, {
-            backgroundColor: 'rgb(' + padColors.blue + ')',
+          TweenLite.to(pad, 0.1, {
+            backgroundColor: 'rgb(' + padColor.blue + ')',
             onComplete: function () {
               currentPad++
               if (currentPad !== pads.length) {
@@ -504,15 +547,15 @@ var showCorrectPad = function () {
   }
 
   TweenLite.to(wrongPads, 0.2, {
-    backgroundColor: 'rgb(' + padColors.red + ')'
+    backgroundColor: 'rgb(' + padColor.red + ')'
   })
 
   var blinkPads = function () {
     TweenLite.to(correctPad, 0.3, {
-      backgroundColor: 'rgb(' + padColors.green + ')',
+      backgroundColor: 'rgb(' + padColor.green + ')',
       onComplete: function () {
         TweenLite.to(correctPad, 0.2, {
-          backgroundColor: 'rgb(' + padColors.lightGreen + ')',
+          backgroundColor: 'rgb(' + padColor.blue + ')',
           onComplete: function () {
             blinkPads()
           }
@@ -529,7 +572,7 @@ var killPadsAnimation = function (pads) {
   var pads = document.getElementsByClassName('pad__color')
   TweenLite.killTweensOf(pads)
   TweenLite.to(pads, 0.2, {
-    backgroundColor: 'rgb(' + padColors.blue + ')'
+    backgroundColor: 'rgb(' + padColor.blue + ')'
   })
 }
 
@@ -576,6 +619,8 @@ var createRippleEffect = function (elm) {
 
 var videoPlayer
 var videoPlayerIsReady = false
+var videoIsPlaying = false
+var videoIsMuted = false
 
 // This code loads the IFrame Player API code asynchronously.
 var tag = document.createElement('script')
@@ -597,18 +642,22 @@ var onYouTubeIframeAPIReady = function () {
 
 var onPlayerReady = function () {
   videoPlayerIsReady = true
-  // Unmute youtube player
-  // if (videoPlayer.isMuted()) { videoPlayer.unMute() }
-  videoPlayer.mute()
+  videoPlayer.setVolume(100)
+  muteVideo(true)
+  whenMusicIsPlaying()
 }
 
 var onPlayerStateChange = function (e) {
+  if (e.data === 1) {
+    videoIsPlaying = true
+  } else {
+    videoIsPlaying = false
+  }
+
   if (e.data === -1) {
   } else if (e.data === 0) {
     // ended
   } else if (e.data === 1) {
-    animateEqualizer(true)
-
     var updater = function () {
       if (videoPlayer.getPlayerState() === 1) {
         sampleHandeling()
@@ -619,13 +668,22 @@ var onPlayerStateChange = function (e) {
 
     // playing
   } else if (e.data === 2) {
-    animateEqualizer(false)
+
     // paused
   } else if (e.data === 3) {
-    animateEqualizer(false)
     // buffering
   } else if (e.data === 5) {
     // video cued
+  }
+}
+
+var muteVideo = function (mute) {
+  if (mute) {
+    videoIsMuted = true
+    videoPlayer.mute()
+  } else {
+    videoIsMuted = false
+    videoPlayer.unMute()
   }
 }
 
@@ -644,6 +702,20 @@ var waitForVideoPlayer = function (callback) {
       callback()
     }
   }, 10)
+}
+
+// DO STUFF ONLY WHEN MUSIC IS ACTUALY PLAYING
+// -------------------------------------------------------
+var whenMusicIsPlaying = function () {
+  var updater = function () {
+    if (videoIsPlaying && !videoIsMuted) {
+      animateEqualizer(true)
+    } else {
+      animateEqualizer(false)
+    }
+    setTimeout(updater, 300)
+  }
+  updater()
 }
 
 // PREPAIR VIDEO SAMPLE POINTS
@@ -691,8 +763,8 @@ var playNextSample = function () {
   var sampleTimeStamps = gameData.currentGame.track.sampleTimeStamps
   var currentSample = gameData.currentGame.track.currentSample
   videoPlayer.seekTo(sampleTimeStamps[currentSample])
+  muteVideo(false)
   videoPlayer.playVideo()
-  videoPlayer.unMute()
 }
 
 var sampleHandeling = function () {
@@ -701,7 +773,7 @@ var sampleHandeling = function () {
   var startPoint = gameData.currentGame.track.sampleTimeStamps[currentSample]
 
   if (videoPlayerIsReady) {
-    if (currentTime > startPoint + 15) {
+    if (currentTime > startPoint + sampleLenght) {
       gameData.currentGame.track.currentSample++
       // Play next sample if avalible
       if (currentSample !== 2) {

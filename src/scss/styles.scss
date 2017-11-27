@@ -43,6 +43,7 @@ FONTS
 // Visitor
 @font-face {
     font-family: visitor;
+
     src: url(../fonts/visitor1.ttf);
 }
 
@@ -58,11 +59,14 @@ GENERAL
 }
 
 body {
+    font-family: 'Roboto Condensed', sans-serif;
+
     width: 100vw;
     height: 100vh;
+
     background-color: $light-gray;
+
     @include center-children();
-    font-family: 'Roboto Condensed', sans-serif;
 }
 
 /* ==========================================================================
@@ -74,13 +78,14 @@ CONTROLLER
     width: 87vw;
     height: 94vh;
 
+    user-select: none;
+
     border-radius: 1.2vw;
     background-color: $computer-white;
     background-image: linear-gradient(0deg, rgba(0, 0, 0, .01) 0%, rgba(0, 0, 0, .01) 10%, rgba(0, 0, 0, .04) 10%, rgba(0, 0, 0, .04) 13%, rgba(0, 0, 0, .00) 13%, rgba(0, 0, 0, .00) 87%, rgba(0, 0, 0, .04) 87%, rgba(0, 0, 0, .04) 90%, rgba(0, 0, 0, .01) 90%, rgba(0, 0, 0, .01) 100%);
     box-shadow: 0 .9vw 3.8vw .6vw rgba(68, 94, 119, .2);
 
     @include center-children();
-    user-select: none;
 }
 
 /*
@@ -198,13 +203,14 @@ TOP PART OF CONTROLLER
     display: flex;
 
     width: auto;
+    height: 95%;
+    margin: 0 2vw;
 
     color: $display-color;
     border-radius: .2vw;
     background: #252623;
-    height: 95%;
+
     flex-grow: 1;
-    margin: 0 2vw;
 
     &:after {
         position: absolute;
@@ -226,23 +232,22 @@ TOP PART OF CONTROLLER
 
         display: flex;
 
+        width: 80%;
         margin: $display-border-width;
         padding: 1vw;
 
         background: $display-background-color;
-
-        width: 80%;
     }
 }
 
 .display__buttons {
+    z-index: 9;
+
     display: flex;
     flex-direction: column;
 
-
     padding: 1.2vw;
     padding-right: 0;
-    z-index: 9;
 
     justify-content: space-between;
     align-items: flex-end;
@@ -251,10 +256,11 @@ TOP PART OF CONTROLLER
 
 .button {
     font-family: RobotoMono-Bold;
-    @include responsive-font(0.9vw, 12px);
     font-weight: 100;
 
     position: relative;
+
+    overflow: hidden;
 
     width: 100%;
     height: 0;
@@ -267,28 +273,32 @@ TOP PART OF CONTROLLER
 
     color: #b4b7b7;
     border-radius: .2vw;
-    box-shadow: inset 0 0 0 0.2vw #b4b7b7, 0 0 0 .12vw rgba(0, 0, 0, 1);
-    background-color: rgba(white, 0.04);
-    overflow: hidden;
+    background-color: rgba(white, .04);
+    box-shadow: inset 0 0 0 .2vw #b4b7b7, 0 0 0 .12vw rgba(0, 0, 0, 1);
 
+    @include responsive-font(.9vw, 12px);
     flex-grow: 1;
     @include center-children();
-    &:last-child{
+    &:last-child {
         margin-bottom: 0;
     }
 }
 
 .buttons-title {
-    height: 1.9vh;
-    width: 100%;
-    color: #d3d5d5;
-    text-align: center;
     font-weight: 0;
-    @include responsive-font(0.6vw, 10px);
-    text-transform: uppercase;
-    border-bottom: 1px solid #d3d5d5;
+
+    width: 100%;
+    height: 1.9vh;
     margin-bottom: 1.4vh;
-    opacity: 0.5;
+
+    text-align: center;
+    text-transform: uppercase;
+
+    opacity: .5;
+    color: #d3d5d5;
+    border-bottom: 1px solid #d3d5d5;
+
+    @include responsive-font(.6vw, 10px);
 }
 
 .speaker {
@@ -311,16 +321,19 @@ TOP PART OF CONTROLLER
     width: 75%;
 
     justify-content: space-between;
-    &--dark{
-        background: $display-color;
-        @include fill-parent();
-        transform: scale(1.02);
-        color: $display-background-color;
+    &--dark {
         z-index: 1;
+
+        transform: scale(1.02);
+        text-align: center;
+
+        opacity: 0;
+        color: $display-background-color;
+        background: $display-color;
+
+        @include fill-parent();
         @include center-children();
         @include responsive-font(1.5vw, 20px);
-        text-align: center;
-        opacity: 0;
     }
 }
 
@@ -336,7 +349,7 @@ TOP PART OF CONTROLLER
     justify-content: space-between;
     @include responsive-font(1.2vw, 10px);
     div:not(:first-child) {
-        opacity: 0.7;
+        opacity: .7;
     }
     &--lives {
         text-align: right;
@@ -398,7 +411,7 @@ $border-radius: .7vw;
 
         align-items: flex-end;
     }
-    
+
 
     .bar {
         height: 100%;
@@ -408,6 +421,7 @@ $border-radius: .7vw;
         transform-origin: 0 100%;
 
         background-color: $display-color;
+
         flex-grow: 1;
     }
 }
@@ -435,16 +449,18 @@ BOTTOM PART OF CONTROLLER
     cursor: pointer;
 
     border-radius: .85vw;
-    box-shadow: 0 0 0 .7vw rgba(0, 0, 0, .025);
     background-color: $light-gray;
+    box-shadow: 0 0 0 .7vw rgba(0, 0, 0, .025);
+
     flex-grow: 1;
 
     &:last-child {
         margin-right: 0;
     }
     &__color {
-        background-color: rgb(73, 246, 239);
         border-radius: inherit;
+        background-color: rgb(73, 246, 239);
+
         @include fill-parent();
     }
     &__button {
@@ -465,10 +481,8 @@ BOTTOM PART OF CONTROLLER
             border-radius: .7vw;
             background-color: rgba(white, .3);
 
-            
             @include fill-parent();
         }
-
     }
     &__sticker {
         position: absolute;
@@ -476,9 +490,11 @@ BOTTOM PART OF CONTROLLER
         width: 100%;
         height: 100%;
         padding: .67vw;
-        opacity: 0.86;
+
         transform: scaleY(.975);
         transform-origin: top;
+
+        opacity: .86;
         img {
             display: block;
 
@@ -487,22 +503,27 @@ BOTTOM PART OF CONTROLLER
         }
     }
 
-    &__title{
-        text-align: center;
+    &__title {
+        font-weight: bold;
+
         position: absolute;
         bottom: 7%;
+
         width: 100%;
-        
+
+        text-align: center;
         text-transform: uppercase;
-        @include responsive-font(1vw, 14px);
+
         opacity: .6;
         color: black;
-        font-weight: bold;
+
+        @include responsive-font(1vw, 14px);
     }
 
 
     &:active {
-        .pad__button:before, .pad__sticker {
+        .pad__button:before,
+        .pad__sticker {
             transform: scaleY(.98);
         }
         .pad__title {
@@ -514,15 +535,20 @@ BOTTOM PART OF CONTROLLER
 
 // Hidden youtube player
 #videoPlayer {
-  position: absolute;
-  overflow: hidden;
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+
+    overflow: hidden;
+
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+
     pointer-events: none;
+
     opacity: 0;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-
+    border: 0;
 }
-

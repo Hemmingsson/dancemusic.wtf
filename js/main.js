@@ -4,7 +4,8 @@ var sound = {
   wrong: new Audio('./sounds/wrong.mp3')
 }
 
-var sampleLenght = 10
+var sampleLenght = 17
+var scoreMultiplyer = 0
 
 var message = {
   start: 'Click Start to begin game',
@@ -192,7 +193,7 @@ var noAnswerChoosen = function () {
 }
 
 /* ==========================================================================
-DISPLAY
+STATS
 ========================================================================== */
 
 var resetStats = function () {
@@ -203,7 +204,7 @@ var resetStats = function () {
 }
 
 var getScore = function () {
-  return 11 * scoreMultiplyer
+  return Math.floor(11 * scoreMultiplyer / 2)
 }
 
 var scoreMultiplyCounter = function () {

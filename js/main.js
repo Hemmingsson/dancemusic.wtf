@@ -54,6 +54,14 @@ document.addEventListener('DOMContentLoaded', function (event) {
   initRippleEffect()
   initDisplayButtons()
   initPads()
+  // blinkPadsRandomly('pink')
+
+  document.getElementsByClassName('start-button')[0].addEventListener('click', function (event) {
+    console.log('hej')
+    var controller = document.getElementsByClassName('controller')[0]
+    controller.classList.remove('away')
+  })
+
   waitForVideoPlayer(function () {
     setDisplayText(message.start, true)
   })

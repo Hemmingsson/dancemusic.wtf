@@ -1,1 +1,1 @@
-window.location.replace("http://stackoverflow.com");
+window.location.replace("http://dancemusic.wtf/");

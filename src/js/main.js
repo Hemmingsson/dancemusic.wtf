@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
   })
 
   waitForVideoPlayer(function () {
-    setDisplayText(message.ready, true)
+    setDisplayText(message.ready, false)
   })
 })
 

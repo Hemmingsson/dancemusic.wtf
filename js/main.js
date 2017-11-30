@@ -9,6 +9,7 @@ var scoreMultiplyer = 0
 
 var message = {
   start: 'Click Start to begin game',
+  ready: 'Controller Ready!',
   loading: 'Loading track...',
   what: 'What genere is playing?',
   buffering: 'Buffering Music...',
@@ -54,16 +55,19 @@ document.addEventListener('DOMContentLoaded', function (event) {
   initRippleEffect()
   initDisplayButtons()
   initPads()
-  // blinkPadsRandomly('pink')
 
   document.getElementsByClassName('start-button')[0].addEventListener('click', function (event) {
     console.log('hej')
     var controller = document.getElementsByClassName('controller')[0]
-    controller.classList.remove('away')
+    controller.classList.remove('controller-offscreen')
+    setDisplayText('', false)
+    setTimeout(function () {
+      setDisplayText(message.start, true)
+    }, 900)
   })
 
   waitForVideoPlayer(function () {
-    setDisplayText(message.start, true)
+    setDisplayText(message.ready, true)
   })
 })
 

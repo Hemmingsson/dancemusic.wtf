@@ -4,11 +4,11 @@ var sound = {
   wrong: new Audio('./sounds/wrong.mp3')
 }
 
-var sampleLenght = 17
+var sampleLenght = 20
 var scoreMultiplyer = 0
 
 var message = {
-  start: 'Click Start to begin game',
+  start: 'Click Start to begin quiz',
   ready: 'Controller Ready!',
   loading: 'Loading track...',
   what: 'What genere is playing?',
@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
   initDisplayButtons()
   initPads()
 
+  // Should be moved in to its own function
   document.getElementsByClassName('start-button')[0].addEventListener('click', function (event) {
     console.log('hej')
     var controller = document.getElementsByClassName('controller')[0]
@@ -63,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
     setDisplayText('', false)
     setTimeout(function () {
       setDisplayText(message.start, true)
+      controller.classList.remove('animated')
     }, 900)
   })
 
@@ -115,9 +117,7 @@ var resetBoard = function () {
   scoreMultiplyer = 0
   // remove genre form pads
   var titles = document.getElementsByClassName('pad__title')
-  for (var i = 0; i < titles.length; i++) {
-    titles.item(i).innerHTML = ''
-  }
+  for (var i = 0; i < titles.length; i++) { titles.item(i).innerHTML = '' }
 }
 
 /* ==========================================================================

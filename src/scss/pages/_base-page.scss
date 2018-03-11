@@ -1,0 +1,37 @@
+/*------------------------------------*\
+    $BASE-PAGE
+\*------------------------------------*/
+
+
+body {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+
+    background-color: $light-gray;
+
+    @include center-children();
+    &:after {
+        position: absolute;
+        bottom: 1.8vh;
+        left: 1.8vh;
+
+        content: 'mobile';
+
+        color: red;
+
+        @include respond-to('small') {
+            content: 'small';
+        }
+        @include respond-to('medium') {
+            content: 'medium';
+        }
+        @include respond-to('large') {
+            content: 'large';
+        }
+    }
+}
+
+

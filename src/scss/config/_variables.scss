@@ -1,0 +1,66 @@
+/*------------------------------------*\
+    $VARIABLES
+\*------------------------------------*/
+
+
+// Colors
+$computer-white: #fffffa;
+$light-gray: #cfdce4;
+$orange: #ff9058;
+$baby-blue: #58e1ff;
+$dark-black: #434343;
+$yellow: #ffe800;
+$red: #a30000;
+
+$display-dark: #252623;
+$display-color: #262b2a;
+$display-background-color: #d5dac9;
+$display-border-width: 2.4vw;
+
+
+// Cords
+$cord-bevel: rgba(0, 0, 0, .07);
+$cord-io: #2d2d2d;
+
+// Typography
+$font--primary: 'Roboto Mono', monospace;
+$font--screen: 'visitor', sans-serif;
+$font--condensed: 'Roboto Condensed', sans-serif;
+
+
+$base-font-size: 16px;
+$base-line-height: 25px;
+
+// Base sizes
+$font-sizes: (
+    xxl:        38px,
+    xl:         30px,
+    l:          24px,
+    m:          18px,
+    s:          14px,
+    xs:         12px
+);
+
+// Breakpoints
+$breakpoints: (
+  'small':  ( min-width:  600px ),
+  'medium': ( min-width:  1000px ),
+  'large':  ( min-width: 1400px )
+) !default;
+
+// Transitions
+$default-transition-speed: 300ms;
+
+// Z-index
+$z-alpha:       7;
+$z-beta:        6;
+$z-gamma:       5;
+$z-delta:       4;
+$z-epsilon:     3;
+$z-zeta:        2;
+$z-milli:       1;
+$z-base:        0;
+$z-hidden:     -1;
+$z-giga:     9999;
+$z-mega:      110;
+$z-kilo:      109;

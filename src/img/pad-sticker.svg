@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 282 263">
-  <defs>
-    <radialGradient id="fill" cx="50.968%" cy="48.895%" r="74.77%" fx="50.968%" fy="48.895%" gradientTransform="matrix(0 1 -.93262 0 .966 -.02)">
-      <stop offset="0%" stop-opacity=".68"/>
-      <stop offset="100%" stop-opacity=".78"/>
-    </radialGradient>
-  </defs>
-  <path fill="url(#fill)" fill-rule="evenodd" d="M9,4 L281,4 C283.761424,4 286,6.23857625 286,9 L286,262 C286,264.761424 283.761424,267 281,267 L273.6448,267 L273.6448,267 C271.472843,267 269.549296,265.597811 268.884658,263.530046 L261.669205,241.081972 L261.669205,241.081972 C261.270422,239.841313 260.116294,239 258.81312,239 L31.1868803,239 L31.1868803,239 C29.8837059,239 28.7295779,239.841313 28.3307946,241.081972 L21.1153424,263.530046 L21.1153424,263.530046 C20.4507035,265.597811 18.5271569,267 16.3551996,267 L9,267 C6.23857625,267 4,264.761424 4,262 L4,9 C4,6.23857625 6.23857625,4 9,4 Z" transform="translate(-4 -4)"/>
+    <defs>
+        <radialGradient id="a" cx="51%" cy="48.9%" r="74.8%" fx="51%" fy="48.9%" gradientTransform="matrix(0 1 -.93262 0 .966 -.02)">
+            <stop offset="0%" stop-opacity=".7" />
+            <stop offset="100%" stop-opacity=".8" />
+        </radialGradient>
+    </defs>
+    <path fill="url(#a)" fill-rule="evenodd" d="M9 4h272c2.8 0 5 2.2 5 5v253c0 2.8-2.2 5-5 5h-7.4c-2 0-4-1.4-4.7-3.5l-7.5-22.4c-.4-1-1.6-2-3-2H31.3c-1.3 0-2.5 1-3 2l-7 22.7c-.7 2-2.7 3.5-4.8 3.5H9c-2.8 0-5-2-5-5V9c0-2.8 2.2-5 5-5z" transform="translate(-4 -4)" />
 </svg>

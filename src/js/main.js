@@ -4,13 +4,13 @@ var sound = {
   wrong: new Audio('./sounds/wrong.mp3')
 }
 
-var sampleLenght = 20
+var sampleLenght = 15
 var scoreMultiplyer = 0
 
 var message = {
   start: 'Click Start to begin quiz',
   ready: 'Controller Ready!',
-  loading: 'Loading track...',
+  loading: 'Prepare for next round',
   what: 'What genere is playing?',
   buffering: 'Buffering Music...',
   userChoosed: 'You Picked ',
@@ -28,10 +28,11 @@ var padColor = {
   orange: '246, 156, 73'
 }
 
+loadingDone = false
+
 var gameData = {
   'totalScore': 0,
-  'totalCorrect': 0,
-  'totalRounds': 0,
+  'totalLives': 5,
   'currentGame': null,
   'gameIsActive': false
 }
@@ -67,12 +68,89 @@ document.addEventListener('DOMContentLoaded', function (event) {
       controller.classList.remove('animated')
     }, 900)
   })
-
   waitForVideoPlayer(function () {
     setDisplayText(message.ready, false)
   })
 })
 
+var startProgressBar = function () {
+  var progressElm = document.getElementsByClassName('progress-bar')[0]
+
+  TweenLite.to(progressElm, 0, {
+    transform: 'translateX(0)'
+  })
+
+  var animate = function () {
+    var progress = getProgress()
+    console.log(progress)
+    if (videoIsPlaying && !videoIsMuted) {
+      console.log(progress + '%')
+      TweenLite.to(progressElm, 1, {
+        transform: 'translateX(' + progress + '%)',
+        ease: Power0.easeNone,
+        force3D: true,
+        onComplete: function () {
+          if (gameData.gameIsActive) {
+            animate()
+          }
+        }
+      })
+    } else {
+      setTimeout(animate, 1000)
+    }
+  }
+  animate()
+}
+
+var getProgress = function () {
+  if (!gameData.currentGame) return
+  if (!gameData.currentGame.track) return
+  var currentTime = videoPlayer.getCurrentTime()
+  var currentSample = gameData.currentGame.track.currentSample
+  // calculate current total time of samples
+  var sampleTime = sampleLenght * currentSample
+  var relativeTime = currentTime - gameData.currentGame.track.sampleTimeStamps[currentSample]
+  var time = relativeTime + sampleTime
+
+  // Convert total time of samples to stroke offsset value
+  var value = convertRange(time, [0, 3 * sampleLenght], [0, 100])
+  value = value < 0 ? 0 : value
+
+  return value
+}
+
+var convertRange = function (value, r1, r2) {
+  return (value - r1[0]) * (r2[1] - r2[0]) / (r1[1] - r1[0]) + r2[0]
+}
+
+var showLoadingIndicator = function () {
+  var loadingElm = document.getElementsByClassName('interface__loading')[0]
+  var bar = loadingElm.getElementsByClassName('loading-bar')[0]
+  var width = loadingElm.offsetWidth
+  var barWidth = width / 2
+
+  loadingElm.style.opacity = 1
+
+  TweenLite.to(bar, 0, {
+    transform: 'translateX(-' + barWidth + 'px)'
+  })
+
+  var animate = function () {
+    TweenLite.to(bar, 2, {
+      transform: 'translateX(' + width + 'px)',
+      ease: 'Circ.easeOutIn',
+      onComplete: function () {
+        if (loadingDone) {
+          loadingElm.style.opacity = 0
+        } else {
+          animate()
+        }
+      }
+
+    })
+  }
+  animate()
+}
 /* ==========================================================================
 START GAME
 ========================================================================== */
@@ -90,9 +168,9 @@ var startNewRound = function (addRound) {
   gameData.currentGame = defaultGame()
   resetBoard()
   setDisplayText(message.loading, false)
+  showLoadingIndicator(true)
   renderStats()
 
-  gameData.totalRounds += addRound ? 1 : 0
   drawNewRound()
     .then(prepairVideo)
     .then(renderPadGenres)
@@ -103,6 +181,7 @@ var startNewRound = function (addRound) {
         gameData.gameIsActive = true
         scoreMultiplyCounter()
         playNextSample() // start sample playback
+        startProgressBar()
         blinkPadsRandomly('pink') // start pads animation
       })
     })
@@ -112,7 +191,7 @@ var startNewRound = function (addRound) {
 var resetBoard = function () {
   setDarkDisplayText(false)
   killPadsAnimation()
-  resetSamplesBackground()
+  resetProgress()
   muteVideo(true)
   scoreMultiplyer = 0
   // remove genre form pads
@@ -178,8 +257,8 @@ var answerChoosen = function (answerIndex, elm) {
       setDarkDisplayText(true, choosenGenre.genre + '<br>' + message.correct)
       // Update Score
       gameData.totalScore += getScore()
-      gameData.totalCorrect += 1
     } else {
+      gameData.totalLives -= 1
       sound.wrong.play()
       setDarkDisplayText(true, choosenGenre.genre + '<br>' + message.incorrect)
       showCorrectPad()
@@ -187,7 +266,11 @@ var answerChoosen = function (answerIndex, elm) {
   }, 1700)
   // Wait even more to start new round
   setTimeout(function () {
-    startNewRound(true)
+    if (gameData.totalLives === 0) { // Game Over
+      startNewGame()
+    } else {
+      startNewRound(true)
+    }
   }, 4700)
 }
 
@@ -196,7 +279,7 @@ var noAnswerChoosen = function () {
   blinkAllPads('red', 'orange')
   videoPlayer.pauseVideo()
   gameData.gameIsActive = false
-
+  scoreMultiplyer -= 1
   setDarkDisplayText(true, message.toSlow)
 
   setTimeout(function () {
@@ -210,8 +293,7 @@ STATS
 
 var resetStats = function () {
   gameData.totalScore = 0
-  gameData.totalCorrect = 0
-  gameData.totalRounds = 0
+  gameData.totalLives = 5
   renderStats()
 }
 
@@ -224,7 +306,6 @@ var scoreMultiplyCounter = function () {
   var counter = function () {
     if (videoIsPlaying && !videoIsMuted && scoreMultiplyer > 1 && gameData.gameIsActive) {
       scoreMultiplyer -= 1
-      console.log(scoreMultiplyer)
     }
 
     setTimeout(counter, 1000)
@@ -245,7 +326,7 @@ var initDisplayButtons = function () {
   buttons[0].addEventListener('click', function (event) {
     if (!videoPlayerIsReady) return
     startNewGame()
-    blinkDisplayText(true)
+    // blinkDisplayText(true)
   })
 
   // Mute Button
@@ -316,47 +397,33 @@ var setDarkDisplayText = function (show, string = '') {
   textElm.innerHTML = string
 }
 
-// SAMPLE INDICATOR
-// -------------------------------------------------------
-var updateCurrentSample = function () {
-  var currentSample = gameData.currentGame.track.currentSample
-  var elms = document.getElementsByClassName('interface__samples')[0].children
+var resetProgress = function (argument) {
+  var progressElm = document.getElementsByClassName('progress-bar')[0]
 
-  Array.from(elms).forEach(function (elm, index) {
-    var textElm = elm.children[0]
-
-    elm.style.backgroundColor = '#d5dac9'
-    textElm.style.color = '#262b2a'
-    textElm.style.opacity = 1
-
-    if (index === currentSample) {
-      elm.style.backgroundColor = '#262b2a'
-      textElm.style.color = '#d5dac9'
-    }
+  TweenLite.to(progressElm, 0, {
+    transform: 'translateX(0)'
   })
-}
-
-var resetSamplesBackground = function () {
-  var sampleBackgrounds = document.getElementsByClassName('interface__samples')[0].children
-
-  var reset = function (elm) {
-    var textElm = elm.children[0]
-    elm.style.backgroundColor = '#d5dac9'
-    textElm.style.color = '#262b2a'
-    textElm.style.opacity = 1
-  }
-
-  for (var i = 0; i < sampleBackgrounds.length; i++) {
-    reset(sampleBackgrounds.item(i))
-  }
 }
 
 // STATS
 // -------------------------------------------------------
 var renderStats = function () {
   document.getElementsByClassName('total-score')[0].innerHTML = gameData.totalScore
-  document.getElementsByClassName('total-correct')[0].innerHTML = gameData.totalCorrect
-  document.getElementsByClassName('total-rounds')[0].innerHTML = gameData.totalRounds
+  // document.getElementsByClassName('total-lives')[0].innerHTML = gameData.totalLives
+  // document.getElementsByClassName('total-rounds')[0].innerHTML = gameData.totalRounds
+  renderLives()
+}
+
+var renderLives = function () {
+  var string = ''
+  for (var i = 0; i < 5; i++) {
+    if (i < gameData.totalLives) {
+      string = '_' + string
+    } else {
+      string = '^' + string
+    }
+  }
+  document.getElementsByClassName('interface__lives')[0].innerHTML = string
 }
 
 // EQUALIZER
@@ -645,6 +712,9 @@ var onYouTubeIframeAPIReady = function () {
   videoPlayer = new YT.Player('videoPlayer', {
     height: '200',
     width: '300',
+    playerVars: {
+      playsinline: 1
+    },
     events: {
       'onReady': onPlayerReady,
       'onStateChange': onPlayerStateChange,
@@ -684,7 +754,7 @@ var onPlayerStateChange = function (e) {
 
     // paused
   } else if (e.data === 3) {
-    // buffering
+    console.log('BUFFER')
   } else if (e.data === 5) {
     // video cued
   }
@@ -747,6 +817,7 @@ var prepairVideo = function () {
         gameData.currentGame.track.sampleTimeStamps = createSamplePoints(duration, 3)
         // Set time to First Sample point
         videoPlayer.seekTo(gameData.currentGame.track.sampleTimeStamps[0])
+        loadingDone = true
         resolve()
       } else {
         setTimeout(calculateTimeStamps, 150)
@@ -772,7 +843,6 @@ var createSamplePoints = function (duration, sampleSize) {
 }
 
 var playNextSample = function () {
-  updateCurrentSample()
   var sampleTimeStamps = gameData.currentGame.track.sampleTimeStamps
   var currentSample = gameData.currentGame.track.currentSample
   videoPlayer.seekTo(sampleTimeStamps[currentSample])

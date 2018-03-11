@@ -1,0 +1,30 @@
+/*------------------------------------*\
+    $CONFIG
+\*------------------------------------*/
+@import 'vendor/normalize';
+@import 'config/variables';
+
+/*------------------------------------*\
+    $BASE
+\*------------------------------------*/
+@import 'abstracts/mixins';
+@import 'abstracts/functions';
+@import 'abstracts/base';
+@import 'abstracts/type';
+
+/*------------------------------------*\
+    $COMPONENTS
+\*------------------------------------*/
+
+@import 'components/controller';
+@import 'components/footer';
+@import 'components/controlls';
+@import 'components/display';
+@import 'components/interface';
+@import 'components/video';
+@import 'components/pads';
+
+/*------------------------------------*\
+    $PAGES
+\*------------------------------------*/
+@import 'pages/base-page';

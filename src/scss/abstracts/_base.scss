@@ -1,0 +1,28 @@
+/*------------------------------------*\
+    $BASE DEFAULTS
+\*------------------------------------*/
+
+* {
+    line-height: 1;
+
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    //box-shadow: 0 0 0 1px red;
+}
+
+html {
+    font-family: $font--primary;
+    -webkit-text-size-adjust: 100%;
+}
+
+img,
+svg {
+    vertical-align: top;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+}
+
+

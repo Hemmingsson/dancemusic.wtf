@@ -6,18 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Dance music what the fuck</title>
     <!--build:css css/styles.min.css-->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/main.css">
     <!--endbuild-->
-
     <meta name="application-name" content="Dancemusic.wtf">
     <meta name="description" content="what the fuck is all these generes?">
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="google" content="notranslate">
-
     <link rel="me" href="https://github.com/Hemmingsson" type="text/html">
     <link rel="me" href="mailto:hemmingsson.m@gmail.com">
-
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110343050-1"></script>
     <script>
@@ -25,28 +22,16 @@
 
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-110343050-1');
-    </script>
 
+    </script>
 </head>
 
 <body>
     <div id="videoPlayer"></div>
-    <section class="intro">
-            <p>bla bla bla bla<br><br>
-            This is a quiz game to learn electronic music geners...<br>
-            Havent had time to write this text yet.<br><br>
-            It is still a work in progres, but totally playabel. <br>
-            Only tested in chrome and only works on desktop for now.<br>
-            Notice any bugs or have feedback <a target="_blank" href="https://www.messenger.com/t/1337bERNA">send it to me</a> ;)
-            </p>
-            <div class="start-button"><span>&#9658;</span> Play Game</div>
-
-    </section>
-    <main class="controller controller-offscreen animated"> <!-- controller-offscreen animated -->
+    <main class="controller">
         <div class="controller__decoration">
-            <img class="logo" src="./img/logo.svg">
+            <img class="logo" alt="logotype" src="./img/logo.svg">
             <div class="cords">
                 <div class="cords__aux cords__aux--right"></div>
                 <div class="cords__aux cords__aux--left"></div>
@@ -60,38 +45,37 @@
                     <div class="display__buttons">
                         <div class="buttons-title">game controlls</div>
                         <div class="button ripple-effect">Start</div>
-                        <div class="button ripple-effect">mute</div>
+                        <div class="button ripple-effect">hiscore</div>
                         <div class="button ripple-effect">About</div>
                     </div>
                     <div class="display__inner">
-
-
-
-                        <canvas id="nois" width="100%" height="100%"></canvas>
-
-
                         <div class="interface">
                             <div class="interface--dark">
                                 <p></p>
                             </div>
-                            <div class="interface__score">
-                                <div class="interface__score--total">score: <span class="total-score">0</span></div>
-                                <div class="interface__score--correct">Correct: <span class="total-correct">0</span></div>
-                                <div class="interface__score--rounds">Rounds: <span class="total-rounds">0</span></div>
+                            <div class="interface__stats">
+                                <div class="interface__score">score: <span class="total-score"></span></div>
+                                <div class="interface__lives">
+                                </div>
                             </div>
                             <div class="interface__info">
                                 <p>Initializing controller...</p>
                             </div>
-                            <div class="interface__samples">
-                                <div><span>Sample 01</span></div>
-                                <div><span>Sample 02</span></div>
-                                <div><span>Sample 03</span></div>
+                            <div class="interface__bottom">
+                                <div class="progress-bar"></div>
+                                <div class="interface__samples">
+                                    <div><span>Sample #1</span></div>
+                                    <div><span>Sample #2</span></div>
+                                    <div><span>Sample #3</span></div>
+                                </div>
+                                <div class="interface__loading">
+                                    <div class="loading-bar"></div>
+                                    <span>Loading track...</span>
+                                </div>
                             </div>
                         </div>
                         <div class="equalizer animate-bars">
                             <div class='equalizer--inner'>
-                                <div class="bar"></div>
-                                <div class="bar"></div>
                                 <div class="bar"></div>
                                 <div class="bar"></div>
                                 <div class="bar"></div>
@@ -151,6 +135,9 @@
             </section>
         </div>
     </main>
+    <footer>
+        Created by <a href="http://mattias.lol">mattias.lol</a>
+    </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.6/typed.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.11.5/TweenMax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>

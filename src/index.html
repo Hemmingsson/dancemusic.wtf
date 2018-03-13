@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Dance music what the fuck</title>
     <!--build:css css/styles.min.css-->
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.min.css">
     <!--endbuild-->
     <meta name="application-name" content="Dancemusic.wtf">
     <meta name="description" content="what the fuck is all these generes?">
@@ -43,13 +43,15 @@
                 <img class="speaker" src="./img/speaker.svg">
                 <div class="display">
                     <div class="display__buttons">
-                        <div class="buttons-title">game controlls</div>
-                        <div class="button ripple-effect">Start</div>
-                        <div class="button ripple-effect">hiscore</div>
+                        <div class="buttons-title">Game Controlls</div>
+                        <div class="button start-button ripple-effect">Start</div>
                         <div class="button ripple-effect">About</div>
+
                     </div>
                     <div class="display__inner">
                         <div class="interface">
+
+                            <!--
                             <div class="interface--dark">
                                 <p></p>
                             </div>
@@ -72,7 +74,7 @@
                                     <div class="loading-bar"></div>
                                     <span>Loading track...</span>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="equalizer animate-bars">
                             <div class='equalizer--inner'>
@@ -135,14 +137,13 @@
             </section>
         </div>
     </main>
-    <footer>
-        Created by <a href="http://mattias.lol">mattias.lol</a>
-    </footer>
+    <script src="./js/bundle.js"></script>
+    <!--
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.6/typed.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.11.5/TweenMax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="js/genreData.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/main.js"></script>-->
 </body>
 
 </html>

@@ -1,3 +1,9 @@
+require('./libs/TweenMax.min.js')
+var Typed = require('./libs/Typed.min.js')
+var _ = require('./libs/underscore.min.js')
+
+var genreData = require('./genreData.json')
+
 var sound = {
   tap: new Audio('./sounds/tap.mp3'),
   correct: new Audio('./sounds/correct.mp3'),
@@ -28,8 +34,6 @@ var padColor = {
   orange: '246, 156, 73'
 }
 
-loadingDone = false
-
 var gameData = {
   'totalScore': 0,
   'totalLives': 5,
@@ -56,101 +60,20 @@ document.addEventListener('DOMContentLoaded', function (event) {
   initRippleEffect()
   initDisplayButtons()
   initPads()
+  if (is_touch_device()) {
+    document.body.style.height = window.innerHeight + 'px'
+  }
 
-  // Should be moved in to its own function
-  document.getElementsByClassName('start-button')[0].addEventListener('click', function (event) {
-    console.log('hej')
-    var controller = document.getElementsByClassName('controller')[0]
-    controller.classList.remove('controller-offscreen')
-    setDisplayText('', false)
-    setTimeout(function () {
-      setDisplayText(message.start, true)
-      controller.classList.remove('animated')
-    }, 900)
-  })
   waitForVideoPlayer(function () {
-    setDisplayText(message.ready, false)
+    console.log('READY')
   })
 })
 
-var startProgressBar = function () {
-  var progressElm = document.getElementsByClassName('progress-bar')[0]
+function is_touch_device () {
+  return 'ontouchstart' in window        // works on most browsers
+      || navigator.maxTouchPoints       // works on IE10/11 and Surface
+};
 
-  TweenLite.to(progressElm, 0, {
-    transform: 'translateX(0)'
-  })
-
-  var animate = function () {
-    var progress = getProgress()
-    console.log(progress)
-    if (videoIsPlaying && !videoIsMuted) {
-      console.log(progress + '%')
-      TweenLite.to(progressElm, 1, {
-        transform: 'translateX(' + progress + '%)',
-        ease: Power0.easeNone,
-        force3D: true,
-        onComplete: function () {
-          if (gameData.gameIsActive) {
-            animate()
-          }
-        }
-      })
-    } else {
-      setTimeout(animate, 1000)
-    }
-  }
-  animate()
-}
-
-var getProgress = function () {
-  if (!gameData.currentGame) return
-  if (!gameData.currentGame.track) return
-  var currentTime = videoPlayer.getCurrentTime()
-  var currentSample = gameData.currentGame.track.currentSample
-  // calculate current total time of samples
-  var sampleTime = sampleLenght * currentSample
-  var relativeTime = currentTime - gameData.currentGame.track.sampleTimeStamps[currentSample]
-  var time = relativeTime + sampleTime
-
-  // Convert total time of samples to stroke offsset value
-  var value = convertRange(time, [0, 3 * sampleLenght], [0, 100])
-  value = value < 0 ? 0 : value
-
-  return value
-}
-
-var convertRange = function (value, r1, r2) {
-  return (value - r1[0]) * (r2[1] - r2[0]) / (r1[1] - r1[0]) + r2[0]
-}
-
-var showLoadingIndicator = function () {
-  var loadingElm = document.getElementsByClassName('interface__loading')[0]
-  var bar = loadingElm.getElementsByClassName('loading-bar')[0]
-  var width = loadingElm.offsetWidth
-  var barWidth = width / 2
-
-  loadingElm.style.opacity = 1
-
-  TweenLite.to(bar, 0, {
-    transform: 'translateX(-' + barWidth + 'px)'
-  })
-
-  var animate = function () {
-    TweenLite.to(bar, 2, {
-      transform: 'translateX(' + width + 'px)',
-      ease: 'Circ.easeOutIn',
-      onComplete: function () {
-        if (loadingDone) {
-          loadingElm.style.opacity = 0
-        } else {
-          animate()
-        }
-      }
-
-    })
-  }
-  animate()
-}
 /* ==========================================================================
 START GAME
 ========================================================================== */
@@ -167,31 +90,22 @@ var startNewGame = function () {
 var startNewRound = function (addRound) {
   gameData.currentGame = defaultGame()
   resetBoard()
-  setDisplayText(message.loading, false)
-  showLoadingIndicator(true)
   renderStats()
 
   drawNewRound()
     .then(prepairVideo)
     .then(renderPadGenres)
     .then(function () {
-      blinkDisplayText(false)
-      setDisplayText(message.what, true, function () {
-        // callback to wait untill typed animateion is done
-        gameData.gameIsActive = true
-        scoreMultiplyCounter()
-        playNextSample() // start sample playback
-        startProgressBar()
-        blinkPadsRandomly('pink') // start pads animation
-      })
+      gameData.gameIsActive = true
+      scoreMultiplyCounter()
+      playNextSample() // start sample playback
+      blinkPadsRandomly('pink') // start pads animation
     })
 }
 
 // RESET GAME BOARD
 var resetBoard = function () {
-  setDarkDisplayText(false)
   killPadsAnimation()
-  resetProgress()
   muteVideo(true)
   scoreMultiplyer = 0
   // remove genre form pads
@@ -246,7 +160,6 @@ var answerChoosen = function (answerIndex, elm) {
 
   // Indicate which users choise
   blinkSpecificPad(answerIndex, 0.15)
-  setDisplayText(message.userChoosed + choosenGenre.genre, false)
 
   // Wait abit to show the correct anwser
   setTimeout(function () {
@@ -254,13 +167,11 @@ var answerChoosen = function (answerIndex, elm) {
       killPadsAnimation()
       showCorrectPad()
       sound.correct.play()
-      setDarkDisplayText(true, choosenGenre.genre + '<br>' + message.correct)
       // Update Score
       gameData.totalScore += getScore()
     } else {
       gameData.totalLives -= 1
       sound.wrong.play()
-      setDarkDisplayText(true, choosenGenre.genre + '<br>' + message.incorrect)
       showCorrectPad()
     }
   }, 1700)
@@ -329,79 +240,8 @@ var initDisplayButtons = function () {
     // blinkDisplayText(true)
   })
 
-  // Mute Button
-  buttons[1].addEventListener('click', function (event) {
-  })
-
   // About Button
-  buttons[2].addEventListener('click', function (event) {
-  })
-}
-
-// NORMAL DISPLAY TEXT
-// -------------------------------------------------------
-var setDisplayText = function (string, animated, callback) {
-  if (!animated) {
-    document.getElementsByClassName('interface__info')[0].innerHTML = string
-    return
-  }
-
-  string = string.replace('&', '&amp;')
-  document.getElementsByClassName('interface__info')[0].innerHTML = ''
-  var typed = new Typed('.interface__info', {
-    strings: [string],
-    typeSpeed: 20,
-    onComplete: function () {
-      if (!callback) return
-      callback()
-    }
-  })
-}
-
-var blinkDisplayText = function (play) {
-  var textElm = document.getElementsByClassName('interface__info')[0]
-
-  if (!play) {
-    TweenLite.killTweensOf(textElm)
-    TweenLite.to(textElm, 0.2, {
-      opacity: 1
-    })
-    return
-  }
-
-  var animate = function (grow) {
-    TweenLite.to(textElm, 0.2, {
-      opacity: 1,
-      onComplete: function () {
-        TweenLite.to(textElm, 0.2, {
-          opacity: 0,
-          delay: 0.2,
-          onComplete: function () {
-            animate()
-          }
-        })
-      }
-    })
-  }
-  animate()
-}
-
-// DARK DISPLAY TEXT
-// -------------------------------------------------------
-
-var setDarkDisplayText = function (show, string = '') {
-  var darkScreen = document.getElementsByClassName('interface--dark')[0]
-  darkScreen.style.opacity = show ? 1 : 0
-
-  var textElm = darkScreen.getElementsByTagName('p')[0]
-  textElm.innerHTML = string
-}
-
-var resetProgress = function (argument) {
-  var progressElm = document.getElementsByClassName('progress-bar')[0]
-
-  TweenLite.to(progressElm, 0, {
-    transform: 'translateX(0)'
+  buttons[1].addEventListener('click', function (event) {
   })
 }
 
@@ -708,7 +548,7 @@ tag.src = 'https://www.youtube.com/iframe_api'
 var firstScriptTag = document.getElementsByTagName('script')[0]
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
 
-var onYouTubeIframeAPIReady = function () {
+global.onYouTubeIframeAPIReady = function () {
   videoPlayer = new YT.Player('videoPlayer', {
     height: '200',
     width: '300',

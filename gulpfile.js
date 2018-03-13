@@ -1,58 +1,19 @@
+// utils
 var gulp = require('gulp')
-var sass = require('gulp-sass')
-var browserSync = require('browser-sync')
-var useref = require('gulp-useref')
-var uglify = require('gulp-uglify')
-var gulpIf = require('gulp-if')
-var cssnano = require('gulp-cssnano')
-var cache = require('gulp-cache')
+var browserSync = require('browser-sync').create()
+var gutil = require('gulp-util')
+var rename = require('gulp-rename')
 var del = require('del')
-var minifyjs = require('gulp-js-minify')
-var runSequence = require('run-sequence')
 
-// Development Tasks
-// -----------------
+// css
+var sass = require('gulp-sass')
+var cssnano = require('cssnano')
+var autoprefixer = require('autoprefixer')
 
-// Start browserSync server
-gulp.task('browserSync', function () {
-  browserSync({
-    server: {
-      baseDir: 'src'
-    }
-  })
-})
-
-gulp.task('sass', function () {
-  return gulp.src('src/scss/**/*.scss') // Gets all files ending with .scss in src/scss and children dirs
-    .pipe(sass().on('error', sass.logError)) // Passes it through a gulp-sass, log errors to console
-    .pipe(gulp.dest('src/css')) // Outputs it in the css folder
-    .pipe(browserSync.reload({ // Reloading with Browser Sync
-      stream: true
-    }))
-})
-
-// Watchers
-gulp.task('watch', function () {
-  gulp.watch('src/scss/**/*.scss', ['sass'])
-  gulp.watch('src/*.html', browserSync.reload)
-  gulp.watch('src/js/**/*.js', browserSync.reload)
-})
-
-// Optimization Tasks
-// ------------------
-
-// Optimizing CSS and JavaScript
-gulp.task('useref', function () {
-  return gulp.src('src/*.html')
-    .pipe(useref())
-    .pipe(gulpIf('*.css', cssnano()))
-    .pipe(gulp.dest('dist'))
-})
-
-gulp.task('js', function () {
-  return gulp.src('src/js/**/*')
-    .pipe(gulp.dest('dist/js'))
-})
+// browserify
+var browserify = require('browserify')
+var source = require('vinyl-source-stream')
+var uglify = require('gulp-uglify')
 
 // Copying fonts
 gulp.task('fonts', function () {
@@ -67,36 +28,53 @@ gulp.task('images', function () {
 })
 
 // Copying fonts
+gulp.task('html', function () {
+  return gulp.src('src/*.html')
+    .pipe(gulp.dest('dist/'))
+    .pipe(browserSync.stream())
+})
+
+// Copying fonts
 gulp.task('sounds', function () {
   return gulp.src('src/sounds/**/*')
     .pipe(gulp.dest('dist/sounds'))
 })
 
 // Cleaning
-gulp.task('clean', function () {
-  return del.sync('dist').then(function (cb) {
-    return cache.clearAll(cb)
-  })
-})
 
 gulp.task('clean:dist', function () {
   return del.sync(['dist/**/*'])
 })
 
-// Build Sequences
-// ---------------
-
-gulp.task('default', function (callback) {
-  runSequence(['sass', 'browserSync'], 'watch',
-    callback
-  )
+gulp.task('default', ['clean:dist', 'html', 'sass', 'js', 'fonts', 'sounds', 'images'], function () {
+  browserSync.init({
+    server: {
+      baseDir: './dist'
+    }
+  })
+  gulp.watch('./src/*.html', ['html'])
+  gulp.watch('./src/scss/**/*.scss', ['sass'])
+  gulp.watch('./src/js/*.js', ['js'])
 })
 
-gulp.task('build', function (callback) {
-  runSequence(
-    'clean:dist',
-    'sass',
-    ['useref', 'js', 'fonts', 'sounds', 'images'],
-    callback
-  )
+gulp.task('sass', function () {
+  var plugins = [autoprefixer({browsers: ['last 2 versions']}), cssnano()]
+  return gulp.src('./src/scss/**/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(gulp.dest('./dist/css'))
+        .pipe(browserSync.stream())
+})
+
+gulp.task('js', function () {
+  browserify({
+    entries: './src/js/main.js',
+    debug: true
+  })
+    .on('error', gutil.log)
+    .bundle()
+    .on('error', gutil.log)
+    .pipe(source('bundle.js'))
+    .pipe(gulp.dest('dist/js'))
+    .pipe(browserSync.stream())
 })

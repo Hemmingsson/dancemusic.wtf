@@ -29,7 +29,7 @@
 
 <body>
     <div id="videoPlayer"></div>
-    <main class="controller">
+    <main class="controller --offscreen">
         <div class="controller__decoration">
             <img class="logo" alt="logotype" src="./img/logo.svg">
             <div class="cords">
@@ -44,39 +44,62 @@
                 <div class="display">
                     <div class="display__buttons">
                         <div class="buttons-title">Game Controlls</div>
-                        <div class="button start-button ripple-effect">Start</div>
+                        <div class="button start ripple-effect">
+                            Start
+                            <div class="button--glow">Start</div>
+                        </div>
                         <div class="button ripple-effect">About</div>
-
                     </div>
-                    <div class="display__inner">
-                        <div class="interface">
+                    <div class="interface">
+                        <div class="interface__left">
 
-                            <!--
-                            <div class="interface--dark">
-                                <p></p>
+                            
+                            <div class="status">
+                                <div class="status__score">000000</div>
+                                <div class="status__lives">^^^^^^^^^^</div>
+                            </div>
+                            <div class="info">
+                                
+                                <div class="big">Guess the music genre!</div>
+                                <div class="small">Playing: <span>Sample 1</span></div>
+                                <div class="overlay"><canvas></canvas></div>
+
+                            </div>
+                            
+                        </div>
+                        <div class="interface__right">
+                            <div class="equalizer">
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                            </div>
+                        </div>
+
+
+                        <!--
+                        <div class="interface">
+                            <div class="overlay"></div>
+                            
+                            <div class="interface__info">
+                                <div class="big">Guess the music genre</div>
+                                <div class="small">Playing: <span>Sample 1</span></div>
                             </div>
                             <div class="interface__stats">
-                                <div class="interface__score">score: <span class="total-score"></span></div>
-                                <div class="interface__lives">
-                                </div>
+                                
+                                
                             </div>
-                            <div class="interface__info">
-                                <p>Initializing controller...</p>
-                            </div>
-                            <div class="interface__bottom">
-                                <div class="progress-bar"></div>
-                                <div class="interface__samples">
-                                    <div><span>Sample #1</span></div>
-                                    <div><span>Sample #2</span></div>
-                                    <div><span>Sample #3</span></div>
-                                </div>
-                                <div class="interface__loading">
-                                    <div class="loading-bar"></div>
-                                    <span>Loading track...</span>
-                                </div>
-                            </div>-->
                         </div>
-                        <div class="equalizer animate-bars">
+                        <div class="equalizer">
                             <div class='equalizer--inner'>
                                 <div class="bar"></div>
                                 <div class="bar"></div>
@@ -93,6 +116,7 @@
                                 <div class="bar"></div>
                             </div>
                         </div>
+                    -->
                     </div>
                 </div>
                 <img class="speaker" src="./img/speaker.svg">

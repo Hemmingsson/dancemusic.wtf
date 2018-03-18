@@ -13,7 +13,6 @@ var autoprefixer = require('autoprefixer')
 // browserify
 var browserify = require('browserify')
 var source = require('vinyl-source-stream')
-var uglify = require('gulp-uglify')
 
 // Copying fonts
 gulp.task('fonts', function () {
@@ -54,7 +53,7 @@ gulp.task('default', ['clean:dist', 'html', 'sass', 'js', 'fonts', 'sounds', 'im
   })
   gulp.watch('./src/*.html', ['html'])
   gulp.watch('./src/scss/**/*.scss', ['sass'])
-  gulp.watch('./src/js/*.js', ['js'])
+  gulp.watch('./src/js/**/*.js', ['js'])
 })
 
 gulp.task('sass', function () {

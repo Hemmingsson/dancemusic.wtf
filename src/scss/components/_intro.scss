@@ -1,0 +1,37 @@
+/* ==========================================================================
+Intro
+========================================================================== */
+
+.intro {
+    font-family: 'Roboto Mono', sans-serif;
+
+    position: absolute;
+    top: 41vh;
+    left: 37vw;
+    p {
+        font-weight: bold;
+        line-height: 1.5;
+
+        letter-spacing: .18em;
+
+        color: #fffffa;
+
+        @include responsive-font(1.2vw, 12px);
+        a {
+            color: #fffffa;
+        }
+    }
+    &__button {
+        display: inline-block;
+
+        margin-top: 3vh;
+        padding: .5em .8em;
+
+        cursor: pointer;
+
+        color: $yellow;
+        border: 3px solid currentColor;
+
+        @include responsive-font(1.3vw, 12px);
+    }
+}

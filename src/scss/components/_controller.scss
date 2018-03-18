@@ -3,13 +3,13 @@
 \*------------------------------------*/
 
 .controller {
-
     position: relative;
 
     width: 100%;
     height: 100%;
     //min-height: 600px;
     //min-width: 400px;
+
     user-select: none;
 
     background-color: $computer-white;
@@ -32,7 +32,10 @@
     @include respond-to('large') {
         width: 87vw;
     }
+
 }
+
+
 
 
 /*
@@ -118,17 +121,15 @@ Logo
 
     @include respond-to('small') {
         top: 2.8%;
-        
         left: 5.1%;
+
         transform: none;
     }
-
     @include respond-to('medium') {
-      left: 2.3%;
+        left: 2.3%;
     }
     @include respond-to('large') {
-      left: 4.5%;
-      
+        left: 4.5%;
     }
 }
 
@@ -144,19 +145,18 @@ Controller Inside
     height: 78%;
     margin-top: 10%;
 
+    @include respond-to('small') {
+        height: 68%;
+        margin-top: 0;
+    }
+    @include respond-to('medium') {
+        width: 95%;
+    }
+    @include respond-to('large') {
+        width: 90%;
+    }
+
      > section {
         flex-grow: 1;
     }
-    @include respond-to('small') {
-      margin-top: 0;
-      height: 68%;
-    }
-    @include respond-to('medium') {
-      width: 95%;
-    }
-    @include respond-to('large') {
-      width: 90%;
-    }
-
-
 }

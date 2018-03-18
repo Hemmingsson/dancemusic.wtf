@@ -13,8 +13,8 @@ $yellow: #ffe800;
 $red: #a30000;
 
 $display-dark: #252623;
-$display-color: #262b2a;
-$display-background-color: #d3dabe; //#d3dabe #b5c8c6 #d5dac9
+$display-color: #4a4e4b;
+$display-background-color: #d5dac9; //#d3dabe #b5c8c6 #d5dac9
 $display-border-width: 2.4vw;
 
 
@@ -26,20 +26,13 @@ $cord-io: #2d2d2d;
 $font--primary: 'Roboto Mono', monospace;
 $font--screen: 'visitor', sans-serif;
 $font--condensed: 'Roboto Condensed', sans-serif;
+$font--icons: 'mago', sans-serif;
+$font--big: 'VT323', sans-serif;
 
 
 $base-font-size: 16px;
 $base-line-height: 25px;
 
-// Base sizes
-$font-sizes: (
-    xxl:        38px,
-    xl:         30px,
-    l:          24px,
-    m:          18px,
-    s:          14px,
-    xs:         12px
-);
 
 // Breakpoints
 $breakpoints: (

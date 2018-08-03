@@ -1,0 +1,287 @@
+/*------------------------------------*\
+    $INTERFACE
+\*------------------------------------*/
+
+$display-border: 2px solid $display-color;
+
+/* 
+   Layout
+   ========================================================================== */
+
+.interface {
+    font-family: visitor;
+
+    position: relative;
+
+    display: flex;
+    overflow: hidden;
+
+    padding: 5px;
+
+    background: $display-background-color;
+
+    flex-grow: 1;
+    @include respond-to('small') {
+        padding: 10px;
+    }
+    &.--intro {
+        .interface__overlay {
+            display: block;
+        }
+        .interface__right,
+        .interface__left {
+            opacity: 0;
+        }
+    }
+    &.--default {
+        .interface__right,
+        .interface__left {
+            opacity: 1;
+        }
+    }
+}
+
+
+
+.interface__overlay {
+    display: none;
+
+    margin: 5px;
+
+    @include fill-parent()
+    @include respond-to('small') {
+        margin: 10px;
+    }
+    canvas {
+        position: absolute;
+
+        width: 100%;
+        height: 100%;
+    }
+    .overlay__title {
+        font-family: $font--big;
+        font-size: 32px;
+
+        white-space: nowrap;
+        letter-spacing: .02em;
+
+        color: $display-background-color;
+
+        @include center-selfe()
+        @include respond-to('medium') {
+            @include responsive-font(3.4vw, 28px, 75px);
+        }
+    }
+    .overlay__text {
+        width: 80%;
+
+        text-align: center;
+        white-space: nowrap;
+        hyphens: none;
+
+        color: $display-background-color;
+        font-size: 13px;
+        @include respond-to('small') {
+            @include responsive-font(1.5vw, 16px, 28px);
+        }
+        
+        @include center-selfe();
+        span {
+            opacity: 0;
+        }
+    }
+}
+
+.interface__right,
+.interface__left {
+    position: relative;
+    z-index: $z-milli;
+
+    display: flex;
+    //opacity: 0;
+
+    border: $display-border;
+}
+
+
+.interface__left {
+    flex-direction: column;
+
+    flex-grow: 1;
+}
+
+
+.interface__right {
+    display: none;
+    flex-direction: column;
+
+    border-left: none;
+
+    @include respond-to('small') {
+        display: flex;
+    }
+}
+
+/* 
+   Status
+   ========================================================================== */
+
+.status {
+    display: flex;
+    overflow: hidden;
+
+    height: 1.5em;
+    padding: 0 8px;
+
+    border-bottom: $display-border;
+
+    flex-shrink: 1;
+    justify-content: space-between;
+    align-items: center;
+    @include responsive-font(1.2vw, 14px, 22px);
+    &__lives {
+        font-family: $font--icons;
+        font-size: .6em;
+        //transform: translateY(-6%);
+
+        letter-spacing: .25em;
+    }
+
+    &__score {
+        transform: translateY(1.5%);
+        letter-spacing: .05em;
+
+        color: $display-color;
+    }
+}
+
+
+/* 
+   Info
+   ========================================================================== */
+
+
+.info {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 0 20px;
+    padding-bottom: 6px;
+
+    text-align: center;
+
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    flex-shrink: 0;
+    .big {
+        font-family: $font--big;
+
+        min-height: 1em;
+
+        text-transform: uppercase;
+        //@include responsive-font(1.4vw, 18px);
+
+        @include responsive-font(1.6vw, 18px, 35px);
+        span {
+            opacity: 0;
+        }
+        &.--small {
+            //@include responsive-font(1.4vw, 14px);
+            text-transform: none;
+
+            @include responsive-font(1.3vw, 14px, 26px);
+        }
+        &.--score {
+            font-family: $font--screen;
+            font-size: 30px;
+            opacity: 0.7;
+            letter-spacing: .05em;
+
+            @include respond-to('small') {
+                @include responsive-font(4vw, 20px, 40px);
+            }
+        }
+    }
+    .loading {
+        //background-color: $display-color;
+        position: absolute;
+        bottom: 0;
+
+        display: flex;
+
+        width: 100%;
+        padding: 4px;
+
+        justify-content: center;
+        align-items: center;
+
+        .line {
+            width: calc(33%);
+            height: 5px;
+            margin-right: 2px;
+
+            opacity: 0;
+            border-bottom: 2px solid $display-color;
+
+            @include respond-to('medium') {
+                height: 8px;
+            }
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+        .dot {
+            width: 100%;
+            height: 100%;
+
+            transform: translateY(1px);
+
+            opacity: 0;
+            background-color: $display-color;;
+        }
+    }
+}
+
+
+
+
+/* 
+   Equalizer
+   ========================================================================== */
+
+.equalizer {
+    position: relative;
+
+    display: flex;
+
+    padding: 4px 5px;
+
+    flex-grow: 1;
+    .bar {
+        position: relative;
+
+        width: 3px;
+        //height: 10px;
+        margin-right: 2px;
+
+        transform: scaleY(.1);
+        transform-origin: 0 100%;
+
+        background-color: $display-color;
+
+        @include respond-to('medium') {
+            width: 5px;
+            margin-right: 3px;
+        }
+        @include respond-to('large') {
+            width: 6px;
+            margin-right: 3px;
+        }
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}

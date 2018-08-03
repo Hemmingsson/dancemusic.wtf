@@ -1,0 +1,12 @@
+{
+  "rules": {
+    "semi": ["error", "always"]
+  },
+  "overrides": [
+    {
+      "rules": {
+        "semi": ["error", "always"]
+      }
+    }
+  ]
+}

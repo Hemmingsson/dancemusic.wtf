@@ -1,26 +1,21 @@
 {
-  "name": "project",
+  "name": "DanceMusic.WTF",
   "version": "1.0.0",
-  "description": "",
-  "main": "gulpfile.js",
+  "description": "Guess Electronic Dance Music Styles. How High Can You Score?",
+  "main": "index.js",
   "scripts": {
-    "start": "gulp",
-    "build": "gulp build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Mattias Hemmingsson",
   "license": "ISC",
   "devDependencies": {
-    "autoprefixer": "^6.7.6",
-    "browser-sync": "^2.18.8",
-    "browserify": "^14.1.0",
-    "cssnano": "^3.10.0",
-    "del": "^3.0.0",
-    "gulp": "^3.9.1",
-    "gulp-postcss": "^6.3.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0",
-    "gulp-util": "^3.0.8",
-    "vinyl-source-stream": "^1.1.0"
+    "babel-core": "^6.26.0",
+    "cssnano": "^4.0.5",
+    "node-sass": "^4.8.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "gsap": "^1.20.4",
+    "lib": "^3.0.2",
+    "lodash": "^4.17.5"
+  }
 }

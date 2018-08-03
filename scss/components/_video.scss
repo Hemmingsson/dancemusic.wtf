@@ -1,0 +1,24 @@
+/* ==========================================================================
+   VIDEO PLAYER - Hidden youtube embedd
+   ========================================================================== */
+
+#videoPlayer {
+    position: absolute;z-index: 100; right: 0; top: 0;
+    display: none;
+    /*
+    top: 0;
+    left: 0;
+
+    overflow: hidden;
+
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+
+    pointer-events: none;
+
+    opacity: 0;
+    border: 0;
+    */
+}

@@ -1,0 +1,144 @@
+/*------------------------------------*\
+    $BASE-PAGE
+\*-----------------------------------*/
+
+.orientleft {
+    -webkit-transform: rotate(-90deg);
+    -webkit-transform-origin:160px 160px;
+}
+
+.orientright{
+    -webkit-transform: rotate(90deg);
+    -webkit-transform-origin:230px 230px;
+} 
+
+body {
+    position: relative;
+
+    overflow: hidden;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: $light-gray;
+    background-color: lighten($light-gray, 5%);
+
+    @include center-children();
+    @include responsive-font(1.4vw, 12px);
+    /*
+    &:after {
+        position: absolute;
+        bottom: 1.8vh;
+        left: 1.8vh;
+
+        content: 'mobile';
+
+        color: red;
+
+        @include respond-to('small') {
+            content: 'small';
+        }
+        @include respond-to('medium') {
+            content: 'medium';
+        }
+        @include respond-to('large') {
+            content: 'large';
+        }
+
+     
+
+    }
+    */
+    //animation:slidebg 5s linear infinite;
+}
+
+
+
+body.--offscreen {
+    .controller {
+        transform: translate(-100vw, 0) rotate(0deg);
+
+        @include respond-to('small') {
+            transform: translate(-65vw, 0) rotate(-2deg);
+        }
+        @include respond-to('medium') {
+            transform: translate(-40vw, 0) rotate(-1deg);
+        }
+    }
+    .about {
+        transition-delay: 0ms;
+
+        opacity: 1;
+    }
+    .backButton {
+        z-index: $z-alpha;
+
+        display: block;
+    }
+}
+
+.backButton {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: none;
+
+    width: 100vw;
+    height: 100vh;
+
+    cursor: pointer;
+
+    @include respond-to('small') {
+        width: 30vw;
+    }
+    @include respond-to('medium') {
+        width: 55vw;
+    }
+}
+
+
+
+.about {
+    position: absolute;
+    z-index: $z-gamma;
+    right: 0;
+
+    overflow: scroll;
+
+    width: 100vw;
+    padding: 8vw;
+    padding-right: 5vw;
+
+    transition: opacity 200ms;
+    transition-delay: 200ms;
+
+    opacity: 0;
+    color: #506c75;
+
+    @include respond-to('small') {
+        width: 60vw;
+        padding: 0;
+        padding-right: 5vw;
+    }
+    @include respond-to('medium') {
+        width: 40vw;
+    }
+    a {
+        color: #506c75;
+
+        text-decoration-color: darkturquoise;
+        &:hover{
+            color: darken(darkturquoise, 10%);
+        }
+    }
+    p {
+        line-height: 1.8;
+
+        @include responsive-font(1vw, 14px);
+
+        span {
+            color: orange;
+        }
+    }
+}

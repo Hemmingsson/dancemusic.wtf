@@ -21,10 +21,12 @@ Dancemusic.wtf is a web based quiz game created for Me & You to learn how the di
 Dancemusic.wtf uses the 6 Main Electronic Dance Music Genres (`Breakbeat`, `Drum 'N' Bass`, `Hardcore`, `Techno`, `House`, `Trance`), and their 57 Subgenres. Resulting in over 500 Individual Tracks.
 
 
-The dataset is based upon [musicmap.info](https://www.musicmap.info/) and its public [youtube playlists](https://www.youtube.com/channel/UCvwUL1or_EKtt-qmt_ob2KA/playlists). Which is the result of more than seven years of research including over 200 listed sources, created by **Kwinten Crauwels**. 
+The dataset is based upon [musicmap.info](https://www.musicmap.info/) and its public [youtube playlists](https://www.youtube.com/channel/UCvwUL1or_EKtt-qmt_ob2KA/playlists). created by **Kwinten Crauwels**. 
+
+> Musicmap attempts to provide the ultimate genealogy of popular music genres, including their relations and history. It is the result of more than seven years of research with over 200 listed sources and cross examination of many other visual genealogies. Its aim is to focus on the delicate balance between comprehensibility, accuracy and accessibility.
 
 
-*I really recommend you to check out musicmap.info if you wanna digg deeper, or learn about other genres outside of the electronic dance music cluster. It is a gold mine!*
+I really recommend you to check out musicmap.info if you wanna digg deeper, or learn about other genres outside of the electronic dance music cluster. It is a gold mine!
 
 
 #### 🖥️ Support Devices

@@ -34,7 +34,13 @@ Let me know if you find problems with any other devices!
 
 <br>
 
-<img align="center" src="https://i.imgur.com/VfNfv12.jpg">
+
+  <a href="http://dancemusic.wtf/">
+    <img align="center" src="https://i.imgur.com/VfNfv12.jpg">
+  </a>
+
+
+
 
 <br>
 

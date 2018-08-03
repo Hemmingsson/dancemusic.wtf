@@ -32,7 +32,7 @@ I really recommend you to check out musicmap.info if you wanna dig deeper, or le
 The Web App is tested on `macOS` in `Chrome 68`, `Safari 11`, `Firefox 61` and on `iOS 11.4`.<br>
 Let me know if you find problems with any other devices!
 
-<br><br>
+<br>
 
 <img align="center" src="https://i.imgur.com/VfNfv12.jpg">
 

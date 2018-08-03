@@ -5,7 +5,7 @@
     <img width="700" align="center" src="https://i.imgur.com/CXSZktI.png">
   </a>
 </p>
-<h4 align="center">Quiz Game for Learning Electronic Dance Music Geners. How High Can You Score?</h4>
+<h4 align="center">Quiz Game for Learning Electronic Dance Music Genres. How High Can You Score?</h4>
 
 
 <br>
@@ -18,7 +18,7 @@ Dancemusic.wtf is a web based quiz game created for Me & You to learn how the ma
 
 #### Dataset
 
-Dancemusic.wtf contains the 6 main electronic dance music geners (`Breakbeat`, `Drum 'N' Bass`, `Hardcore`, `Techno`, `House`, `Trance`), and their 57 subgeners. Resulting in over 500 individual tracks.
+Dancemusic.wtf contains the **6 Main Electronic Dance Music Genres** (`Breakbeat`, `Drum 'N' Bass`, `Hardcore`, `Techno`, `House`, `Trance`), and their **57 Subgenres**. Including over **500 Individual Tracks**.
 
 
 The dataset is based upon **[musicmap.info](https://www.musicmap.info/)** and its public [youtube playlists](https://www.youtube.com/channel/UCvwUL1or_EKtt-qmt_ob2KA/playlists). Which is the result of more than seven years of research including over 200 listed sources, created by **Kwinten Crauwels**. 

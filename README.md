@@ -13,7 +13,7 @@
 
 
 ## About
-Dancemusic.wtf is a web based quiz game created for Me & You to learn how the different electronic dance music geners sound like. And hopefully we’ll  have a better vocabulary next time we're trying to describe that great track we heard the other night .<br>
+Dancemusic.wtf is a web based quiz game created for us to learn how the different electronic dance music geners sound like. And hopefully we’ll  have a better vocabulary next time we're trying to describe that great track we heard the other night .<br>
 
 
 #### 🗄️Genres

@@ -18,7 +18,7 @@ Dancemusic.wtf is a web based quiz game created for Me & You to learn how the ma
 
 #### Dataset
 
-Dancemusic.wtf contains the **6 Main Electronic Dance Music Genres** (`Breakbeat`, `Drum 'N' Bass`, `Hardcore`, `Techno`, `House`, `Trance`), and their **57 Subgenres**. Including over **500 Individual Tracks**.
+Dancemusic.wtf uses the 6 Main Electronic Dance Music Genres (`Breakbeat`, `Drum 'N' Bass`, `Hardcore`, `Techno`, `House`, `Trance`), and their 57 Subgenres. Resulting in over 500 Individual Tracks.
 
 
 The dataset is based upon **[musicmap.info](https://www.musicmap.info/)** and its public [youtube playlists](https://www.youtube.com/channel/UCvwUL1or_EKtt-qmt_ob2KA/playlists). Which is the result of more than seven years of research including over 200 listed sources, created by **Kwinten Crauwels**. 
@@ -38,7 +38,7 @@ Let me know if you find problems with any other devices!
 
 <br>
 
-## Dev Environement
+## Dev Environment
 
 **Installation**
 

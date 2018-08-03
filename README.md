@@ -58,7 +58,3 @@ Let me know if you find problems with any other devices!
 
 *P.S The codebase is still quite messy* 🙃
 
-
-## License
-
-Dancemusic.wtf is released under Creative Commons License.

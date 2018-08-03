@@ -20,7 +20,7 @@ Dancemusic.wtf is a web based quiz game created for Me & You to learn how the di
 
 Dancemusic.wtf quizes you on music from 57 different subgenres in Electronic Dance Music.
 
-The dataset is based upon [musicmap.info](https://www.musicmap.info/) and its public [youtube playlists](https://www.youtube.com/channel/UCvwUL1or_EKtt-qmt_ob2KA/playlists). Created by Kwinten Crauwels. 
+The dataset is based upon [musicmap.info](https://www.musicmap.info/) and its public [YouTube playlists](https://www.youtube.com/channel/UCvwUL1or_EKtt-qmt_ob2KA/playlists). Created by Kwinten Crauwels. 
 
 > Musicmap attempts to provide the ultimate genealogy of popular music genres, including their relations and history. It is the result of more than **seven years of research** with over 200 listed sources and cross examination of many other visual genealogies. Its aim is to focus on the delicate balance between comprehensibility, accuracy and accessibility.
 

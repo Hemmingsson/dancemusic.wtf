@@ -61,5 +61,5 @@ Let me know if you have problems with any other devices or browsers!
 
 `parcel build index.html --public-url ./`
 
-*P.S The codebase is still quite messy* 🙃
+*P.S The code is still quite messy* 🙃
 

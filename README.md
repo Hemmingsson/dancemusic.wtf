@@ -29,7 +29,7 @@ I really recommend you to check out [musicmap.info](https://www.musicmap.info/) 
 
 #### Support Devices
 
-The Web App is tested on `macOS` in `Chrome 68`, `Safari 11`, `Firefox 61` and on `iOS 11.4`.<br>
+The web app is tested on `macOS` in `Chrome 68`, `Safari 11`, `Firefox 61` and on `iOS 11.4`.<br>
 Let me know if you find problems with any other devices!
 
 <br>

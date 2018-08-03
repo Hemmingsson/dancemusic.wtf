@@ -1,4 +1,64 @@
-![Screen Shot](https://i.imgur.com/VfNfv12.jpg)
+<br>
+<br>
+<p align="center">
+  <a href="http://dancemusic.wtf/">
+    <img width="700" align="center" src="https://i.imgur.com/CXSZktI.png">
+  </a>
+</p>
+<h4 align="center">Quiz Game for Learning Electronic Dance Music Geners. How High Can You Score?</h4>
 
-# dancemusic.wtf
-Electronic Music Genres Quiz Game 🎶
+
+<br>
+<br>
+
+
+## About
+Dancemusic.wtf is a web based quiz game created for Me & You to learn how the major dance music geners sound like. <br>Hopefully we’ll  have a better vocabulary next time we're trying to describe that great track we've heard the other night .<br><br>
+
+
+#### Dataset
+
+Dancemusic.wtf contains the 6 main electronic dance music geners (`Breakbeat`, `Drum 'N' Bass`, `Hardcore`, `Techno`, `House`, `Trance`), and their 57 subgeners. Resulting in over 500 individual tracks.
+
+
+The dataset is based upon **[musicmap.info](https://www.musicmap.info/)** and its public [youtube playlists](https://www.youtube.com/channel/UCvwUL1or_EKtt-qmt_ob2KA/playlists). Which is the result of more than seven years of research including over 200 listed sources, created by **Kwinten Crauwels**. 
+
+
+I really recommend you to check out musicmap.info if you wanna dig deeper, or learn about other geners outside of the electronic dance music cluster.
+
+
+#### Support Devices
+
+The Web App is tested on `macOS` in `Chrome 68`, `Safari 11`, `Firefox 61` and on `iOS 11.4`.<br>
+Let me know if you find problems with any other devices!
+
+<br><br>
+
+<img align="center" src="https://i.imgur.com/VfNfv12.jpg">
+
+<br>
+
+## Dev Environement
+
+**Installation**
+
+
+
+1. Clone the repository `git clone https://github.com/Hemmingsson/dancemusic.wtf`
+2. Run `npm install` 
+3. If you don’t have [parcel](https://parceljs.org/) installed `npm install -g parcel-bundler`
+
+**Development**
+
+`parcel index.html`
+
+**Building**
+
+`parcel build index.html --public-url ./`
+
+*P.S The codebase is still quite messy* 🙃
+
+
+## License
+
+Dancemusic.wtf is released under Creative Commons License.

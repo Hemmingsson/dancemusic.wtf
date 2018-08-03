@@ -16,7 +16,7 @@
 Dancemusic.wtf is a web based quiz game created for Me & You to learn how the major dance music geners sound like. <br>And hopefully we’ll  have a better vocabulary next time we're trying to describe that great track we heard the other night .<br>
 
 
-#### 🗄️ Dataset
+#### 🗄️ Genre Data
 
 Dancemusic.wtf uses the 6 Main Electronic Dance Music Genres (`Breakbeat`, `Drum 'N' Bass`, `Hardcore`, `Techno`, `House`, `Trance`), and their 57 Subgenres. Resulting in over 500 Individual Tracks.
 

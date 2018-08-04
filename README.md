@@ -2,7 +2,7 @@
 <br>
 <p align="center">
   <a href="http://dancemusic.wtf/">
-    <img width="700" align="center" src="https://i.imgur.com/CXSZktI.png">
+    <img width="700" align="center" src="assets/images/logo.png?raw=true">
   </a>
 </p>
 <h4 align="center">Quiz Game for Learning Electronic Dance Music Genres. How High Can You Score?
@@ -34,15 +34,21 @@ Dancemusic.wtf uses over 500 music tracks from 57 different subgenres in Electro
 The web app is tested on `macOS` in `Chrome 68`, `Safari 11`, `Firefox 61` and on `iOS 11.4`.<br>
 Let me know if you have problems with any other devices or browsers!
 
+
 <br>
 
+<br>
+
+<br>
 
   <a href="http://dancemusic.wtf/">
-    <img align="center" src="https://i.imgur.com/VfNfv12.jpg">
+    <img align="center" src="assets/images/screenshot.jpg?raw=true">
   </a>
 
 
+<br>
 
+<br>
 
 <br>
 
@@ -58,11 +64,11 @@ Let me know if you have problems with any other devices or browsers!
 
 **Development**
 
-`parcel index.html`
+`parcel src/index.html`
 
 **Building**
 
-`parcel build index.html --public-url ./`
+`parcel build src/index.html --public-url ./`
 
 *P.S The code is still quite messy* 🙃
 

@@ -5,36 +5,44 @@
     <img width="700" align="center" src="https://i.imgur.com/CXSZktI.png">
   </a>
 </p>
-<h4 align="center">Quiz Game for Learning Electronic Dance Music Genres. How High Can You Score?</h4>
+<h4 align="center">Quiz Game for Learning Electronic Dance Music Genres. How High Can You Score?
+</h4>
 
 
 <br>
+
 <br>
 
+<hr>
+<br>
 
-## About
-Dancemusic.wtf is a web based quiz game created for Me & You to learn how the major dance music geners sound like. <br>And hopefully we’ll  have a better vocabulary next time we're trying to describe that great track we heard the other night .<br>
-
-
-#### 🗄️ Dataset
-
-Dancemusic.wtf uses the 6 Main Electronic Dance Music Genres (`Breakbeat`, `Drum 'N' Bass`, `Hardcore`, `Techno`, `House`, `Trance`), and their 57 Subgenres. Resulting in over 500 Individual Tracks.
+[DANCEMUSIC WTF-300](http://dancemusic.wtf/) is a web based quiz game created for us to learn how the different electronic dance music geners sound like. And hopefully we’ll  have a better vocabulary next time we're trying to describe that great track we heard the other night.<br>
 
 
-The dataset is based upon **[musicmap.info](https://www.musicmap.info/)** and its public [youtube playlists](https://www.youtube.com/channel/UCvwUL1or_EKtt-qmt_ob2KA/playlists). Which is the result of more than seven years of research including over 200 listed sources, created by **Kwinten Crauwels**. 
+#### 🗄️Dataset
+
+Dancemusic.wtf uses over 500 music tracks from 57 different subgenres in Electronic Dance Music. <br>The dataset is based upon [musicmap.info](https://www.musicmap.info/) and its public [YouTube playlists](https://www.youtube.com/channel/UCvwUL1or_EKtt-qmt_ob2KA/playlists). Created by Kwinten Crauwels. 
+
+> Musicmap attempts to provide the ultimate genealogy of popular music genres, including their relations and history. It is the result of more than **seven years of research** with over 200 listed sources and cross examination of many other visual genealogies. Its aim is to focus on the delicate balance between comprehensibility, accuracy and accessibility.
 
 
-I really recommend you to check out [musicmap.info](https://www.musicmap.info/) if you wanna digg deeper, or learn about other genres outside of the electronic dance music cluster. It is a gold mine! 
+(I recommend you to visit musicmap.info if you wanna digg deeper, or learn about other genres outside of the electronic dance music cluster. It is a gold mine!)
 
 
 #### 🖥️ Support Devices
 
 The web app is tested on `macOS` in `Chrome 68`, `Safari 11`, `Firefox 61` and on `iOS 11.4`.<br>
-Let me know if you find problems with any other devices!
+Let me know if you have problems with any other devices or browsers!
 
 <br>
 
-<img align="center" src="https://i.imgur.com/VfNfv12.jpg">
+
+  <a href="http://dancemusic.wtf/">
+    <img align="center" src="https://i.imgur.com/VfNfv12.jpg">
+  </a>
+
+
+
 
 <br>
 
@@ -56,9 +64,5 @@ Let me know if you find problems with any other devices!
 
 `parcel build index.html --public-url ./`
 
-*P.S The codebase is still quite messy* 🙃
+*P.S The code is still quite messy* 🙃
 
-
-## License
-
-Dancemusic.wtf is released under Creative Commons License.

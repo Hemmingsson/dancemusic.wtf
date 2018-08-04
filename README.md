@@ -34,28 +34,25 @@ Dancemusic.wtf uses over 500 music tracks from 57 different subgenres in Electro
 The web app is tested on `macOS` in `Chrome 68`, `Safari 11`, `Firefox 61` and on `iOS 11.4`.<br>
 Let me know if you have problems with any other devices or browsers!
 
-<br>
-
-
-
-<hr>
 
 <br>
 
+<br>
+
+<br>
 
   <a href="http://dancemusic.wtf/">
     <img align="center" src="assets/images/screenshot.jpg?raw=true">
   </a>
 
-<br>
-
-
-
-<hr>
 
 <br>
 
-## Dev Environment
+<br>
+
+<br>
+
+### Dev Environment
 
 **Installation**
 

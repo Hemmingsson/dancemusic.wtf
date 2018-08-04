@@ -9,7 +9,7 @@
   "author": "Mattias Hemmingsson",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "^6.26.0",
+    "babel-core": "^6.26.3",
     "cssnano": "^4.0.5",
     "node-sass": "^4.8.3"
   },

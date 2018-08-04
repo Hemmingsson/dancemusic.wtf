@@ -5,20 +5,18 @@
     <img width="700" align="center" src="https://i.imgur.com/CXSZktI.png">
   </a>
 </p>
-<h4 align="center">Quiz Game for Learning Electronic Dance Music Genres.
+<h4 align="center">Quiz Game for Learning Electronic Dance Music Genres. How High Can You Score?
 </h4>
 
 
 <br>
-<h4 align="center">
-<a href="http://dancemusic.wtf/">[ ▶PLAY NOW ]</a>
-</h4>
 
-
+<br>
 
 <hr>
 <br>
-Dancemusic.wtf is a web based quiz game created for us to learn how the different electronic dance music geners sound like. And hopefully we’ll  have a better vocabulary next time we're trying to describe that great track we heard the other night.<br>
+
+[DANCEMUSIC.WTF](http://dancemusic.wtf/) is a web based quiz game created for us to learn how the different electronic dance music geners sound like. And hopefully we’ll  have a better vocabulary next time we're trying to describe that great track we heard the other night.<br>
 
 
 #### 🗄️Dataset

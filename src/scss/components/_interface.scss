@@ -197,7 +197,7 @@ $display-border: 2px solid $display-color;
         &.--score {
             font-family: $font--screen;
             font-size: 30px;
-            opacity: 0.7;
+            opacity: 0.9!important;
             letter-spacing: .05em;
 
             @include respond-to('small') {

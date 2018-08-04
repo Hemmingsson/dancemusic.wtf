@@ -36,11 +36,11 @@ const intro = () => {
       pixels.fade(false)
     .then(() => {
       $interface.classList.remove('--intro')
+      loadingIndicator.loading()
       setTimeout(() => {
         setBigText(string.init)
-        loadingIndicator.loading()
         resolve()
-      }, 800)
+      }, 1000)
     })
     })
     })

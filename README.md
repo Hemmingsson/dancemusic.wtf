@@ -6,7 +6,7 @@
   </a>
 </p>
 <h4 align="center">Quiz Game for Learning Electronic Dance Music Genres.  <br>
-<a href="http://dancemusic.wtf/">[ Play Now ]</a>
+<a href="http://dancemusic.wtf/">[ ▶PLAY NOW ]</a>
 </h4>
 
 

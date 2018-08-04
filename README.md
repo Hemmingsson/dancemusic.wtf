@@ -5,8 +5,8 @@
     <img width="700" align="center" src="https://i.imgur.com/CXSZktI.png">
   </a>
 </p>
-<h4 align="center">Quiz Game for Learning Electronic Dance Music Genres. <a href="http://dancemusic.wtf/">▶ Play Now</a> <br>
-
+<h4 align="center">Quiz Game for Learning Electronic Dance Music Genres.  <br>
+<a href="http://dancemusic.wtf/">[ Play Now ]</a>
 </h4>
 
 

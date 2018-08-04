@@ -58,11 +58,11 @@ Let me know if you have problems with any other devices or browsers!
 
 **Development**
 
-`parcel index.html`
+`parcel src/index.html`
 
 **Building**
 
-`parcel build index.html --public-url ./`
+`parcel build src/index.html --public-url ./`
 
 *P.S The code is still quite messy* 🙃
 

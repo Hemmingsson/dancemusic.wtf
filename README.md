@@ -2,7 +2,7 @@
 <br>
 <p align="center">
   <a href="http://dancemusic.wtf/">
-    <img width="700" align="center" src="https://i.imgur.com/CXSZktI.png">
+    <img width="700" align="center" src="assets/images/logo.png?raw=true">
   </a>
 </p>
 <h4 align="center">Quiz Game for Learning Electronic Dance Music Genres. How High Can You Score?
@@ -38,7 +38,7 @@ Let me know if you have problems with any other devices or browsers!
 
 
   <a href="http://dancemusic.wtf/">
-    <img align="center" src="https://i.imgur.com/VfNfv12.jpg">
+    <img align="center" src="assets/images/screenshot.jpg?raw=true">
   </a>
 
 

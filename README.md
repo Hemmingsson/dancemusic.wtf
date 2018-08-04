@@ -52,7 +52,7 @@ Let me know if you have problems with any other devices or browsers!
 
 <br>
 
-### Dev Environment
+## Dev Environment
 
 **Installation**
 

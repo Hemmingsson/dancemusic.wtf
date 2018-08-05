@@ -5,7 +5,7 @@
     <img width="700" align="center" src="assets/images/logo.png?raw=true">
   </a>
 </p>
-<h4 align="center">Quiz Game for Learning Electronic Dance Music Styles. How High Can You Score?
+<h4 align="center">Quiz game for learning electronic dance music styles. How high can you score?
 </h4>
 
 

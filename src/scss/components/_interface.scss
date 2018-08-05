@@ -73,6 +73,8 @@ $display-border: 2px solid $display-color;
         }
     }
     .overlay__text {
+        font-size: 13px;
+
         width: 80%;
 
         text-align: center;
@@ -80,11 +82,10 @@ $display-border: 2px solid $display-color;
         hyphens: none;
 
         color: $display-background-color;
-        font-size: 13px;
+
         @include respond-to('small') {
             @include responsive-font(1.5vw, 16px, 28px);
         }
-        
         @include center-selfe();
         span {
             opacity: 0;
@@ -197,8 +198,10 @@ $display-border: 2px solid $display-color;
         &.--score {
             font-family: $font--screen;
             font-size: 30px;
-            opacity: 0.9!important;
+
             letter-spacing: .05em;
+
+            color: #585c58;
 
             @include respond-to('small') {
                 @include responsive-font(4vw, 20px, 40px);

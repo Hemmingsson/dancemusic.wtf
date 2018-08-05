@@ -21,10 +21,11 @@ var string = {
 
 const intro = () => {
   return new Promise((resolve, reject) => {
-     /* var $interface = document.querySelector('.interface')
+    /*
+    var $interface = document.querySelector('.interface')
     $interface.classList.add('--default')
     $interface.classList.remove('--intro')
-    resolve() */
+    resolve()      */
 
     var $interface = document.querySelector('.interface')
     pixels.fade(true)
@@ -212,7 +213,7 @@ const clear = () => {
 const toLate = () => {
   return new Promise((resolve, reject) => {
     setBigText(string.late)
-    blinkBigText().then(resolve)
+    blinkBigText().then(wrongInfo).then(resolve)
   })
 }
 

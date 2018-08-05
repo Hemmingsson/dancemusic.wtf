@@ -15,19 +15,19 @@ $breakpoints: (
 
 
 @mixin respond-to($breakpoint) {
-  // If the key exists in the map
-  @if map-has-key($breakpoints, $breakpoint) {
-    // Prints a media query based on the value
-    @media #{inspect(map-get($breakpoints, $breakpoint))} {
-      @content;
+    // If the key exists in the map
+    @if map-has-key($breakpoints, $breakpoint) {
+        // Prints a media query based on the value
+        @media #{inspect(map-get($breakpoints, $breakpoint))} {
+            @content;
+        }
     }
-  }
- 
-  // If the key doesn't exist in the map
-  @else {
-    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
-        + "Available breakpoints are: #{map-keys($breakpoints)}.";
-  }
+
+    // If the key doesn't exist in the map
+    @else {
+        @warn 'Unfortunately, no value could be retrieved from `#{$breakpoint}`. '
+        + 'Available breakpoints are: #{map-keys($breakpoints)}.';
+    }
 }
 
 /* ============================================
@@ -35,10 +35,11 @@ $breakpoints: (
 */
 
 @mixin center-selfe() {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
 }
 
 /* ============================================
@@ -47,6 +48,7 @@ $breakpoints: (
 
 @mixin center-children() {
     display: flex;
+
     justify-content: center;
     align-items: center;
 }
@@ -56,11 +58,11 @@ $breakpoints: (
 */
 
 @mixin fill-parent() {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 /* ============================================
@@ -68,27 +70,25 @@ $breakpoints: (
 */
 
 @mixin responsive-font($responsive, $min, $max: false, $fallback: false) {
-  $responsive-unitless: $responsive / ($responsive - $responsive + 1);
-  $dimension: if(unit($responsive) == 'vh', 'height', 'width');
-  $min-breakpoint: $min / $responsive-unitless * 100;
-  
-  @media (max-#{$dimension}: #{$min-breakpoint}) {
-    font-size: $min;
-  }
-  
-  @if $max {
-    $max-breakpoint: $max / $responsive-unitless * 100;
-    
-    @media (min-#{$dimension}: #{$max-breakpoint}) {
-      font-size: $max;
+    font-size: $responsive;
+
+    $responsive-unitless: $responsive / ($responsive - $responsive + 1);
+    $dimension: if(unit($responsive) == 'vh', 'height', 'width');
+    $min-breakpoint: $min / $responsive-unitless * 100;
+
+    @media (max-#{$dimension}: #{$min-breakpoint}) {
+        font-size: $min;
     }
-  }
-  
-  @if $fallback {
-    font-size: $fallback;
-  }
-  
-  font-size: $responsive;
+
+    @if $max {
+        $max-breakpoint: $max / $responsive-unitless * 100;
+
+        @media (min-#{$dimension}: #{$max-breakpoint}) {
+            font-size: $max;
+        }
+    }
+
+    @if $fallback {
+        font-size: $fallback;
+    }
 }
-
-

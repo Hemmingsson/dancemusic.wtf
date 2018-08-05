@@ -32,9 +32,8 @@ global.newRound = () => {
 global.toLate = () => {
   gameData.roundIsActive = false
   updateStats(false)
-  display.toLate().then(() => {
-    gameData.totalLives !== 0 ? newRound() : lostGame()
-  })
+  pads.showCorrect()
+  display.toLate().then(nextRound)
 }
 
 /* ==========================================================================
@@ -47,20 +46,13 @@ const choosen = (answerIndex, elm) => {
   gameData.roundIsActive = false
   pads.showCorrect()
   updateStats(isCorrect)
-
-  display.choosen(isCorrect).then(() => {
-    gameData.totalLives !== 0 ? newRound() : lostGame()
-  })
+  display.choosen(isCorrect).then(nextRound)
 }
 
 let gameIsActive = false
 const start = () => {
-  if (!global.gameData && !gameIsActive) {
-    display.intro().then(player.init).then(newGame)
-  }
-  if (global.gameData && !gameIsActive) {
-    newGame()
-  }
+  if (!global.gameData && !gameIsActive) display.intro().then(player.init).then(newGame)
+  if (global.gameData && !gameIsActive) newGame()
   gameIsActive = true
 }
 
@@ -78,19 +70,20 @@ const loadRound = () => new Promise((resolve) => {
 
 const startRound = () => {
   global.gameData.roundIsActive = true
-  pads.blinkRandomly()
   player.start()
-  display.live()
+  waitForMusic(() => {
+    pads.blinkRandomly()
+    display.live()
+  })
 }
 
-const lostGame = () => {
-  video.player.pauseVideo()
-  pads.killAnimation()
-  pads.resetGeners()
+const waitForMusic = (func) => {
+  const interval = () => global.video.isMusicPlaying ? func() : setTimeout(interval, 100)
+  interval()
+}
 
-  display.lost().then(() => {
-    gameIsActive = false
-  })
+const nextRound = () => {
+  gameData.totalLives !== 0 ? newRound() : lostGame()
 }
 
 /* ==========================================================================
@@ -98,16 +91,15 @@ STATS
 ========================================================================== */
 
 const updateStats = (isCorrect) => {
-  if (isCorrect) {
-    let score = Number((global.gameData.currentGame.scoreMultiplyer * 105).toFixed(0))
-    if (score > 3000) { score = 3000 }
-    if (score < 0) { score = 0 }
-
-    global.gameData.currentGame.score = score
-    global.gameData.totalScore += score
-  } else {
+  if (!isCorrect) {
     global.gameData.totalLives -= 1
+    return
   }
+  let score = Number((global.gameData.currentGame.scoreMultiplyer * 105).toFixed(0))
+  if (score > 3000) { score = 3000 }
+  if (score < 0) { score = 0 }
+  global.gameData.currentGame.score = score
+  global.gameData.totalScore += score
 }
 
 /* ==========================================================================
@@ -118,6 +110,13 @@ const newGame = () => {
   global.gameData = resetGameData()
   global.gameData.gameIsActive = true
   newRound()
+}
+
+const lostGame = () => {
+  video.player.pauseVideo()
+  pads.killAnimation()
+  pads.resetGeners()
+  display.lost().then(() => { gameIsActive = false })
 }
 
 const togglePause = () => {

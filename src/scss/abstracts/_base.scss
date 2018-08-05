@@ -13,6 +13,7 @@
 
 html {
     font-family: $font--primary;
+
     -webkit-text-size-adjust: 100%;
 }
 
@@ -21,8 +22,9 @@ svg {
     vertical-align: top;
 }
 
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
     font-family: inherit;
 }
-
-

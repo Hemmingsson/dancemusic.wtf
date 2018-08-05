@@ -3,9 +3,6 @@
    ========================================================================== */
 
 #videoPlayer {
-    position: absolute;z-index: 100; right: 0; top: 0;
-    display: none;
-    /*
     top: 0;
     left: 0;
 
@@ -20,5 +17,5 @@
 
     opacity: 0;
     border: 0;
-    */
+    display: none;
 }

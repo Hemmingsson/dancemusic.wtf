@@ -14,6 +14,7 @@ global.video = {
   player: null,
   isReady: false,
   isPlaying: false,
+  isMusicPlaying: false,
   isMuted: false,
   mute (mute) {
     if (mute) {
@@ -77,7 +78,9 @@ const whenMusicIsPlaying = () => {
     if (video.isPlaying && !video.isMuted) {
       equalizer.animate(true)
       updateScoreMultiplyer()
+      video.isMusicPlaying = true
     } else {
+      video.isMusicPlaying = false
       equalizer.animate(false)
     }
     setTimeout(interval, 100)

@@ -34,6 +34,7 @@ const init = () => {
     tag.src = 'https://www.youtube.com/iframe_api'
     const firstScriptTag = document.getElementsByTagName('script')[0]
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+    setTimeout(() => { if (!video.isReady) reject() }, 10000)
     const readyInterval = () => { video.isReady ? resolve() : setTimeout(readyInterval, 100) }
     readyInterval()
   })

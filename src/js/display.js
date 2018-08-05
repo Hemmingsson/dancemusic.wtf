@@ -12,8 +12,8 @@ var string = {
   correct: 'Well Played',
   wrong: 'Wrong Answer',
   guess: 'Guess the Music Genre',
-  tap: 'Tap [HERE] to Play',
-  late: 'Too Late'
+  late: 'Too Late',
+  error: 'Failed to embedd YouTube player'
 }
 
 // INTRO
@@ -79,7 +79,6 @@ var blinkBigText = function () {
 const choosen = (isCorrect) => {
   return new Promise((resolve, reject) => {
     loadingIndicator.stop()
-    // renderStats()
     isCorrect ? correctAnswer().then(resolve) : wrongAnswer().then(resolve)
   })
 }
@@ -187,18 +186,7 @@ const typeText = (selector, strings, delay) => {
   })
 }
 
-const live = () => {
-  // Fix for iOS Safari, as they prevent me from autoplaying in background
-  if ('ontouchstart' in window || navigator.maxTouchPoints) {
-    setBigText(string.tap)
-    document.querySelector('.interface').addEventListener('click', () => {
-      global.video.player.playVideo()
-      setBigText(string.guess)
-    })
-  } else {
-    setBigText(string.guess)
-  }
-}
+const live = () => setBigText(string.guess)
 
 const loading = () => {
   loadingIndicator.loading()
@@ -235,6 +223,11 @@ const ready = () => {
   setBigText('get ready')
 }
 
+const error = () => {
+  loadingIndicator.stop()
+  setBigText(string.error)
+}
+
 const setBigText = function (string) {
   document.querySelector('.big').innerHTML = string
 }
@@ -268,5 +261,6 @@ export default {
   loading,
   toLate,
   clear,
-  lost
+  lost,
+  error
 }

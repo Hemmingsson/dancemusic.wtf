@@ -5,8 +5,6 @@ var lines = document.querySelectorAll('.loading .line')
 
 var loading = function () {
   stop()
-
-  console.log(lines)
   TweenLite.to(lines, 0, {opacity: 1})
   var animationLoop = function (index) {
     var line = lines[index]

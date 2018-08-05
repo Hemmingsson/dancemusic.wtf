@@ -7,6 +7,7 @@ import sound from './sounds.js'
 import display from './display.js'
 import pads from './pads.js'
 import player from './player.js'
+import mobile from './mobile.js'
 
 /*
 Resets
@@ -51,7 +52,7 @@ const choosen = (answerIndex, elm) => {
 
 let gameIsActive = false
 const start = () => {
-  if (!global.gameData && !gameIsActive) display.intro().then(player.init).then(newGame)
+  if (!global.gameData && !gameIsActive) display.intro().then(player.init).then(newGame, display.error)
   if (global.gameData && !gameIsActive) newGame()
   gameIsActive = true
 }
@@ -71,6 +72,7 @@ const loadRound = () => new Promise((resolve) => {
 const startRound = () => {
   global.gameData.roundIsActive = true
   player.start()
+  mobile.tapStart()
   waitForMusic(() => {
     pads.blinkRandomly()
     display.live()

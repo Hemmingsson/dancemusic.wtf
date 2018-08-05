@@ -16,7 +16,7 @@
 <hr>
 <br>
 
-[DANCEMUSIC WTF-300](http://dancemusic.wtf/) is a web based quiz game created for us to learn what the different electronic dance music geners sound like. Hopefully it will help us get a better vocabulary next time we're trying to describe that great track we heard the other night.<br>
+[DANCEMUSIC WTF-300](http://dancemusic.wtf/) is a web based quiz game created for us to learn what the different electronic dance music styles sound like. Hopefully it will help us get a better vocabulary next time we're trying to describe that great track we heard the other night.<br>
 
 
 #### 🗄️Dataset

@@ -26,7 +26,7 @@ Dancemusic.wtf uses over 592 music tracks from 57 different subgenres in Electro
 > Musicmap attempts to provide the ultimate genealogy of popular music genres, including their relations and history. It is the result of more than **seven years of research** with over 200 listed sources and cross examination of many other visual genealogies. Its aim is to focus on the delicate balance between comprehensibility, accuracy and accessibility.
 
 
-(I recommend you to visit musicmap.info if you wanna digg deeper, or learn about other genres outside of the electronic dance music cluster. It is a gold mine!)
+(I recommend you to visit musicmap.info if you want to dig deeper, or learn about other genres outside of the electronic dance music cluster. It is a gold mine!)
 
 
 #### 🖥️ Support Devices

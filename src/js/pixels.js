@@ -81,7 +81,10 @@ function fade (show) {
     fpsInterval = 50
     then = Date.now()
     animate()
-    setTimeout(resolve, 800)
+    setTimeout(() => {
+      overlay.style.backgroundColor = show ? '#4a4e4b' : '#d5dac9'
+      resolve()
+    }, 800)
   })
 }
 

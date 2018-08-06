@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>DANCEMUSIC WTF-3000</title>
-    <meta name="application-name" content="Dancemusic.wtf">
+    <title>DANCEMUSIC WTF-300</title>
+    <meta name="application-name" content="DANCEMUSIC WTF-300">
     <meta name="description" content="Quiz Game for Learning Electronic Dance Music Genres. How High Can You Score?">
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
@@ -13,13 +13,32 @@
     <link rel="me" href="https://github.com/Hemmingsson" type="text/html">
     <link rel="me" href="mailto:hemmingsson.m@gmail.com">
     <link rel="icon" href="./static/img/favico.png" sizes="32x32">
+    <meta property="og:url" content="http://dancemusic.wtf/" />
+    <meta property="og:title" content="DANCEMUSIC WTF-300" />
+    <meta property="og:description" content="Quiz Game for Learning Electronic Dance Music Genres. How High Can You Score?" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110343050-1"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
+
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'UA-110343050-1');
+
+    </script>
+    <!-- Hotjar Tracking Code for http://dancemusic.wtf/ -->
+    <script>
+    (function(h, o, t, j, a, r) {
+        h.hj = h.hj || function() {
+            (h.hj.q = h.hj.q || []).push(arguments) };
+        h._hjSettings = { hjid: 971868, hjsv: 6 };
+        a = o.getElementsByTagName('head')[0];
+        r = o.createElement('script');
+        r.async = 1;
+        r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+
     </script>
 </head>
 
@@ -45,10 +64,10 @@
                             <div class="ripple-effect"></div>
                         </div>
                         <div class="button">about
-                        <div class="ripple-effect"></div></div>
+                            <div class="ripple-effect"></div>
+                        </div>
                     </div>
                     <div class="interface --intro">
-
                         <div class="interface__overlay">
                             <canvas></canvas>
                             <div class="overlay__title">DANCEMUSIC WTF-300</div>
@@ -62,9 +81,15 @@
                             <div class="info">
                                 <div class="big"></div>
                                 <div class="loading">
-                                    <div class="line"><div class="dot"></div></div>
-                                    <div class="line"><div class="dot"></div></div>
-                                    <div class="line"><div class="dot"></div></div>
+                                    <div class="line">
+                                        <div class="dot"></div>
+                                    </div>
+                                    <div class="line">
+                                        <div class="dot"></div>
+                                    </div>
+                                    <div class="line">
+                                        <div class="dot"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -128,15 +153,16 @@
         </div>
     </main>
     <section class="about">
-        <p><span>DANCEMUSIC WTF-300</span> is quiz game for learning how the different electronic dance music geners sound like. <br>Created by <a href="http://mattias.lol" target="_blank">Mattias Hemmingsson</a>.
-        <br><br>
-The game uses over 500 music tracks from 57 different subgenres in Electronic Dance Music. 
-The dataset is based upon <a href="https://www.musicmap.info/" target="_blank">musicmap.info</a> and its public <a href="https://www.youtube.com/channel/UCvwUL1or_EKtt-qmt_ob2KA/playlists" target="_blank">YouTube playlists</a>.<br><br>
-
-If you find any bugs or have feedback, file an issue on the project's <a href="https://github.com/Hemmingsson/dancemusic.wtf" target="_blank">GitHub page</a> or <a href="https://github.com/Hemmingsson/dancemusic.wtf" target="_blank">email me</a>.
-
-</p>
+        <p><span>DANCEMUSIC WTF-300</span> is a quiz game for learning how the different electronic dance music styles sound like.
+            <br>Created by <a href="http://mattias.lol" target="_blank">Mattias Hemmingsson</a>.
+            <br>
+            <br> The game uses over 500 music tracks from 57 different subgenres in Electronic Dance Music. The dataset is based upon <a href="https://www.musicmap.info/" target="_blank">musicmap.info</a> and its public <a href="https://www.youtube.com/channel/UCvwUL1or_EKtt-qmt_ob2KA/playlists" target="_blank">YouTube playlists</a>.
+            <br>
+            <br> If you find any bugs or have feedback, file an issue on the project's <a href="https://github.com/Hemmingsson/dancemusic.wtf" target="_blank">GitHub page</a> or <a href="https://github.com/Hemmingsson/dancemusic.wtf" target="_blank">email me</a>.
+        </p>
     </section>
+    <div class="flexbox-msg">Your browser does not support Flexbox :(
+        <br>Which is needed for DANCEMUSIC WTF-300 to work</div>
     <div class="backButton"></div>
     <script src="js/index.js"></script>
 </body>

@@ -25,33 +25,26 @@ body {
 
     @include center-children();
     @include responsive-font(1.4vw, 12px);
-    /*
-    &:after {
-        position: absolute;
-        bottom: 1.8vh;
-        left: 1.8vh;
 
-        content: 'mobile';
 
-        color: red;
 
-        @include respond-to('small') {
-            content: 'small';
-        }
-        @include respond-to('medium') {
-            content: 'medium';
-        }
-        @include respond-to('large') {
-            content: 'large';
-        }
-
-     
-
-    }
-    */
-    //animation:slidebg 5s linear infinite;
 }
 
+body.no-flex{
+    .controller{
+        display: none;
+    }
+    .flexbox-msg{
+        display: block;
+    }
+}
+
+
+    .flexbox-msg{
+        text-align: center;
+        line-height: 1.5;
+        display: none;
+    }
 
 
 body.--offscreen {

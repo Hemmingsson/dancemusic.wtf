@@ -31,7 +31,7 @@ const intro = () => {
     pixels.fade(true)
     .then(blinkOverlayTitle)
     .then(() => {
-      typeText('.overlay__text', string.intro, 600)
+      typeText('.overlay__text', string.intro, 900)
     .then(() => {
       $interface.classList.add('--default')
       pixels.fade(false)

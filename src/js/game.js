@@ -70,10 +70,10 @@ const loadRound = () => new Promise((resolve) => {
 })
 
 const startRound = () => {
-  global.gameData.roundIsActive = true
   player.start()
   mobile.tapStart()
   waitForMusic(() => {
+    global.gameData.roundIsActive = true
     pads.blinkRandomly()
     display.live()
   })

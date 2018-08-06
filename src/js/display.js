@@ -13,7 +13,8 @@ var string = {
   wrong: 'Wrong Answer',
   guess: 'Guess the Music Genre',
   late: 'Too Late',
-  error: 'Failed to embedd YouTube player'
+  error: 'Failed to embedd YouTube player',
+  playbackError: ['Youtube seems to be loading slow', 'Pleas check your internet connection']
 }
 
 // INTRO
@@ -21,13 +22,12 @@ var string = {
 
 const intro = () => {
   return new Promise((resolve, reject) => {
-    /*
     var $interface = document.querySelector('.interface')
     $interface.classList.add('--default')
     $interface.classList.remove('--intro')
-    resolve()      */
+    resolve()
 
-    var $interface = document.querySelector('.interface')
+    /* var $interface = document.querySelector('.interface')
     pixels.fade(true)
     .then(blinkOverlayTitle)
     .then(() => {
@@ -45,6 +45,7 @@ const intro = () => {
     })
     })
     })
+     */
   })
 }
 
@@ -228,6 +229,17 @@ const error = () => {
   setBigText(string.error)
 }
 
+const playbackError = () => {
+  return new Promise((resolve, reject) => {
+    loadingIndicator.stop()
+    typeText('.big', string.playbackError, 1000).then(() => {
+      setBigText('')
+      loadingIndicator.loading()
+      resolve()
+    })
+  })
+}
+
 const setBigText = function (string) {
   document.querySelector('.big').innerHTML = string
 }
@@ -262,5 +274,6 @@ export default {
   toLate,
   clear,
   lost,
-  error
+  error,
+  playbackError
 }

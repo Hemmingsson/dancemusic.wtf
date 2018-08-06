@@ -2,16 +2,6 @@
     $BASE-PAGE
 \*-----------------------------------*/
 
-.orientleft {
-    -webkit-transform: rotate(-90deg);
-    -webkit-transform-origin:160px 160px;
-}
-
-.orientright{
-    -webkit-transform: rotate(90deg);
-    -webkit-transform-origin:230px 230px;
-} 
-
 body {
     position: relative;
 
@@ -25,9 +15,6 @@ body {
 
     @include center-children();
     @include responsive-font(1.4vw, 12px);
-
-
-
 }
 
 body.no-flex{

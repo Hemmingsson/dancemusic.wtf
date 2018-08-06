@@ -72,11 +72,23 @@ const loadRound = () => new Promise((resolve) => {
 const startRound = () => {
   player.start()
   mobile.tapStart()
+
+  playbackErrorChecker()
   waitForMusic(() => {
     global.gameData.roundIsActive = true
     pads.blinkRandomly()
     display.live()
   })
+}
+
+const playbackErrorChecker = () => {
+  console.log(global.gameData)
+  const startTime = global.gameData.currentGame.track.sampleTimeStamps[0]
+  setTimeout(() => {
+    if (startTime === video.player.getCurrentTime()) {
+      display.playbackError().then(() => { if (startTime < video.player.getCurrentTime()) display.live() })
+    }
+  }, 8000)
 }
 
 const waitForMusic = (func) => {

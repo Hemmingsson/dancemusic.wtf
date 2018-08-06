@@ -82,7 +82,6 @@ const startRound = () => {
 }
 
 const playbackErrorChecker = () => {
-  console.log(global.gameData)
   const startTime = global.gameData.currentGame.track.sampleTimeStamps[0]
   setTimeout(() => {
     if (startTime === video.player.getCurrentTime()) {

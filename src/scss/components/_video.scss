@@ -3,5 +3,19 @@
    ========================================================================== */
 
 #videoPlayer {
- 
+    top: 0;
+    left: 0;
+
+    display: none;
+    overflow: hidden;
+
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+
+    pointer-events: none;
+
+    opacity: 0;
+    border: 0;
 }

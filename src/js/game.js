@@ -150,7 +150,7 @@ Draw Round
 const drawNewRound = () => new Promise((resolve) => {
   const draw = () => {
     // Trow dice
-    const correctIndex = Math.floor(Math.random() * 3)
+    const correctIndex = Math.floor(Math.random() * 4)
     // Draw 4 random tracks
     const answers = _.sampleSize(genreData.tracks, 4)
     // Check if draw has unique genres

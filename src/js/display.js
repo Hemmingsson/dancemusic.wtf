@@ -22,12 +22,13 @@ var string = {
 
 const intro = () => {
   return new Promise((resolve, reject) => {
+    /*
     var $interface = document.querySelector('.interface')
     $interface.classList.add('--default')
     $interface.classList.remove('--intro')
-    resolve()
+    resolve() */
 
-    /* var $interface = document.querySelector('.interface')
+    var $interface = document.querySelector('.interface')
     pixels.fade(true)
     .then(blinkOverlayTitle)
     .then(() => {
@@ -45,7 +46,6 @@ const intro = () => {
     })
     })
     })
-     */
   })
 }
 

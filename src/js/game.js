@@ -148,32 +148,28 @@ Draw Round
 ========================================================================== */
 
 const drawNewRound = () => new Promise((resolve) => {
-  const draw = () => {
-    // Trow dice
-    const correctIndex = Math.floor(Math.random() * 4)
-    // Draw 4 random tracks
-    const answers = _.sampleSize(genreData.tracks, 4)
-    // Check if draw has unique genres
-    const genres = _.map(answers, 'genre')
-    const isUnique = _.uniq(genres).length === answers.length
-    // If unique draw update gameData and resolve, else draw again
-    if (isUnique) {
-      for (const [index, item] of answers.entries()) {
-        const isCorrectAnswer = index === correctIndex
-        gameData.currentGame.answers.push({
-          genre: item.genre,
-          correct: isCorrectAnswer
-        })
-        if (isCorrectAnswer) {
-          gameData.currentGame.track.info = item
-        }
-      }
-      resolve()
-    } else {
-      draw()
+  // Trow dice
+  const correctIndex = Math.floor(Math.random() * 4)
+  // Draw 4 random genres
+  const genres = _.sampleSize(genreData.genres, 4)
+  // Draw one song from each genre
+  const answers = []
+  for (const genre of genres) {
+    const track = _.sample(genreData.tracks[genre])
+    track.genre = genre
+    answers.push(track)
+  }
+  for (const [index, item] of answers.entries()) {
+    const isCorrectAnswer = index === correctIndex
+    gameData.currentGame.answers.push({
+      genre: item.genre,
+      correct: isCorrectAnswer
+    })
+    if (isCorrectAnswer) {
+      gameData.currentGame.track.info = item
     }
   }
-  draw()
+  resolve()
 })
 
 export default {

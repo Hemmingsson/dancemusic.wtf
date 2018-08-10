@@ -16,32 +16,32 @@ var fill = startFill
 var fpsInterval, now, then, elapsed
 
 // Canvas size
-function getCanvasWidth () {
+const getCanvasWidth = () => {
   return canvas.width
 }
 
-function getCanvastHeight () {
+const getCanvastHeight = () => {
   return canvas.width
 }
 
 // Canvas responsive
-var vw = getCanvasWidth()
-var vh = getCanvastHeight()
+let vw = getCanvasWidth()
+let vh = getCanvastHeight()
 // window.addEventListener('resize', onResize, false)
 
-function onResize () {
+const onResize = () => {
   vw = getCanvasWidth()
   vh = getCanvastHeight()
   resizeCanvas()
 }
 
-function resizeCanvas () {
+const resizeCanvas = () => {
   canvas.width = vw
   canvas.height = vh
 }
 resizeCanvas()
 
-function draw (x, y) {
+const draw = (x, y) => {
   setColor()
   ctx.fillRect(x, y, pixelSize, pixelSize)
   if (fill > 2) {
@@ -49,7 +49,7 @@ function draw (x, y) {
   }
 }
 
-function drawEach () {
+const drawEach = () => {
   // clearCanvas()
   for (var x = 0; x < vw; x += pixelSize) {
     for (var y = 0; y < vh; y += pixelSize) {
@@ -58,11 +58,11 @@ function drawEach () {
   }
 }
 
-function clearCanvas () {
+const clearCanvas = () => {
   ctx.clearRect(0, 0, vw, vh)
 }
 
-function setColor () {
+const setColor = () => {
   if (fadeIn) {
     return Math.round(Math.random() - fill) ? (ctx.fillStyle = '#4a4e4b') : (ctx.fillStyle = '#d5dac9')
   } else {
@@ -70,8 +70,8 @@ function setColor () {
   }
 }
 
-var fadeIn
-function fade (show) {
+let fadeIn
+const fade = (show) => {
   return new Promise(function (resolve, reject) {
     if (fadeRAF) cancelAnimationFrame(fadeRAF)
     fill = startFill
@@ -88,7 +88,7 @@ function fade (show) {
   })
 }
 
-function animate () {
+const animate = () => {
   fadeRAF = requestAnimationFrame(animate)
   now = Date.now()
   elapsed = now - then

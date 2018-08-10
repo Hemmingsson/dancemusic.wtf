@@ -8,10 +8,10 @@ import game from './game.js'
 DISPALY BUTTONS
 ========================================================================== */
 
-var buttonsEvent = function () {
-  var displayButtons = document.querySelectorAll('.button')
-  var backButton = document.querySelector('.backButton')
-  var body = document.body
+const buttonsEvent = () => {
+  const displayButtons = document.querySelectorAll('.button')
+  const backButton = document.querySelector('.backButton')
+  const body = document.body
   // Start button
   displayButtons[0].addEventListener('click', () => {
     buttons.blink(false)

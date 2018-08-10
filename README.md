@@ -32,6 +32,7 @@ Dancemusic.wtf uses 592 music tracks from 57 different subgenres in Electronic D
 #### 🖥️ Support Devices
 
 The web app is tested on `macOS` in `Chrome 68`, `Safari 11`, `Firefox 61` and on `iOS 11.4`.<br>
+And should work wherever flexbox works and a youtube player can be embedded. <br>
 Let me know if you have problems with any other devices or browsers.
 
 

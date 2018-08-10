@@ -8,7 +8,7 @@ const animate = play => {
   play ? startEqualizer() : stopEqualizer()
 }
 
-var startEqualizer = () => {
+const startEqualizer = () => {
   const bars = document.getElementsByClassName('bar')
 
   const timeRand = () => (Math.random() * 0.4) + 0.25
@@ -33,7 +33,7 @@ var startEqualizer = () => {
   }
 }
 
-var stopEqualizer = () => {
+const stopEqualizer = () => {
   const elms = document.getElementsByClassName('bar')
   TweenLite.killTweensOf(elms)
   TweenLite.to(elms, 0.1, {

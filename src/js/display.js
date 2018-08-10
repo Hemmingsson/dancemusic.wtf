@@ -5,7 +5,7 @@ import loadingIndicator from './loading-indicator.js'
 import defaults from './defaults.js'
 import buttons from './buttons.js'
 
-var string = {
+const string = {
   intro: ['Each round You’ll hear 3 samples <br>  from a dance music track.', 'Your goal is to guess <br> the correct genre.'],
   loading: ['Loading First Round', 'Loading Next Round'],
   init: 'Initializing Game',
@@ -28,7 +28,7 @@ const intro = () => {
     $interface.classList.remove('--intro')
     resolve() */
 
-    var $interface = document.querySelector('.interface')
+    const $interface = document.querySelector('.interface')
     pixels.fade(true)
     .then(blinkOverlayTitle)
     .then(() => {
@@ -49,9 +49,9 @@ const intro = () => {
   })
 }
 
-var blinkOverlayTitle = function () {
+const blinkOverlayTitle = () => {
   return new Promise((resolve, reject) => {
-    var title = document.querySelector('.overlay__title')
+    const title = document.querySelector('.overlay__title')
     new TimelineMax({onComplete: resolve})
     .to(title, 0, { opacity: 0, delay: 0.1 })
     .to(title, 0, { opacity: 1, delay: 0.4 })
@@ -62,9 +62,9 @@ var blinkOverlayTitle = function () {
   })
 }
 
-var blinkBigText = function () {
+const blinkBigText = () => {
   return new Promise((resolve, reject) => {
-    var text = document.querySelector('.big')
+    const text = document.querySelector('.big')
     const d = 0.3
     new TimelineMax({onComplete: resolve})
     .to(text, 0, { opacity: 0, delay: d })
@@ -84,7 +84,7 @@ const choosen = (isCorrect) => {
   })
 }
 
-const correctAnswer = function () {
+const correctAnswer = () => {
   return new Promise((resolve, reject) => {
     setBigText(string.correct)
     blinkBigText().then(correctInfo).then(scoreAnimation).then(() => {
@@ -93,17 +93,18 @@ const correctAnswer = function () {
   })
 }
 
-const displayPause = function (resolve) {
+const displayPause = (resolve) => {
   clear()
   setTimeout(resolve, 1500)
 }
 
-const scoreAnimation = function () {
+const scoreAnimation = () => {
   return new Promise((resolve, reject) => {
-    const $text = document.querySelector('.big')
-    var endScore = global.gameData.currentGame.score
-    var startScore = {score: 0}
+    let $text = document.querySelector('.big')
+    let endScore = global.gameData.currentGame.score
+    let startScore = {score: 0}
     $text.classList.add('--score')
+    const counter = () => { setBigText(startScore.score) }
     TweenLite.to(startScore, 2.2, {
       score: endScore,
       ease: Power4.easeOut,
@@ -117,21 +118,17 @@ const scoreAnimation = function () {
         })
       }
     })
-
-    function counter () {
-      setBigText(startScore.score)
-    }
   })
 }
 
-const correctInfo = function () {
+const correctInfo = () => {
   return new Promise((resolve, reject) => {
     typeText('.big', ['You heard <br>' + gameData.currentGame.track.info.title], 2000)
     .then(resolve)
   })
 }
 
-const wrongInfo = function () {
+const wrongInfo = () => {
   return new Promise((resolve, reject) => {
     typeText('.big', ['You heard <br>' + gameData.currentGame.track.info.title, 'Which is a<br>' + gameData.currentGame.track.info.genre + ' Track'], 1800)
     .then(() => {
@@ -141,7 +138,7 @@ const wrongInfo = function () {
   })
 }
 
-const wrongAnswer = function () {
+const wrongAnswer = () => {
   return new Promise((resolve, reject) => {
     setBigText(string.wrong)
     blinkBigText().then(wrongInfo).then(resolve)
@@ -152,7 +149,7 @@ const wrongAnswer = function () {
 // -------------------------------------------------------
 const typeText = (selector, strings, delay) => {
   return new Promise((resolve, reject) => {
-    const $text = document.querySelector('.big')
+    let $text = document.querySelector('.big')
     $text.classList.add('--small')
     let index = 0
     const elm = document.querySelector(selector)
@@ -165,7 +162,7 @@ const typeText = (selector, strings, delay) => {
 
       elm.appendChild(innerDiv)
 
-      const instance = new SplitType(innerDiv, {split: 'chars', tagName: 'span'})
+      let instance = new SplitType(innerDiv, {split: 'chars', tagName: 'span'})
 
       for (let i = 0; i < instance.chars.length; i++) {
         TweenLite.to(instance.chars[i], 0, {
@@ -240,7 +237,7 @@ const playbackError = () => {
   })
 }
 
-const setBigText = function (string) {
+const setBigText = (string) => {
   document.querySelector('.big').innerHTML = string
 }
 
@@ -255,10 +252,10 @@ const renderScore = () => {
 }
 
 const renderLives = () => {
-  var string = ''
-  var fullHeart = '_'
-  var emptyHeart = '^'
-  for (var i = 0; i < defaults.misc.lives; i++) {
+  let string = ''
+  const fullHeart = '_'
+  const emptyHeart = '^'
+  for (let i = 0; i < defaults.misc.lives; i++) {
     string = i < global.gameData.totalLives ? fullHeart + string : emptyHeart + string
   }
   document.querySelector('.status__lives').innerHTML = string

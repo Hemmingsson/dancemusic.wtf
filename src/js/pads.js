@@ -56,6 +56,19 @@ BLINK ALL PADS RANDOMLY
 const blinkRandomly = () => {
   const pads = document.querySelectorAll('.pad__color')
   let currentPad
+
+  const colorPad = (pad) => {
+    currentPad = pad
+    TweenLite.to(pad, 0.3, {
+      backgroundColor: `rgb(${padColor.pink})`,
+      onComplete () {
+        TweenLite.to(pad, 0.2, {
+          backgroundColor: `rgb(${padColor.blue})`,
+          onComplete: animationLoop()
+        })
+      }
+    })
+  }
   const animationLoop = () => {
     const getNewPad = () => {
       const index = Math.floor(Math.random() * pads.length)
@@ -63,19 +76,6 @@ const blinkRandomly = () => {
       padToAnimate === currentPad ? getNewPad() : colorPad(padToAnimate)
     }
     getNewPad()
-
-    function colorPad (pad) {
-      currentPad = pad
-      TweenLite.to(pad, 0.3, {
-        backgroundColor: `rgb(${padColor.pink})`,
-        onComplete () {
-          TweenLite.to(pad, 0.2, {
-            backgroundColor: `rgb(${padColor.blue})`,
-            onComplete: animationLoop()
-          })
-        }
-      })
-    }
   }
   animationLoop()
 }
@@ -111,8 +111,8 @@ const showCorrect = () => {
 }
 
 const resetGeners = () => {
-  var titles = document.querySelectorAll('.pad__title')
-  for (var i = 0; i < titles.length; i++) { titles.item(i).innerHTML = '' }
+  let titles = document.querySelectorAll('.pad__title')
+  for (let i = 0; i < titles.length; i++) { titles.item(i).innerHTML = '' }
 }
 
 export default {

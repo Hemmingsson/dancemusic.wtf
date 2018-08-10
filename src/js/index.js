@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!cssPropertySupported(['-ms-flexbox', '-webkit-box', 'flex'])) document.body.className = 'no-flex'
 })
 
-function cssPropertySupported (pNames) {
+// Todo: Should be moved to its own file
+const cssPropertySupported = (pNames) => {
   const element = document.createElement('a')
 
   let index = pNames.length

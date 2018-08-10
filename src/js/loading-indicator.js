@@ -1,17 +1,17 @@
 /* global TweenLite */
 
-var dots = document.querySelectorAll('.loading .dot')
-var lines = document.querySelectorAll('.loading .line')
+const dots = document.querySelectorAll('.loading .dot')
+const lines = document.querySelectorAll('.loading .line')
 
-var loading = function () {
+const loading = () => {
   stop()
   TweenLite.to(lines, 0, {opacity: 1})
-  var animationLoop = function (index) {
-    var line = lines[index]
+  const animationLoop = (index) => {
+    const line = lines[index]
     TweenLite.to(line, 0, {
       opacity: line.style.opacity ^= 1, // invert opacity
       delay: 0.15,
-      onComplete: function () {
+      onComplete: () => {
         index++
         if (index !== lines.length) {
           animationLoop(index)
@@ -24,28 +24,28 @@ var loading = function () {
   animationLoop(0)
 }
 
-var hide = function () {
+const hide = () => {
   TweenLite.killTweensOf(dots)
   TweenLite.to(dots, 0, {opacity: 0})
 }
 
-var stop = function () {
+const stop = () => {
   TweenLite.killTweensOf(dots)
   TweenLite.killTweensOf(lines)
   TweenLite.to(dots, 0, {opacity: 0})
   TweenLite.to(lines, 0, {opacity: 1})
 }
 
-var blinkCurrentSample = function () {
+const blinkCurrentSample = () => {
   stop()
   let currentIndex = global.gameData.currentGame.track.currentSample
   TweenLite.killTweensOf(dots)
   TweenLite.to(dots, 0, {opacity: 0})
-  for (var i = 0; i <= currentIndex; i++) {
+  for (let i = 0; i <= currentIndex; i++) {
     TweenLite.to(dots[i], 0, {opacity: 1})
   }
 
-  var animationLoop = function () {
+  const animationLoop = () => {
     TweenLite.to(dots[currentIndex], 0.4, {
       opacity: dots[currentIndex].style.opacity ^= 1, // invert opacity
       onComplete: animationLoop

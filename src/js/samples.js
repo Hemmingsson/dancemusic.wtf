@@ -52,7 +52,7 @@ const update = () => {
 }
 
 const checker = () => {
-  var interval = function () {
+  const interval = () => {
     if (video.isPlaying) {
       update()
       setTimeout(interval, 200)

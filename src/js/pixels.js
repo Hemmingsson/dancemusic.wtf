@@ -1,19 +1,19 @@
 // Canvas
 
-var overlay = document.querySelector('.interface__overlay')
+const overlay = document.querySelector('.interface__overlay')
 
-var canvas = overlay.querySelector('canvas')
+const canvas = overlay.querySelector('canvas')
 var ctx = canvas.getContext('2d')
 
-var fadeRAF
+let fadeRAF
 
 // Pixel Style
-var pixelSize = 4
-var startFill = 0.5
-var fill = startFill
+const pixelSize = 4
+const startFill = 0.5
+let fill = startFill
 
 // Animation
-var fpsInterval, now, then, elapsed
+let fpsInterval, now, then, elapsed
 
 // Canvas size
 const getCanvasWidth = () => {

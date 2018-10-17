@@ -14,7 +14,7 @@ const string = {
   guess: 'Guess the Music Genre',
   late: 'Too Late',
   error: 'Failed to embed YouTube player',
-  playbackError: ['Youtube seems to be loading slowly', 'Please check your internet connection']
+  playbackError: ['YouTube seems to be loading slowly', 'Please check your internet connection']
 }
 
 // INTRO

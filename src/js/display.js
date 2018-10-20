@@ -6,15 +6,15 @@ import defaults from './defaults.js'
 import buttons from './buttons.js'
 
 const string = {
-  intro: ['Each round You’ll hear 3 samples <br>  from a dance music track.', 'Your goal is to guess <br> the correct genre.'],
+  intro: ['Each round you’ll hear 3 samples <br>  from a dance music track.', 'Your goal is to guess <br> the correct genre.'],
   loading: ['Loading First Round', 'Loading Next Round'],
   init: 'Initializing Game',
   correct: 'Well Played',
   wrong: 'Wrong Answer',
   guess: 'Guess the Music Genre',
   late: 'Too Late',
-  error: 'Failed to embedd YouTube player',
-  playbackError: ['Youtube seems to be loading slow', 'Pleas check your internet connection']
+  error: 'Failed to embed YouTube player',
+  playbackError: ['YouTube seems to be loading slowly', 'Please check your internet connection']
 }
 
 // INTRO

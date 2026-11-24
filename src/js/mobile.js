@@ -15,7 +15,7 @@ const tapStart = () => {
   if (isMobile) {
     document.querySelector('.big').innerHTML = 'Tap [HERE] to Play'
     document.querySelector('.interface').addEventListener('click', () => {
-      global.video.player.playVideo()
+      globalThis.video.player.playVideo()
     })
   }
 }

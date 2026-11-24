@@ -29,11 +29,9 @@ Dancemusic.wtf uses 592 music tracks from 57 different subgenres in Electronic D
 (I recommend you to visit musicmap.info if you want to dig deeper, or learn about other genres outside of the electronic dance music cluster. It is a gold mine!)
 
 
-#### 🖥️ Support Devices
+#### Browser support
 
-The web app is tested on `macOS` in `Chrome 68`, `Safari 11`, `Firefox 61` and on `iOS 11.4`.<br>
-And should work wherever flexbox is supported and a youtube player can be embedded. <br>
-Let me know if you have problems with any other devices or browsers.
+Use a current browser that supports JavaScript modules. Local production builds pass a headless Chrome startup check. YouTube must permit embedding and playback for each track; availability can change.
 
 
 <br>
@@ -53,23 +51,9 @@ Let me know if you have problems with any other devices or browsers.
 
 <br>
 
-## Dev Environment
 
-**Installation**
+## Development
 
+Use Node.js 22 or later. Run `npm ci`, then `npm start` for development or `npm run build` to create `dist/`. Parcel is installed locally.
 
-
-1. Clone the repository `git clone https://github.com/Hemmingsson/dancemusic.wtf`
-2. Run `npm install` 
-3. If you don’t have [parcel](https://parceljs.org/) installed `npm install -g parcel-bundler`
-
-**Development**
-
-`parcel src/index.html`
-
-**Building**
-
-`parcel build src/index.html --public-url ./`
-
-*P.S The code is still quite messy* 🙃
-
+Run `npm test` to check player polling. A blocked or unavailable YouTube video now ends loading with an error; select Start to retry. Completed games list the tracks that were played.

@@ -2,20 +2,30 @@
   "name": "DanceMusic.WTF",
   "version": "1.0.0",
   "description": "Guess Electronic Dance Music Styles. How High Can You Score?",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html --public-url ./ --no-cache",
+    "test": "node --test test/*.test.mjs"
   },
   "author": "Mattias Hemmingsson",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "cssnano": "^4.0.5",
-    "node-sass": "^4.8.3"
+    "@parcel/transformer-sass": "^2.16.4",
+    "cssnano": "^9.9.0",
+    "parcel": "^2.16.4",
+    "sass": "^1.108.2"
   },
   "dependencies": {
-    "gsap": "^1.20.4",
-    "lib": "^3.0.2",
+    "gsap": "^3.15.1",
     "lodash": "^4.17.5"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "targets": {
+    "default": {
+      "context": "browser",
+      "includeNodeModules": true
+    }
   }
 }

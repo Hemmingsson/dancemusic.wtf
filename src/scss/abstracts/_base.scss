@@ -1,3 +1,5 @@
+@use "../config/variables";
+
 /*------------------------------------*\
     $BASE DEFAULTS
 \*------------------------------------*/
@@ -12,7 +14,7 @@
 }
 
 html {
-    font-family: $font--primary;
+    font-family: variables.$font--primary;
 
     -webkit-text-size-adjust: 100%;
 }

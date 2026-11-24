@@ -1,3 +1,4 @@
+import { TweenLite } from 'gsap'
 /* global gameData, TweenLite */
 
 /**

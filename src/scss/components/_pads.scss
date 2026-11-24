@@ -1,3 +1,6 @@
+@use "../abstracts/mixins";
+@use "../config/variables";
+
 /*------------------------------------*\
     $PADS
 \*------------------------------------*/
@@ -13,10 +16,10 @@ $pads-spacing: 1vw;
     transform: translateX(-$pads-spacing);
 
     flex-wrap: wrap;
-    @include respond-to('medium') {
+    @include mixins.respond-to('medium') {
         height: calc(15% + 2vw);
     }
-    @include respond-to('large') {
+    @include mixins.respond-to('large') {
         height: calc(10% + 2vw);
     }
 }
@@ -34,14 +37,14 @@ $pads-spacing: 1vw;
     cursor: pointer;
 
     border-radius: 2vw;
-    background-color: $light-gray;
+    background-color: variables.$light-gray;
     box-shadow: 0 0 0 .7vw rgba(0, 0, 0, .025);
 
     flex-grow: 1;
-    @include respond-to('small') {
+    @include mixins.respond-to('small') {
         border-radius: .85vw;
     }
-    @include respond-to('medium') {
+    @include mixins.respond-to('medium') {
         width: auto;
         height: 100%;
         margin: 0;
@@ -55,27 +58,27 @@ $pads-spacing: 1vw;
 
     &__color {
         border-radius: inherit;
-        background-color: $light-gray;
+        background-color: variables.$light-gray;
 
-        @include fill-parent();
+        @include mixins.fill-parent();
     }
     &__button {
         overflow: hidden;
 
         border-radius: inherit;
-        background-color: rgba($light-gray, .2);
-        box-shadow: inset 0 0 0 -.3vw rgba(0, 0, 0, 1), inset 0 0 0 .4vw rgba($dark-black, .3);
+        background-color: rgba(variables.$light-gray, .2);
+        box-shadow: inset 0 0 0 -.3vw rgba(0, 0, 0, 1), inset 0 0 0 .4vw rgba(variables.$dark-black, .3);
 
-        @include respond-to('small') {
-            box-shadow: inset 0 0 0 -.3vw rgba(0, 0, 0, 1), inset 0 0 0 .3vw rgba($dark-black, .3);
+        @include mixins.respond-to('small') {
+            box-shadow: inset 0 0 0 -.3vw rgba(0, 0, 0, 1), inset 0 0 0 .3vw rgba(variables.$dark-black, .3);
         }
-        @include respond-to('medium') {
-            box-shadow: inset 0 0 0 -.3vw rgba(0, 0, 0, 1), inset 0 0 0 .2vw rgba($dark-black, .3);
+        @include mixins.respond-to('medium') {
+            box-shadow: inset 0 0 0 -.3vw rgba(0, 0, 0, 1), inset 0 0 0 .2vw rgba(variables.$dark-black, .3);
         }
-        @include respond-to('large') {
-            box-shadow: inset 0 0 0 -.3vw rgba(0, 0, 0, 1), inset 0 0 0 .15vw rgba($dark-black, .3);
+        @include mixins.respond-to('large') {
+            box-shadow: inset 0 0 0 -.3vw rgba(0, 0, 0, 1), inset 0 0 0 .15vw rgba(variables.$dark-black, .3);
         }
-        @include fill-parent();
+        @include mixins.fill-parent();
         &:before {
             margin: .4vw;
 
@@ -86,16 +89,16 @@ $pads-spacing: 1vw;
             border-radius: 2vw;
             background-color: rgba(white, .3);
 
-            @include fill-parent();
-            @include respond-to('small') {
+            @include mixins.fill-parent();
+            @include mixins.respond-to('small') {
                 margin: .3vw;
 
                 border-radius: .7vw;
             }
-            @include respond-to('medium') {
+            @include mixins.respond-to('medium') {
                 margin: .2vw;
             }
-            @include respond-to('large') {
+            @include mixins.respond-to('large') {
                 margin: .15vw;
             }
         }
@@ -112,14 +115,14 @@ $pads-spacing: 1vw;
 
         opacity: .86;
 
-        @include respond-to('small') {
+        @include mixins.respond-to('small') {
             padding: 1vw;
             padding-bottom: 1.6vw;
         }
-        @include respond-to('medium') {
+        @include mixins.respond-to('medium') {
             padding: .9vw;
         }
-        @include respond-to('large') {
+        @include mixins.respond-to('large') {
             padding: .67vw;
         }
 
@@ -132,7 +135,7 @@ $pads-spacing: 1vw;
     }
 
     &__title {
-        font-family: $font--condensed;
+        font-family: variables.$font--condensed;
         font-weight: bold;
 
         position: absolute;
@@ -149,19 +152,19 @@ $pads-spacing: 1vw;
         opacity: .6;
         color: black;
 
-        @include responsive-font(2.2vw, 9px);
-        @include respond-to('small') {
+        @include mixins.responsive-font(2.2vw, 9px);
+        @include mixins.respond-to('small') {
             bottom: 7%;
 
             margin-top: 0;
 
-            @include responsive-font(1vw, 12px);
+            @include mixins.responsive-font(1vw, 12px);
         }
-        @include respond-to('medium') {
+        @include mixins.respond-to('medium') {
             bottom: 7%;
         }
-        @include respond-to('large') {
-            @include responsive-font(1vw, 14px, 20px);
+        @include mixins.respond-to('large') {
+            @include mixins.responsive-font(1vw, 14px, 20px);
         }
     }
 

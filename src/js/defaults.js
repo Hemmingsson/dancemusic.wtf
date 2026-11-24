@@ -5,6 +5,7 @@ export default {
   },
   'gameData': {
     'totalScore': 0,
+    'playedTracks': [],
     'lastScore': 0,
     'totalLives': 10,
     'currentGame': {

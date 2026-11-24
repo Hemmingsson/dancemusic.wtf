@@ -1,8 +1,11 @@
+@use "../abstracts/mixins";
+@use "../config/variables";
+
 /*------------------------------------*\
     $INTERFACE
 \*------------------------------------*/
 
-$display-border: 2px solid $display-color;
+$display-border: 2px solid variables.$display-color;
 
 /* 
    Layout
@@ -18,10 +21,10 @@ $display-border: 2px solid $display-color;
 
     padding: 5px;
 
-    background: $display-background-color;
+    background: variables.$display-background-color;
 
     flex-grow: 1;
-    @include respond-to('small') {
+    @include mixins.respond-to('small') {
         padding: 10px;
     }
     &.--intro {
@@ -48,8 +51,8 @@ $display-border: 2px solid $display-color;
 
     margin: 5px;
 
-    @include fill-parent()
-    @include respond-to('small') {
+    @include mixins.fill-parent();
+    @include mixins.respond-to('small') {
         margin: 10px;
     }
     canvas {
@@ -59,17 +62,17 @@ $display-border: 2px solid $display-color;
         height: 100%;
     }
     .overlay__title {
-        font-family: $font--big;
+        font-family: variables.$font--big;
         font-size: 32px;
 
         white-space: nowrap;
         letter-spacing: .02em;
 
-        color: $display-background-color;
+        color: variables.$display-background-color;
 
-        @include center-selfe()
-        @include respond-to('medium') {
-            @include responsive-font(3.4vw, 28px, 75px);
+        @include mixins.center-selfe();
+        @include mixins.respond-to('medium') {
+            @include mixins.responsive-font(3.4vw, 28px, 75px);
         }
     }
     .overlay__text {
@@ -81,12 +84,12 @@ $display-border: 2px solid $display-color;
         white-space: nowrap;
         hyphens: none;
 
-        color: $display-background-color;
+        color: variables.$display-background-color;
 
-        @include respond-to('small') {
-            @include responsive-font(1.5vw, 16px, 28px);
+        @include mixins.respond-to('small') {
+            @include mixins.responsive-font(1.5vw, 16px, 28px);
         }
-        @include center-selfe();
+        @include mixins.center-selfe();
         span {
             opacity: 0;
         }
@@ -96,7 +99,7 @@ $display-border: 2px solid $display-color;
 .interface__right,
 .interface__left {
     position: relative;
-    z-index: $z-milli;
+    z-index: variables.$z-milli;
 
     display: flex;
     //opacity: 0;
@@ -118,7 +121,7 @@ $display-border: 2px solid $display-color;
 
     border-left: none;
 
-    @include respond-to('small') {
+    @include mixins.respond-to('small') {
         display: flex;
     }
 }
@@ -139,9 +142,9 @@ $display-border: 2px solid $display-color;
     flex-shrink: 1;
     justify-content: space-between;
     align-items: center;
-    @include responsive-font(1.2vw, 14px, 22px);
+    @include mixins.responsive-font(1.2vw, 14px, 22px);
     &__lives {
-        font-family: $font--icons;
+        font-family: variables.$font--icons;
         font-size: .6em;
         //transform: translateY(-6%);
 
@@ -152,7 +155,7 @@ $display-border: 2px solid $display-color;
         transform: translateY(1.5%);
         letter-spacing: .05em;
 
-        color: $display-color;
+        color: variables.$display-color;
     }
 }
 
@@ -178,14 +181,14 @@ $display-border: 2px solid $display-color;
     flex-grow: 1;
     flex-shrink: 0;
     .big {
-        font-family: $font--big;
+        font-family: variables.$font--big;
 
         min-height: 1em;
 
         text-transform: uppercase;
         //@include responsive-font(1.4vw, 18px);
 
-        @include responsive-font(1.6vw, 18px, 35px);
+        @include mixins.responsive-font(1.6vw, 18px, 35px);
         span {
             opacity: 0;
         }
@@ -193,18 +196,18 @@ $display-border: 2px solid $display-color;
             //@include responsive-font(1.4vw, 14px);
             text-transform: none;
 
-            @include responsive-font(1.3vw, 14px, 26px);
+            @include mixins.responsive-font(1.3vw, 14px, 26px);
         }
         &.--score {
-            font-family: $font--screen;
+            font-family: variables.$font--screen;
             font-size: 30px;
 
             letter-spacing: .05em;
 
             color: #585c58;
 
-            @include respond-to('small') {
-                @include responsive-font(4vw, 20px, 40px);
+            @include mixins.respond-to('small') {
+                @include mixins.responsive-font(4vw, 20px, 40px);
             }
         }
     }
@@ -227,9 +230,9 @@ $display-border: 2px solid $display-color;
             margin-right: 2px;
 
             opacity: 0;
-            border-bottom: 2px solid $display-color;
+            border-bottom: 2px solid variables.$display-color;
 
-            @include respond-to('medium') {
+            @include mixins.respond-to('medium') {
                 height: 8px;
             }
             &:last-child {
@@ -243,7 +246,7 @@ $display-border: 2px solid $display-color;
             transform: translateY(1px);
 
             opacity: 0;
-            background-color: $display-color;;
+            background-color: variables.$display-color;;
         }
     }
 }
@@ -273,13 +276,13 @@ $display-border: 2px solid $display-color;
         transform: scaleY(.1);
         transform-origin: 0 100%;
 
-        background-color: $display-color;
+        background-color: variables.$display-color;
 
-        @include respond-to('medium') {
+        @include mixins.respond-to('medium') {
             width: 5px;
             margin-right: 3px;
         }
-        @include respond-to('large') {
+        @include mixins.respond-to('large') {
             width: 6px;
             margin-right: 3px;
         }

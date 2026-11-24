@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "sass:math";
+@use "sass:meta";
 /*------------------------------------*\
     $MIXINS
 \*------------------------------------*/
@@ -16,9 +19,9 @@ $breakpoints: (
 
 @mixin respond-to($breakpoint) {
     // If the key exists in the map
-    @if map-has-key($breakpoints, $breakpoint) {
+    @if map.has-key($breakpoints, $breakpoint) {
         // Prints a media query based on the value
-        @media #{inspect(map-get($breakpoints, $breakpoint))} {
+        @media #{meta.inspect(map.get($breakpoints, $breakpoint))} {
             @content;
         }
     }
@@ -26,7 +29,7 @@ $breakpoints: (
     // If the key doesn't exist in the map
     @else {
         @warn 'Unfortunately, no value could be retrieved from `#{$breakpoint}`. '
-        + 'Available breakpoints are: #{map-keys($breakpoints)}.';
+        + 'Available breakpoints are: #{map.keys($breakpoints)}.';
     }
 }
 
@@ -72,16 +75,17 @@ $breakpoints: (
 @mixin responsive-font($responsive, $min, $max: false, $fallback: false) {
     font-size: $responsive;
 
-    $responsive-unitless: $responsive / ($responsive - $responsive + 1);
-    $dimension: if(unit($responsive) == 'vh', 'height', 'width');
-    $min-breakpoint: $min / $responsive-unitless * 100;
+    $responsive-unitless: math.div($responsive, $responsive - $responsive + 1);
+    $dimension: 'width';
+    @if math.unit($responsive) == 'vh' { $dimension: 'height'; }
+    $min-breakpoint: math.div($min, $responsive-unitless) * 100;
 
     @media (max-#{$dimension}: #{$min-breakpoint}) {
         font-size: $min;
     }
 
     @if $max {
-        $max-breakpoint: $max / $responsive-unitless * 100;
+        $max-breakpoint: math.div($max, $responsive-unitless) * 100;
 
         @media (min-#{$dimension}: #{$max-breakpoint}) {
             font-size: $max;

@@ -1,3 +1,4 @@
+import { waitFor } from './wait-for.mjs'
 /* global video, gameData, newRound */
 
 import samples from './samples.js'
@@ -9,8 +10,10 @@ import loadingIndicator from './loading-indicator.js'
    ========================================================================== */
 
 let start = samples.playNext
+let playerError = null
+let initPromise
 
-global.video = {
+globalThis.video = {
   player: null,
   isReady: false,
   isPlaying: false,
@@ -28,29 +31,39 @@ global.video = {
 }
 
 const init = () => {
-  return new Promise((resolve, reject) => {
-    samples.init()
+  if (video.isReady) return Promise.resolve()
+  if (initPromise) return initPromise
+  playerError = null
+  if (globalThis.YT?.Player) globalThis.onYouTubeIframeAPIReady()
+  else if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
     const tag = document.createElement('script')
     tag.src = 'https://www.youtube.com/iframe_api'
-    const firstScriptTag = document.getElementsByTagName('script')[0]
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
-    setTimeout(() => { if (!video.isReady) reject() }, 10000)
-    const readyInterval = () => { video.isReady ? resolve() : setTimeout(readyInterval, 100) }
-    readyInterval()
-  })
+    tag.onerror = () => { tag.remove(); playerError = new Error('Could not load YouTube') }
+    document.head.appendChild(tag)
+  }
+  initPromise = waitFor(() => {
+    if (playerError) throw playerError
+    return video.isReady
+  }).catch(error => {
+    if (!globalThis.YT?.Player) document.querySelector('script[src="https://www.youtube.com/iframe_api"]')?.remove()
+    throw error
+  }).finally(() => { initPromise = null })
+  return initPromise
 }
 
-global.onYouTubeIframeAPIReady = () => {
+globalThis.onYouTubeIframeAPIReady = () => {
+  video.player?.destroy?.()
   video.player = new YT.Player('videoPlayer', {
     height: '200',
     width: '260',
     playerVars: {
-      playsinline: 1
+      playsinline: 1,
+      origin: window.location.origin
     },
     events: {
       'onReady': onPlayerReady,
       'onStateChange': onPlayerStateChange,
-      'onError': newRound // Should be rebuilt to a propper error
+      'onError': e => { playerError = new Error('YouTube playback error: ' + e.data) }
     }
   })
 }
@@ -90,40 +103,27 @@ const whenMusicIsPlaying = () => {
 }
 
 const updateScoreMultiplyer = () => {
-  if (global.gameData.currentGame.scoreMultiplyer > 0) {
-    global.gameData.currentGame.scoreMultiplyer -= 0.1
+  if (globalThis.gameData?.currentGame.scoreMultiplyer > 0) {
+    globalThis.gameData.currentGame.scoreMultiplyer -= 0.1
   }
 }
 
 // PREPAIR VIDEO SAMPLE POINTS
 // -------------------------------------------------------
 
-const prepare = () => new Promise((resolve, reject) => {
-  // try again if video player is not yet loaded
-  if (!video.isReady) {
-    setTimeout(() => prepare(), 100)
-    return
-  }
-
-  video.player.loadVideoById(gameData.currentGame.track.info.ytId, 40)
-  video.player.setPlaybackQuality('small')
-  // Wait untill duration is avalible
-  const calculateTimeStamps = () => {
-    if (video.player.getDuration() > 1) {
-      video.player.pauseVideo()
-      // Get Video Duration
-      const duration = video.player.getDuration()
-      // Create sampe Points
-      gameData.currentGame.track.sampleTimeStamps = samples.createSamplePoints(duration, 3)
-      // Set time to First Sample point
-      video.player.seekTo(gameData.currentGame.track.sampleTimeStamps[0])
-      resolve()
-    } else {
-      setTimeout(calculateTimeStamps, 150)
-    }
-  }
-  calculateTimeStamps()
-})
+const prepare = async () => {
+  await init()
+  playerError = null
+  const id = gameData.currentGame.track.info.ytId
+  video.player.cueVideoById(id)
+  const duration = await waitFor(() => {
+    if (playerError) throw playerError
+    // The previous round may still have a duration until the new video loads.
+    return video.player.getVideoData().video_id === id && video.player.getDuration() > 1 && video.player.getDuration()
+  })
+  gameData.currentGame.track.sampleTimeStamps = samples.createSamplePoints(duration, 3)
+  video.player.seekTo(gameData.currentGame.track.sampleTimeStamps[0])
+}
 
 export default {
   init,

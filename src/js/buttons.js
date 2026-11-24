@@ -1,3 +1,4 @@
+import { TimelineMax, Power2 } from 'gsap'
 /* global TimelineMax, Power2 */
 
 /* ==========================================================================

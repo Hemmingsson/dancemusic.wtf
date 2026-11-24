@@ -1,3 +1,4 @@
+import { waitFor } from './wait-for.mjs'
 /* global video, gameData, TweenLite, newRound */
 
 import _ from 'lodash'
@@ -20,7 +21,7 @@ const resetRoundData = () => _.cloneDeep(defaults.gameData.currentGame)
 GLOBAL GAME FUNCTIONS - needs to be global for now, should refactor
 ========================================================================== */
 
-global.newRound = () => {
+globalThis.newRound = () => {
   pads.killAnimation()
   pads.resetGeners()
   display.loading()
@@ -28,9 +29,10 @@ global.newRound = () => {
   display.renderStats()
   loadRound()
     .then(startRound)
+    .catch(roundFailed)
 }
 
-global.toLate = () => {
+globalThis.toLate = () => {
   gameData.roundIsActive = false
   updateStats(false)
   pads.showCorrect()
@@ -51,48 +53,43 @@ const choosen = (answerIndex, elm) => {
 }
 
 let gameIsActive = false
+const roundFailed = () => {
+  if (globalThis.gameData) gameData.roundIsActive = false
+  gameIsActive = false
+  video.player?.pauseVideo()
+  pads.killAnimation()
+  display.error()
+}
+
 const start = () => {
-  if (!global.gameData && !gameIsActive) display.intro().then(player.init).then(newGame, display.error)
-  if (global.gameData && !gameIsActive) newGame()
+  if (gameIsActive) return
   gameIsActive = true
+  const ready = globalThis.gameData ? Promise.resolve() : display.intro()
+  ready.then(player.init).then(newGame).catch(() => {
+    gameIsActive = false
+    display.error()
+  })
 }
 
 /* ==========================================================================
 Round Functions
 ========================================================================== */
 
-const loadRound = () => new Promise((resolve) => {
-  drawNewRound()
-    .then(player.prepare)
-    .then(display.ready)
-    .then(pads.renderGenres)
-    .then(resolve)
-})
+const loadRound = () => drawNewRound()
+  .then(player.prepare)
+  .then(display.ready)
+  .then(pads.renderGenres)
 
-const startRound = () => {
+const startRound = async () => {
+  gameData.playedTracks.push({ ...gameData.currentGame.track.info })
+  video.isMusicPlaying = false
   player.start()
   mobile.tapStart()
 
-  playbackErrorChecker()
-  waitForMusic(() => {
-    global.gameData.roundIsActive = true
-    pads.blinkRandomly()
-    display.live()
-  })
-}
-
-const playbackErrorChecker = () => {
-  const startTime = global.gameData.currentGame.track.sampleTimeStamps[0]
-  setTimeout(() => {
-    if (startTime === video.player.getCurrentTime()) {
-      display.playbackError().then(() => { if (startTime < video.player.getCurrentTime()) display.live() })
-    }
-  }, 8000)
-}
-
-const waitForMusic = (func) => {
-  const interval = () => global.video.isMusicPlaying ? func() : setTimeout(interval, 100)
-  interval()
+  await waitFor(() => globalThis.video.isMusicPlaying)
+  globalThis.gameData.roundIsActive = true
+  pads.blinkRandomly()
+  display.live()
 }
 
 const nextRound = () => {
@@ -105,14 +102,14 @@ STATS
 
 const updateStats = (isCorrect) => {
   if (!isCorrect) {
-    global.gameData.totalLives -= 1
+    globalThis.gameData.totalLives -= 1
     return
   }
-  let score = Number((global.gameData.currentGame.scoreMultiplyer * 105).toFixed(0))
+  let score = Number((globalThis.gameData.currentGame.scoreMultiplyer * 105).toFixed(0))
   if (score > 3000) { score = 3000 }
   if (score < 0) { score = 0 }
-  global.gameData.currentGame.score = score
-  global.gameData.totalScore += score
+  globalThis.gameData.currentGame.score = score
+  globalThis.gameData.totalScore += score
 }
 
 /* ==========================================================================
@@ -120,8 +117,9 @@ NEW FUNCTIONS
 ========================================================================== */
 
 const newGame = () => {
-  global.gameData = resetGameData()
-  global.gameData.gameIsActive = true
+  globalThis.gameData = resetGameData()
+  document.querySelector('.played-tracks').hidden = true
+  globalThis.gameData.gameIsActive = true
   newRound()
 }
 
@@ -129,11 +127,12 @@ const lostGame = () => {
   video.player.pauseVideo()
   pads.killAnimation()
   pads.resetGeners()
+  display.showPlayedTracks(gameData.playedTracks)
   display.lost().then(() => { gameIsActive = false })
 }
 
 const togglePause = () => {
-  if (!global.gameData.roundIsActive) return
+  if (!globalThis.gameData.roundIsActive) return
   if (video.isPlaying) {
     video.player.pauseVideo()
     pads.killAnimation()
@@ -155,7 +154,7 @@ const drawNewRound = () => new Promise((resolve) => {
   // Draw one song from each genre
   const answers = []
   for (const genre of genres) {
-    const track = _.sample(genreData.tracks[genre])
+    const track = { ..._.sample(genreData.tracks[genre]) }
     track.genre = genre
     answers.push(track)
   }

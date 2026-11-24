@@ -1,3 +1,4 @@
+import { TweenLite, TimelineMax, Power4 } from 'gsap'
 /* global gameData, TimelineMax, TweenLite */
 import './splittype.min.js'
 import pixels from './pixels.js'
@@ -101,7 +102,7 @@ const displayPause = (resolve) => {
 const scoreAnimation = () => {
   return new Promise((resolve, reject) => {
     let $text = document.querySelector('.big')
-    let endScore = global.gameData.currentGame.score
+    let endScore = globalThis.gameData.currentGame.score
     let startScore = {score: 0}
     $text.classList.add('--score')
     const counter = () => { setBigText(startScore.score) }
@@ -188,7 +189,7 @@ const live = () => setBigText(string.guess)
 
 const loading = () => {
   loadingIndicator.loading()
-  const isFirstRound = global.gameData.totalScore === 0 && global.gameData.totalLives === 10
+  const isFirstRound = globalThis.gameData.totalScore === 0 && globalThis.gameData.totalLives === 10
   setBigText(isFirstRound ? string.loading[0] : string.loading[1])
 }
 
@@ -247,7 +248,7 @@ const renderStats = () => {
 }
 
 const renderScore = () => {
-  const paddedScore = ('000000' + global.gameData.totalScore).slice(-6)
+  const paddedScore = ('000000' + globalThis.gameData.totalScore).slice(-6)
   document.querySelector('.status__score').innerHTML = paddedScore
 }
 
@@ -256,12 +257,30 @@ const renderLives = () => {
   const fullHeart = '_'
   const emptyHeart = '^'
   for (let i = 0; i < defaults.misc.lives; i++) {
-    string = i < global.gameData.totalLives ? fullHeart + string : emptyHeart + string
+    string = i < globalThis.gameData.totalLives ? fullHeart + string : emptyHeart + string
   }
   document.querySelector('.status__lives').innerHTML = string
 }
 
+const showPlayedTracks = tracks => {
+  const section = document.querySelector('.played-tracks')
+  const list = section.querySelector('ol')
+  list.replaceChildren()
+  for (const track of tracks) {
+    const item = document.createElement('li')
+    const link = document.createElement('a')
+    link.href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(track.ytId)
+    link.textContent = track.title + ' — ' + track.genre
+    link.target = '_blank'
+    link.rel = 'noopener noreferrer'
+    item.appendChild(link)
+    list.appendChild(item)
+  }
+  section.hidden = false
+}
+
 export default {
+  showPlayedTracks,
   intro,
   renderStats,
   choosen,

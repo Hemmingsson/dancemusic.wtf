@@ -1,3 +1,7 @@
+@use "sass:color";
+@use "../abstracts/mixins";
+@use "../config/variables";
+
 /*------------------------------------*\
     $BASE-PAGE
 \*-----------------------------------*/
@@ -10,11 +14,11 @@ body {
     width: 100vw;
     height: 100vh;
 
-    background-color: $light-gray;
-    background-color: lighten($light-gray, 5%);
+    background-color: variables.$light-gray;
+    background-color: color.adjust(variables.$light-gray, $lightness: 5%);
 
-    @include center-children();
-    @include responsive-font(1.4vw, 12px);
+    @include mixins.center-children();
+    @include mixins.responsive-font(1.4vw, 12px);
 }
 
 body.no-flex{
@@ -38,10 +42,10 @@ body.--offscreen {
     .controller {
         transform: translate(-100vw, 0) rotate(0deg);
 
-        @include respond-to('small') {
+        @include mixins.respond-to('small') {
             transform: translate(-65vw, 0) rotate(-2deg);
         }
-        @include respond-to('medium') {
+        @include mixins.respond-to('medium') {
             transform: translate(-40vw, 0) rotate(-1deg);
         }
     }
@@ -51,7 +55,7 @@ body.--offscreen {
         opacity: 1;
     }
     .backButton {
-        z-index: $z-alpha;
+        z-index: variables.$z-alpha;
 
         display: block;
     }
@@ -69,10 +73,10 @@ body.--offscreen {
 
     cursor: pointer;
 
-    @include respond-to('small') {
+    @include mixins.respond-to('small') {
         width: 30vw;
     }
-    @include respond-to('medium') {
+    @include mixins.respond-to('medium') {
         width: 55vw;
     }
 }
@@ -81,7 +85,7 @@ body.--offscreen {
 
 .about {
     position: absolute;
-    z-index: $z-gamma;
+    z-index: variables.$z-gamma;
     right: 0;
 
     overflow: scroll;
@@ -96,12 +100,12 @@ body.--offscreen {
     opacity: 0;
     color: #506c75;
 
-    @include respond-to('small') {
+    @include mixins.respond-to('small') {
         width: 60vw;
         padding: 0;
         padding-right: 5vw;
     }
-    @include respond-to('medium') {
+    @include mixins.respond-to('medium') {
         width: 40vw;
     }
     a {
@@ -109,13 +113,13 @@ body.--offscreen {
 
         text-decoration-color: darkturquoise;
         &:hover{
-            color: darken(darkturquoise, 10%);
+            color: color.adjust(darkturquoise, $lightness: -10%);
         }
     }
     p {
         line-height: 1.8;
 
-        @include responsive-font(1vw, 14px);
+        @include mixins.responsive-font(1vw, 14px);
 
         span {
             color: orange;

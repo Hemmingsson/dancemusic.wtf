@@ -1,3 +1,4 @@
+import { TweenLite } from 'gsap'
 /* global TweenLite */
 
 const dots = document.querySelectorAll('.loading .dot')
@@ -38,7 +39,7 @@ const stop = () => {
 
 const blinkCurrentSample = () => {
   stop()
-  let currentIndex = global.gameData.currentGame.track.currentSample
+  let currentIndex = globalThis.gameData.currentGame.track.currentSample
   TweenLite.killTweensOf(dots)
   TweenLite.to(dots, 0, {opacity: 0})
   for (let i = 0; i <= currentIndex; i++) {

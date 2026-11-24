@@ -1,3 +1,4 @@
+import { TweenLite, TimelineMax } from 'gsap'
 
 /* global TweenLite */
 let isEqualizerAnimating = false

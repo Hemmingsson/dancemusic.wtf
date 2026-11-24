@@ -1,3 +1,5 @@
+@use "../abstracts/mixins";
+
 /*------------------------------------*\
     $CONTROLLS
 \*------------------------------------*/
@@ -14,12 +16,12 @@
 
     justify-content: streach;
     align-items: center;
-    @include respond-to('small') {
+    @include mixins.respond-to('small') {
         padding: 0;
 
         border: 2px solid rgba(204, 204, 204, .3);
     }
-    @include respond-to('medium') {
+    @include mixins.respond-to('medium') {
         min-height: 200px;
         padding: 1vw 2vw;
 
@@ -34,7 +36,7 @@
 .speaker {
     display: none;
 
-    @include respond-to('small') {
+    @include mixins.respond-to('small') {
         width: 25%;
         height: 90%;
         height: 80%;
@@ -43,7 +45,7 @@
             display: block;
         }
     }
-    @include respond-to('medium') {
+    @include mixins.respond-to('medium') {
         display: block;
 
         width: 17%;

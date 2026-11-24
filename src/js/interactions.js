@@ -20,12 +20,12 @@ const buttonsEvent = () => {
   // About button
   displayButtons[1].addEventListener('click', () => {
     body.classList.add('--offscreen')
-    if (global.video.isPlaying) { game.togglePause() }
+    if (globalThis.video.isPlaying) { game.togglePause() }
   })
   // About Back button
   backButton.addEventListener('click', () => {
     body.classList.remove('--offscreen')
-    if (!global.video.isPlaying) { game.togglePause() }
+    if (!globalThis.video.isPlaying) { game.togglePause() }
   })
 }
 
@@ -38,7 +38,7 @@ const padsEvents = () => {
   Array.from(pads).forEach((pad, index) => {
     pad.addEventListener('mousedown', event => {
       sound.tap.play()
-      if (global.gameData && global.gameData.roundIsActive) { game.choosen(index, pad) }
+      if (globalThis.gameData && globalThis.gameData.roundIsActive) { game.choosen(index, pad) }
     })
   })
 }
